@@ -2,7 +2,7 @@
 #include <cmath>
 #include <fstream>
 
-#include "../Source/Libs/Basis/Include/Basis/Vector3D.h"
+#include "Basis/Vector3D.h"
 
 
 using namespace std;
