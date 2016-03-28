@@ -1,16 +1,20 @@
 cmake_minimum_required(VERSION 3.1.2)
 
 set(SOURCES_FILES
-	Basis/Vector3D.cpp
-	Basis/Vector3D.h
+	Basis/Source/Vector3D.cpp
+)
+
+set(HEADER_FILES
+	Basis/Include/Basis/Vector3D.h
 )
 
 set(FILES
     ${SOURCES_FILES}
+    ${HEADER_FILES}
 )
 
 add_library(
-	mecasolid.libs
+mecasolid.libs STATIC
 	${FILES}
 )
 
