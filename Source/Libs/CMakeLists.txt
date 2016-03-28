@@ -14,7 +14,7 @@ set(FILES
 )
 
 add_library(
-mecasolid.libs STATIC
+	mecasolid.libs 
 	${FILES}
 )
 

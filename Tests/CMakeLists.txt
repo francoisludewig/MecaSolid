@@ -21,4 +21,5 @@ target_link_libraries(
 	mecasolid.libs
 	gtest
 )
+include_directories(${CMAKE_SOURCE_DIR}/../Source/Libs/Basis/Include)
 

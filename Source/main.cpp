@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Libs/Basis/Include/Basis/Vector3D.h"
+#include "Basis/Vector3D.h"
 
 using namespace std;
 using namespace Meca::Libs::Basis;
