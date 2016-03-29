@@ -10,15 +10,18 @@ set(HEADER_FILES
 	Basis/Include/Basis/UnitQuaternion.h
 )
 
+
 set(FILES
     ${SOURCES_FILES}
     ${HEADER_FILES}
 )
 
+
 add_library(
 	mecasolid.libs STATIC
 	${FILES}
 )
+
 
 target_include_directories(
 	mecasolid.libs PUBLIC
