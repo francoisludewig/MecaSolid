@@ -19,7 +19,6 @@ target_link_libraries(
 	mecasolid.libs
 )
 
-include_directories(${CMAKE_SOURCE_DIR}/Source/Libs/Basis/Include)
 
 add_subdirectory("Tests")
 add_subdirectory("Source/Libs")

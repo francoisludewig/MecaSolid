@@ -14,8 +14,13 @@ set(FILES
 )
 
 add_library(
-	mecasolid.libs 
+	mecasolid.libs STATIC
 	${FILES}
+)
+
+target_include_directories(
+	mecasolid.libs PUBLIC
+	Basis/Include/
 )
 
 

@@ -11,7 +11,7 @@ set(FILES
 
 
 add_executable(
-	mecasolid.Tests
+	mecasolid.Tests 
 	${FILES}
 	${tests_files}
 )
@@ -21,5 +21,4 @@ target_link_libraries(
 	mecasolid.libs
 	gtest
 )
-include_directories(${CMAKE_SOURCE_DIR}/../Source/Libs/Basis/Include)
 
