@@ -2,7 +2,9 @@ cmake_minimum_required(VERSION 3.1.2)
 
 set(SOURCES_FILES
 	main.cpp
+	Resource/DoublePrecision.h
 	TestVector3D.cpp
+	TestUnitQuaternion.cpp
 )
 
 set(FILES

@@ -34,6 +34,11 @@ namespace Meca {
 				this->z = z;
 			}
 
+			double Vector3D::Norme() const{
+				return sqrt(x*x+y*y+z*z);
+			}
+
+
 			double Vector3D::ScalarProduct(const Vector3D & b) const {
 				double ps = (this->x*b.X()+this->y*b.Y()+this->z*b.Z());
 				return ps;

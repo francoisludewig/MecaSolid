@@ -2,10 +2,12 @@ cmake_minimum_required(VERSION 3.1.2)
 
 set(SOURCES_FILES
 	Basis/Source/Vector3D.cpp
+	Basis/Source/UnitQuaternion.cpp
 )
 
 set(HEADER_FILES
 	Basis/Include/Basis/Vector3D.h
+	Basis/Include/Basis/UnitQuaternion.h
 )
 
 set(FILES
