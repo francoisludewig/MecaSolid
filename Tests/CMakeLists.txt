@@ -2,7 +2,9 @@ cmake_minimum_required(VERSION 3.1.2)
 
 set(SOURCES_FILES
 	main.cpp
+	Resource/DoublePrecision.h
 	TestVector3D.cpp
+	TestUnitQuaternion.cpp
 )
 
 set(FILES
@@ -11,7 +13,7 @@ set(FILES
 
 
 add_executable(
-	mecasolid.Tests
+	mecasolid.Tests 
 	${FILES}
 	${tests_files}
 )
@@ -21,5 +23,4 @@ target_link_libraries(
 	mecasolid.libs
 	gtest
 )
-include_directories(${CMAKE_SOURCE_DIR}/../Source/Libs/Basis/Include)
 

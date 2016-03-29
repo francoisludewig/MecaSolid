@@ -3,17 +3,11 @@
 #include <fstream>
 
 #include "Basis/Vector3D.h"
-
+#include "Resource/DoublePrecision.h"
 
 using namespace std;
 using namespace Meca::Libs::Basis;
 
-#define rdm (double)rand()/RAND_MAX-0.5
-#define precision pow(10,-16)
-
-bool isEquals(double a, double b){
-	return (fabs(a-b) < precision);
-}
 
 TEST(Vector3D,Constructor){
 	Vector3D a;
@@ -35,6 +29,10 @@ TEST(Vector3D,ConstructorValue){
 	ASSERT_EQ (M_PI/2,b.Z());
 }
 
+TEST(Vector3D,Norme){
+	Vector3D a(1,2,3);
+	ASSERT_EQ (sqrt(14.),a.Norme());
+}
 
 TEST(Vector3D,ScalarProduct){
 	Vector3D a(1,0,0);
