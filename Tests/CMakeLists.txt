@@ -5,6 +5,7 @@ set(SOURCES_FILES
 	Resource/DoublePrecision.h
 	TestVector3D.cpp
 	TestUnitQuaternion.cpp
+	TestBasis.cpp
 )
 
 set(FILES
