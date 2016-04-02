@@ -15,6 +15,8 @@ namespace Meca {
 			UnitQuaternion::UnitQuaternion() {
 				q0 = 1.0;
 				q1 = q2 = q3 = 0.0;
+				delayBetweenCheck = 0;
+				MaximumDelay = 10;
 			}
 
 			UnitQuaternion::UnitQuaternion(double q0, double q1, double q2, double q3){
@@ -23,6 +25,8 @@ namespace Meca {
 				this->q2 = q2;
 				this->q3 = q3;
 				this->Normalize();
+				delayBetweenCheck = 0;
+				MaximumDelay = 10;
 			}
 
 			UnitQuaternion::UnitQuaternion(const Vector3D & w){
@@ -33,6 +37,8 @@ namespace Meca {
 				q1 = w.X()/a*sa;
 				q2 = w.Y()/a*sa;
 				q3 = w.Z()/a*sa;
+				delayBetweenCheck = 0;
+				MaximumDelay = 10;
 			}
 
 			UnitQuaternion::~UnitQuaternion(){
@@ -44,6 +50,10 @@ namespace Meca {
 			double UnitQuaternion::Q2() const{return q2;}
 			double UnitQuaternion::Q3() const{return q3;}
 
+			void UnitQuaternion::IncrementDelayBetweenCheck(){
+				delayBetweenCheck++;
+			}
+
 			void UnitQuaternion::Normalize(){
 				double n = sqrt(q0*q0+q1*q1+q2*q2+q3*q3);
 				q0 /= n;
@@ -52,27 +62,27 @@ namespace Meca {
 				q3 /= n;
 			}
 
+			void UnitQuaternion::Check(){
+				if(delayBetweenCheck > MaximumDelay){
+					Normalize();
+					delayBetweenCheck++;
+				}
+			}
 
-			bool UnitQuaternion::SetValue(double q0, double q1, double q2, double q3, bool force/* = false*/){
+			void UnitQuaternion::SetValue(double q0, double q1, double q2, double q3, bool force/* = false*/){
 				if(force){
 					this->q0 = q0;
 					this->q1 = q1;
 					this->q2 = q2;
 					this->q3 = q3;
 					Normalize();
-					return true;
 				}
 				else{
-					if(fabs(sqrt(q0*q0+q1*q1+q2*q2+q3*q3)-1) < precision){
-						this->q0 = q0;
-						this->q1 = q1;
-						this->q2 = q2;
-						this->q3 = q3;
-						return true;
-					}
-					else{
-						return false;
-					}
+					this->q0 = q0;
+					this->q1 = q1;
+					this->q2 = q2;
+					this->q3 = q3;
+					delayBetweenCheck++;
 				}
 			}
 
@@ -82,6 +92,7 @@ namespace Meca {
 				a.q1 = this->q0*b.Q1() + this->q1*b.Q0() - this->q2*b.Q3() + this->q3*b.Q2();
 				a.q2 = this->q0*b.Q2() + this->q1*b.Q3() + this->q2*b.Q0() - this->q3*b.Q1();
 				a.q3 = this->q0*b.Q3() - this->q1*b.Q2() + this->q2*b.Q1() + this->q3*b.Q0();
+				a.IncrementDelayBetweenCheck();
 				return a;
 			}
 
@@ -106,13 +117,14 @@ namespace Meca {
 				q1 = p1;
 				q2 = p2;
 				q3 = p3;
+				delayBetweenCheck++;
 			}
 
 
 			istream & operator >> (istream & in, UnitQuaternion & a){
 				double q0,q1,q2,q3;
 				in >> q0 >> q1 >> q2 >> q3;
-				a.SetValue(q0,q1,q2,q3,true);
+				a.SetValue(q0,q1,q2,q3);
 				return in;
 			}
 

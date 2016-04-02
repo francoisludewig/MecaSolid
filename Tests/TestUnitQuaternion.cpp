@@ -36,28 +36,10 @@ TEST(UnitQuaternion,ConstructorVector3D){
 }
 
 
-TEST(UnitQuaternion,SetValue){
-	UnitQuaternion a;
-	ASSERT_TRUE(a.SetValue(0.5,0.5,0.5,0.5,false));
-	ASSERT_EQ (0.5,a.Q0());
-	ASSERT_EQ (0.5,a.Q1());
-	ASSERT_EQ (0.5,a.Q2());
-	ASSERT_EQ (0.5,a.Q3());
-
-	ASSERT_FALSE(a.SetValue(1,1,1,1,false));
-
-	ASSERT_TRUE(a.SetValue(1,1,1,1,true));
-	ASSERT_EQ (0.5,a.Q0());
-	ASSERT_EQ (0.5,a.Q1());
-	ASSERT_EQ (0.5,a.Q2());
-	ASSERT_EQ (0.5,a.Q3());
-}
-
-
 TEST(UnitQuaternion,multiplication){
 	UnitQuaternion a,b,c;
-	a.SetValue(M_PI,2*M_PI,M_PI/2,M_PI/3,true);
-	b.SetValue(6*M_PI,M_PI/4.,M_PI/6,M_PI,true);
+	a.SetValue(M_PI,2*M_PI,M_PI/2,M_PI/3);
+	b.SetValue(6*M_PI,M_PI/4.,M_PI/6,M_PI);
 	c = a*b;
 
 	ASSERT_EQ (c.Q0(),a.Q0()*b.Q0() - a.Q1()*b.Q1() - a.Q2()*b.Q2() - a.Q3()*b.Q3());
@@ -70,7 +52,7 @@ TEST(UnitQuaternion,multiplication){
 
 TEST(UnitQuaternion,multiplicationOperator){
 	UnitQuaternion a;
-	ASSERT_TRUE(a.SetValue(0.5,0.5,0.5,0.5,false));
+	a.SetValue(0.5,0.5,0.5,0.5);
 	UnitQuaternion b,c;
 
 	c = a*b;
@@ -95,7 +77,7 @@ TEST(UnitQuaternion,multiplicationOperator){
 
 TEST(UnitQuaternion,conjuguation){
 	UnitQuaternion a;
-	ASSERT_TRUE(a.SetValue(0.5,0.5,0.5,0.5,false));
+	a.SetValue(0.5,0.5,0.5,0.5);
 	UnitQuaternion b;
 	b = ~a;
 
@@ -109,7 +91,7 @@ TEST(UnitQuaternion,conjuguation){
 
 TEST(UnitQuaternion,conjuguationAndMultiplication){
 	UnitQuaternion a;
-	ASSERT_TRUE(a.SetValue(0.5,0.5,0.5,0.5,false));
+	a.SetValue(0.5,0.5,0.5,0.5);
 	UnitQuaternion b,c;
 	b = ~a;
 	c = a*b;
@@ -124,7 +106,7 @@ TEST(UnitQuaternion,conjuguationAndMultiplication){
 
 TEST(UnitQuaternion,IO_Operator){
 	UnitQuaternion a;
-	a.SetValue(M_PI,2*M_PI,M_PI/2,M_PI/3,true);
+	a.SetValue(M_PI,2*M_PI,M_PI/2,M_PI/3);
 	UnitQuaternion b;
 
 	ofstream fichierOut("testUnitQuaternion.txt", ios::out | ios::trunc);

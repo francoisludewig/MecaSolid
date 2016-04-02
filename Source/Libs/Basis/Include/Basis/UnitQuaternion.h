@@ -22,7 +22,11 @@ namespace Libs {
 				double Q2() const;
 				double Q3() const;
 
-				bool SetValue(double q0, double q1, double q2, double q3, bool force = false);
+				void SetValue(double q0, double q1, double q2, double q3, bool force = false);
+
+				void Check();
+				void IncrementDelayBetweenCheck();
+
 
 				UnitQuaternion Product(const UnitQuaternion & b) const;
 				UnitQuaternion operator*(UnitQuaternion const &b);
@@ -32,6 +36,7 @@ namespace Libs {
 			private:
 				void Normalize();
 				double q0,q1,q2,q3;
+				int delayBetweenCheck,MaximumDelay;
 			};
 
 			ostream & operator << (ostream & out, UnitQuaternion const& a);
