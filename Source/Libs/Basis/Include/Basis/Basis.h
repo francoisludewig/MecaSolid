@@ -27,7 +27,7 @@ namespace Meca {
 				void UpdateEFromQ();
 				void LoadFromIstream(istream & in);
 			private:
-				Vector3D e1,e2,e3,o;
+				Vector3D o,e1,e2,e3;
 				UnitQuaternion q;
 			};
 

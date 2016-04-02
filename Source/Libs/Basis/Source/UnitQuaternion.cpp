@@ -15,6 +15,8 @@ namespace Meca {
 			UnitQuaternion::UnitQuaternion() {
 				q0 = 1.0;
 				q1 = q2 = q3 = 0.0;
+				delayBetweenCheck = 0;
+				maximumDelay = 10;
 			}
 
 			UnitQuaternion::UnitQuaternion(double q0, double q1, double q2, double q3){
@@ -22,6 +24,8 @@ namespace Meca {
 				this->q1 = q1;
 				this->q2 = q2;
 				this->q3 = q3;
+				delayBetweenCheck = 0;
+				maximumDelay = 10;
 				this->Normalize();
 			}
 
@@ -33,10 +37,20 @@ namespace Meca {
 				q1 = w.X()/a*sa;
 				q2 = w.Y()/a*sa;
 				q3 = w.Z()/a*sa;
+				delayBetweenCheck = 0;
+				maximumDelay = 10;
 			}
 
 			UnitQuaternion::~UnitQuaternion(){
 
+			}
+			void UnitQuaternion::IncrementDelay(){
+				delayBetweenCheck++;
+			}
+
+			void UnitQuaternion::Check(){
+				if(delayBetweenCheck > maximumDelay)
+					Normalize();
 			}
 
 			double UnitQuaternion::Q0() const{return q0;}
@@ -50,29 +64,32 @@ namespace Meca {
 				q1 /= n;
 				q2 /= n;
 				q3 /= n;
+				delayBetweenCheck = 0;
 			}
 
 
-			bool UnitQuaternion::SetValue(double q0, double q1, double q2, double q3, bool force/* = false*/){
+			int UnitQuaternion::DelayBetweenCheck(){
+				return delayBetweenCheck;
+			}
+
+			double UnitQuaternion::Norme(){
+				return sqrt(q0*q0+q1*q1+q2*q2+q3*q3);
+			}
+
+			void UnitQuaternion::SetValue(double q0, double q1, double q2, double q3, bool force/* = false*/){
 				if(force){
 					this->q0 = q0;
 					this->q1 = q1;
 					this->q2 = q2;
 					this->q3 = q3;
 					Normalize();
-					return true;
 				}
 				else{
-					if(fabs(sqrt(q0*q0+q1*q1+q2*q2+q3*q3)-1) < precision){
-						this->q0 = q0;
-						this->q1 = q1;
-						this->q2 = q2;
-						this->q3 = q3;
-						return true;
-					}
-					else{
-						return false;
-					}
+					this->q0 = q0;
+					this->q1 = q1;
+					this->q2 = q2;
+					this->q3 = q3;
+					delayBetweenCheck++;
 				}
 			}
 
@@ -82,6 +99,7 @@ namespace Meca {
 				a.q1 = this->q0*b.Q1() + this->q1*b.Q0() - this->q2*b.Q3() + this->q3*b.Q2();
 				a.q2 = this->q0*b.Q2() + this->q1*b.Q3() + this->q2*b.Q0() - this->q3*b.Q1();
 				a.q3 = this->q0*b.Q3() - this->q1*b.Q2() + this->q2*b.Q1() + this->q3*b.Q0();
+				a.IncrementDelay();
 				return a;
 			}
 
@@ -106,6 +124,7 @@ namespace Meca {
 				q1 = p1;
 				q2 = p2;
 				q3 = p3;
+				delayBetweenCheck++;
 			}
 
 

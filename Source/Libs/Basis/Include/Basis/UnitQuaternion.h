@@ -21,17 +21,20 @@ namespace Meca {
 				double Q1() const;
 				double Q2() const;
 				double Q3() const;
-
-				bool SetValue(double q0, double q1, double q2, double q3, bool force = false);
+				void IncrementDelay();
+				int DelayBetweenCheck();
+				double Norme();
+				void SetValue(double q0, double q1, double q2, double q3, bool force = false);
 
 				UnitQuaternion Product(const UnitQuaternion & b) const;
 				UnitQuaternion operator*(UnitQuaternion const &b);
 				UnitQuaternion operator~();
 				void operator*=(UnitQuaternion const& a);
-
+				void Check();
 			private:
 				void Normalize();
 				double q0,q1,q2,q3;
+				int delayBetweenCheck,maximumDelay;
 			};
 
 			ostream & operator << (ostream & out, UnitQuaternion const& a);

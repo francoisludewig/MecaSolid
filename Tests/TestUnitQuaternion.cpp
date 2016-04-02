@@ -38,19 +38,43 @@ TEST(UnitQuaternion,ConstructorVector3D){
 
 TEST(UnitQuaternion,SetValue){
 	UnitQuaternion a;
-	ASSERT_TRUE(a.SetValue(0.5,0.5,0.5,0.5,false));
+	a.SetValue(0.5,0.5,0.5,0.5,false);
 	ASSERT_EQ (0.5,a.Q0());
 	ASSERT_EQ (0.5,a.Q1());
 	ASSERT_EQ (0.5,a.Q2());
 	ASSERT_EQ (0.5,a.Q3());
 
-	ASSERT_FALSE(a.SetValue(1,1,1,1,false));
-
-	ASSERT_TRUE(a.SetValue(1,1,1,1,true));
+	a.SetValue(0.5,0.5,0.5,0.5,true);
 	ASSERT_EQ (0.5,a.Q0());
 	ASSERT_EQ (0.5,a.Q1());
 	ASSERT_EQ (0.5,a.Q2());
 	ASSERT_EQ (0.5,a.Q3());
+
+	a.SetValue(1,1,1,1,true);
+	ASSERT_EQ (0.5,a.Q0());
+	ASSERT_EQ (0.5,a.Q1());
+	ASSERT_EQ (0.5,a.Q2());
+	ASSERT_EQ (0.5,a.Q3());
+
+	a.SetValue(1,1,1,1,false);
+	ASSERT_NE (0.5,a.Q0());
+	ASSERT_NE (0.5,a.Q1());
+	ASSERT_NE (0.5,a.Q2());
+	ASSERT_NE (0.5,a.Q3());
+}
+
+
+TEST(UnitQuaternion,Delay){
+	UnitQuaternion a,b;
+	a.SetValue(M_PI,2*M_PI,M_PI/2,M_PI/3,true);
+	b.SetValue(6*M_PI,M_PI/4.,M_PI/6,M_PI,true);
+
+	for(int i = 0 ; i < 10000 ; i++){
+		a*=b;
+		a.Check();
+		ASSERT_TRUE(isEquals(0,1-a.Norme()));
+		cout << i << " : " << fabs(1-a.Norme()) << endl;
+	}
 }
 
 
@@ -70,7 +94,7 @@ TEST(UnitQuaternion,multiplication){
 
 TEST(UnitQuaternion,multiplicationOperator){
 	UnitQuaternion a;
-	ASSERT_TRUE(a.SetValue(0.5,0.5,0.5,0.5,false));
+	a.SetValue(0.5,0.5,0.5,0.5,false);
 	UnitQuaternion b,c;
 
 	c = a*b;
@@ -95,7 +119,7 @@ TEST(UnitQuaternion,multiplicationOperator){
 
 TEST(UnitQuaternion,conjuguation){
 	UnitQuaternion a;
-	ASSERT_TRUE(a.SetValue(0.5,0.5,0.5,0.5,false));
+	a.SetValue(0.5,0.5,0.5,0.5,false);
 	UnitQuaternion b;
 	b = ~a;
 
@@ -109,7 +133,7 @@ TEST(UnitQuaternion,conjuguation){
 
 TEST(UnitQuaternion,conjuguationAndMultiplication){
 	UnitQuaternion a;
-	ASSERT_TRUE(a.SetValue(0.5,0.5,0.5,0.5,false));
+	a.SetValue(0.5,0.5,0.5,0.5,false);
 	UnitQuaternion b,c;
 	b = ~a;
 	c = a*b;
