@@ -4,7 +4,7 @@ set(SOURCES_FILES
 	main.cpp
 	Resource/DoublePrecision.h
 	TestVector3D.cpp
-	TestUnitQuaternion.cpp
+	TestQuaternion.cpp
 	TestBasis.cpp
 )
 
@@ -21,7 +21,7 @@ add_executable(
 
 target_link_libraries(
 	mecasolid.Tests
-	mecasolid.libs
+	mecasolidBasis.libs
 	gtest
 )
 

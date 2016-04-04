@@ -16,7 +16,8 @@ add_executable(mecasolid
 
 target_link_libraries(
 	mecasolid
-	mecasolid.libs
+	mecasolidBasis.libs
+	mecasolidSolid.libs
 )
 
 

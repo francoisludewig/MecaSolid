@@ -32,18 +32,26 @@ namespace Meca {
 			Vector3D Basis::E3() const{
 				return e3;
 			}
-			UnitQuaternion Basis::Q() const{
+			Quaternion Basis::Q() const{
 				return q;
 			}
-
 
 			void Basis::O(Vector3D o){
 				this->o = o;
 			}
 
-			void Basis::Q(UnitQuaternion q){
+			void Basis::Q(Quaternion q){
 				this->q = q;
 				UpdateEFromQ();
+			}
+
+			void Basis::Rotate(Quaternion const & q){
+				this->q *= q;
+				UpdateEFromQ();
+			}
+
+			void Basis::Translate(Vector3D const & o){
+				this->o += o;
 			}
 
 			void Basis::LoadFromIstream(istream & in){
@@ -54,17 +62,37 @@ namespace Meca {
 
 			void Basis::UpdateEFromQ(){
 				e1.SetValue(1 - 2*q.Q2()*q.Q2() - 2*q.Q3()*q.Q3(),
-						2*q.Q1()*q.Q2() + 2*q.Q3()*q.Q0(),
-						2*q.Q1()*q.Q3() - 2*q.Q2()*q.Q0());
+							2*q.Q1()*q.Q2() + 2*q.Q3()*q.Q0(),
+							2*q.Q1()*q.Q3() - 2*q.Q2()*q.Q0());
 
 				e2.SetValue(2*q.Q1()*q.Q2() - 2*q.Q3()*q.Q0(),
-						1 - 2*q.Q1()*q.Q1() - 2*q.Q3()*q.Q3(),
-						2*q.Q2()*q.Q3() + 2*q.Q1()*q.Q0());
+							1 - 2*q.Q1()*q.Q1() - 2*q.Q3()*q.Q3(),
+							2*q.Q2()*q.Q3() + 2*q.Q1()*q.Q0());
 
 
 				e3.SetValue(2*q.Q1()*q.Q3() + 2*q.Q2()*q.Q0(),
-						2*q.Q2()*q.Q3() - 2*q.Q1()*q.Q0(),
-						2*q.Q1()*q.Q1() - 2*q.Q2()*q.Q2());
+							2*q.Q2()*q.Q3() - 2*q.Q1()*q.Q0(),
+							1 - 2*q.Q2()*q.Q2() - 2*q.Q1()*q.Q1());
+			}
+
+			Basis Basis::operator*(Quaternion const & q){
+				Basis b = *this;
+				b.Rotate(q);
+				return b;
+			}
+
+			Basis Basis::operator+(Vector3D const & o){
+				Basis b = *this;
+				b.Translate(o);
+				return b;
+			}
+
+			void Basis::operator*=(Quaternion const& q){
+				this->Rotate(q);
+			}
+
+			void Basis::operator+=(Vector3D const& o){
+				this->Translate(o);
 			}
 
 			ostream & operator << (ostream & out, Basis const& a){

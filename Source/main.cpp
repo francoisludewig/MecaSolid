@@ -1,7 +1,7 @@
+#include <Basis/Quaternion.h>
 #include <iostream>
 
 #include "Basis/Vector3D.h"
-#include "Basis/UnitQuaternion.h"
 
 using namespace std;
 using namespace Meca::Libs::Basis;
@@ -14,8 +14,8 @@ int main()
 	a.SetValue(1,2,3);
 	cout << a << endl;
 
-	UnitQuaternion b;
-	b.SetValue(1,1,1,1,true);
+	Quaternion b;
+	b.SetValue(1,1,1,1);
 	cout << b << endl;
 
 	cout << "Enter an integer value : ";

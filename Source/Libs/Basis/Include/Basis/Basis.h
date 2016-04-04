@@ -3,7 +3,8 @@
 #include <iostream>
 #include <iomanip>
 #include "Vector3D.h"
-#include "UnitQuaternion.h"
+#include "Quaternion.h"
+
 using namespace std;
 
 namespace Meca {
@@ -19,16 +20,25 @@ namespace Meca {
 				Vector3D E1() const;
 				Vector3D E2() const;
 				Vector3D E3() const;
-				UnitQuaternion Q() const;
+				Quaternion Q() const;
 
 				void O(Vector3D o);
-				void Q(UnitQuaternion q);
+				void Q(Quaternion q);
+
+				void Rotate(Quaternion const & q);
+				void Translate(Vector3D const & o);
 
 				void UpdateEFromQ();
 				void LoadFromIstream(istream & in);
+
+				Basis operator*(Quaternion const & q);
+				Basis operator+(Vector3D const & o);
+
+				void operator*=(Quaternion const& q);
+				void operator+=(Vector3D const& o);
 			private:
 				Vector3D o,e1,e2,e3;
-				UnitQuaternion q;
+				Quaternion q;
 			};
 
 			ostream & operator << (ostream & out, Basis const& a);

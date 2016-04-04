@@ -11,7 +11,7 @@ using namespace Meca::Libs::Basis;
 
 TEST(Basis,Constructor){
 	Basis a;
-	UnitQuaternion q = a.Q();
+	Quaternion q = a.Q();
 
 	ASSERT_EQ (1,q.Q0());
 	ASSERT_EQ (0,q.Q1());
@@ -41,11 +41,43 @@ TEST(Basis,Constructor){
 	ASSERT_EQ (1,e3.Z());
 }
 
+TEST(Basis,translate){
+	Basis a;
+	Vector3D o;
+	o.SetValue(M_PI,-M_PI/3,7*M_PI/6);
+	a += o;
+
+	ASSERT_TRUE(isEquals( a.O().X() , o.X() ));
+	ASSERT_TRUE(isEquals( a.O().Y() , o.Y() ));
+	ASSERT_TRUE(isEquals( a.O().Z() , o.Z() ));
+}
+
+
+TEST(Basis,rotate){
+	Basis a,b;
+	Vector3D w;
+	w.SetValue(0,M_PI,0);
+	Quaternion q(w);
+
+	b = a*q;
+
+	ASSERT_TRUE(isEquals( b.E1().X() , -a.E1().X() ));
+	ASSERT_TRUE(isEquals( b.E1().Y() , -a.E1().Y() ));
+	ASSERT_TRUE(isEquals( b.E1().Z() , -a.E1().Z() ));
+	ASSERT_TRUE(isEquals( b.E2().X() , a.E2().X() ));
+	ASSERT_TRUE(isEquals( b.E2().Y() , a.E2().Y() ));
+	ASSERT_TRUE(isEquals( b.E2().Z() , a.E2().Z() ));
+	ASSERT_TRUE(isEquals( b.E3().X() , -a.E3().X() ));
+	ASSERT_TRUE(isEquals( b.E3().Y() , -a.E3().Y() ));
+	ASSERT_TRUE(isEquals( b.E3().Z() , -a.E3().Z() ));
+}
+
+
 TEST(Basis,IO_Operator){
 	Basis a;
 	Basis b;
 
-	a.Q(UnitQuaternion(M_PI,2*M_PI,M_PI/2,M_PI/3));
+	a.Q(Quaternion(M_PI,2*M_PI,M_PI/2,M_PI/3));
 	a.O(Vector3D(2*M_PI,M_PI/2,M_PI/3));
 
 	ofstream fichierOut("testBasis.txt", ios::out | ios::trunc);
@@ -67,8 +99,8 @@ TEST(Basis,IO_Operator){
 	ASSERT_TRUE(isEquals (o_a.Y(),o_b.Y()));
 	ASSERT_TRUE(isEquals (o_a.Z(),o_b.Z()));
 
-	UnitQuaternion q_a = a.Q();
-	UnitQuaternion q_b = b.Q();
+	Quaternion q_a = a.Q();
+	Quaternion q_b = b.Q();
 
 	ASSERT_TRUE(isEquals (q_a.Q0(),q_b.Q0()));
 	ASSERT_TRUE(isEquals (q_a.Q1(),q_b.Q1()));
