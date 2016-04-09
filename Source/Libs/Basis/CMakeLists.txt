@@ -4,12 +4,14 @@ set(SOURCES_FILES
 	Source/Vector3D.cpp
 	Source/Quaternion.cpp
 	Source/Basis.cpp
+	Source/Matrix3x3.cpp
 )
 
 set(HEADER_FILES
 	Include/Basis/Vector3D.h
 	Include/Basis/Quaternion.h
 	Include/Basis/Basis.h	
+	Include/Basis/Matrix3x3.h	
 )
 
 

@@ -28,6 +28,9 @@ namespace Meca {
 				void Rotate(Quaternion const & q);
 				void Translate(Vector3D const & o);
 
+				void Local(Vector3D & a);
+				void Global(Vector3D & a);
+
 				void UpdateEFromQ();
 				void LoadFromIstream(istream & in);
 

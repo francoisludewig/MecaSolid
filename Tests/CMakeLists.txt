@@ -6,6 +6,7 @@ set(SOURCES_FILES
 	TestVector3D.cpp
 	TestQuaternion.cpp
 	TestBasis.cpp
+	TestMatrix3x3.cpp
 )
 
 set(FILES

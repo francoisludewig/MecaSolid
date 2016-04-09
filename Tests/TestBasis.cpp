@@ -73,6 +73,24 @@ TEST(Basis,rotate){
 }
 
 
+TEST(Basis,LocalGlobal){
+	Basis a,b;
+	Quaternion q(Vector3D(0,M_PI,0));
+	b = a*q;
+	Vector3D v(M_PI,M_PI/3,M_PI/7);
+	b.Local(v);
+
+	ASSERT_TRUE(isEquals( v.X() , -M_PI ));
+	ASSERT_TRUE(isEquals( v.Y() , M_PI/3 ));
+	ASSERT_TRUE(isEquals( v.Z() , -M_PI/7 ));
+
+	b.Global(v);
+
+	ASSERT_TRUE(isEquals( v.X() , M_PI ));
+	ASSERT_TRUE(isEquals( v.Y() , M_PI/3 ));
+	ASSERT_TRUE(isEquals( v.Z() , M_PI/7 ));
+}
+
 TEST(Basis,IO_Operator){
 	Basis a;
 	Basis b;

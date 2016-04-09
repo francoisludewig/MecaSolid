@@ -45,6 +45,18 @@ namespace Meca {
 				UpdateEFromQ();
 			}
 
+			void Basis::Local(Vector3D & a){
+				double x,y,z;
+				x = a*e1;
+				y = a*e2;
+				z = a*e3;
+				a.SetValue(x,y,z);
+			}
+
+			void Basis::Global(Vector3D & a){
+				a = a.X()*e1 + a.Y()*e2 + a.Z()*e3;
+			}
+
 			void Basis::Rotate(Quaternion const & q){
 				this->q *= q;
 				UpdateEFromQ();
