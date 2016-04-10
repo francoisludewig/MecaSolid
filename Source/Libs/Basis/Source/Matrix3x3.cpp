@@ -20,19 +20,28 @@ namespace Meca {
 
 			}
 
+			Matrix3x3::Matrix3x3(double m00, double m01,double m02,
+					  double m10, double m11,double m12,
+					  double m20, double m21,double m22){
+				m[0][0] = m00; m[0][1] = m01; m[0][2] = m02;
+				m[1][0] = m10; m[1][1] = m11; m[1][2] = m12;
+				m[2][0] = m20; m[2][1] = m21; m[2][2] = m22;
+			}
+
+
 			void Matrix3x3::Componant(int i, int j , double c){
 				m[i][j] = c;
 			}
 
-			double Matrix3x3::Componant(int i, int j){
+			double Matrix3x3::Componant(int i, int j) const{
 				return m[i][j];
 			}
 
-			Vector3D Matrix3x3::Line(int i){
+			Vector3D Matrix3x3::Line(int i) const{
 				return Vector3D(m[i][0],m[i][1],m[i][2]);
 			}
 
-			Vector3D Matrix3x3::Column(int i){
+			Vector3D Matrix3x3::Column(int i) const{
 				return Vector3D(m[0][i],m[1][i],m[2][i]);
 			}
 
@@ -48,7 +57,7 @@ namespace Meca {
 				m[2][i] = c.Z();
 			}
 
-			double Matrix3x3::Determinant(){
+			double Matrix3x3::Determinant() const{
 				return m[0][0]*m[1][1]*m[2][2] + m[0][1]*m[1][2]*m[2][0] + m[0][2]*m[1][0]*m[2][1]
 			  - m[0][2]*m[1][1]*m[2][0] - m[1][2]*m[2][1]*m[0][0] - m[2][2]*m[1][0]*m[0][1];
 			}
@@ -121,8 +130,38 @@ namespace Meca {
 				return this->Product(b);
 			}
 
+			Vector3D Matrix3x3::operator*(Vector3D &b){
+				Vector3D a;
+				a.X(m[0][0]*b.X() + m[0][1]*b.Y() + m[0][2]*b.Z());
+				a.Y(m[1][0]*b.X() + m[1][1]*b.Y() + m[1][2]*b.Z());
+				a.Z(m[2][0]*b.X() + m[2][1]*b.Y() + m[2][2]*b.Z());
+				return a;
+			}
+
 			Matrix3x3 Matrix3x3::operator/(double const &b){
 				return this->Div(b);
+			}
+
+			ostream & operator << (ostream & out, Matrix3x3 const& a){
+				out << scientific << setprecision(15);
+				for(int i = 0 ; i < 3 ; i++){
+					for(int j = 0 ; j < 3 ; j++){
+						out << a.Componant(i,j) << "\t";
+					}
+					out << "\n";
+				}
+				return out;
+			}
+
+			istream & operator >> (istream & in, Matrix3x3 & a){
+				double c;
+				for(int i = 0 ; i < 3 ; i++){
+					for(int j = 0 ; j < 3 ; j++){
+						in >> c;
+						a.Componant(i,j,c);
+					}
+				}
+				return in;
 			}
 
 		}
