@@ -2,14 +2,15 @@
 
 #include <iostream>
 #include <iomanip>
-#include "Vector3D.h"
-#include "Quaternion.h"
+#include "Utils/Quaternion.h"
+#include "Utils/Vector3D.h"
 
 using namespace std;
+using namespace Luga::Meca::Utils;
 
-namespace Meca {
-	namespace Libs {
-		namespace Basis{
+namespace Luga {
+	namespace Meca {
+		namespace Solid{
 
 			class Basis {
 			public:

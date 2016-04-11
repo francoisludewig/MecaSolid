@@ -2,11 +2,11 @@
 #include <cmath>
 #include <fstream>
 
-#include "Basis/Basis.h"
+#include "Solid/Basis.h"
 #include "Resource/DoublePrecision.h"
 
 using namespace std;
-using namespace Meca::Libs::Basis;
+using namespace Luga::Meca::Solid;
 
 
 TEST(Basis,Constructor){

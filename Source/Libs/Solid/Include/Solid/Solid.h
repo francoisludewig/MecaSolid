@@ -1,15 +1,17 @@
+
 #pragma
 
 #include <iostream>
 #include <iomanip>
-#include <Basis/Basis.h>
-#include <Basis/Matrix3x3.h>
+#include "Basis.h"
+#include "../../../Utils/Include/Utils/Matrix3x3.h"
 
 using namespace std;
+using namespace Luga::Meca::Utils;
 
-namespace Meca {
-	namespace Libs {
-		namespace Basis{
+namespace Luga {
+	namespace Meca {
+		namespace Solid{
 
 		class Solid{
 		public:
@@ -34,10 +36,16 @@ namespace Meca {
 
 			void LoadFromIstream(istream & in);
 
+
+			void UpdateVelocities(double dt);
+			void UpdatePosition(double dt);
+
+
 		private:
 			Basis b;
 			Vector3D velocity,angularVelocity,force,momentum;
-			Matrix3x3 inertia;
+			Vector3D localMomentum;
+			Matrix3x3 inertia,interia_1;
 			double mass;
 		};
 

@@ -1,10 +1,10 @@
-#include <Basis/Quaternion.h>
 #include <iostream>
+#include "Libs/Utils/Include/Utils/Quaternion.h"
+#include "Libs/Utils/Include/Utils/Vector3D.h"
 
-#include "Basis/Vector3D.h"
 
 using namespace std;
-using namespace Meca::Libs::Basis;
+using namespace Luga::Meca::Utils;
 
 int main()
 {

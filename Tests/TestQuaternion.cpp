@@ -1,13 +1,13 @@
-#include <Basis/Quaternion.h>
-
 #include <gtest/gtest.h>
 #include <cmath>
 #include <fstream>
 
-#include "Basis/Vector3D.h"
+#include "Utils/Quaternion.h"
+#include "Utils/Vector3D.h"
 #include "Resource/DoublePrecision.h"
+
 using namespace std;
-using namespace Meca::Libs::Basis;
+using namespace Luga::Meca::Utils;
 
 
 TEST(Quaternion,Constructor){

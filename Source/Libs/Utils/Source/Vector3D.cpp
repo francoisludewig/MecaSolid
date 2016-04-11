@@ -5,15 +5,16 @@
  *      Author: ludewigfrancois
  */
 
+#include "../../Utils/Include/Utils/Vector3D.h"
+
 #include <iostream>
 #include <cmath>
-#include "../Include/Basis/Vector3D.h"
 
 using namespace std;
 
-namespace Meca {
-	namespace Libs {
-		namespace Basis{
+namespace Luga {
+	namespace Meca {
+		namespace Utils{
 
 			Vector3D::Vector3D() {
 				x = y = z = 0.0;

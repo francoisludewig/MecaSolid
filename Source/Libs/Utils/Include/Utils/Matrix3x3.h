@@ -2,14 +2,14 @@
 
 #include <iostream>
 #include <iomanip>
-#include "Vector3D.h"
-#include "Quaternion.h"
+#include "../../../Utils/Include/Utils/Quaternion.h"
+#include "../../../Utils/Include/Utils/Vector3D.h"
 
 using namespace std;
 
-namespace Meca {
-	namespace Libs {
-		namespace Basis{
+namespace Luga {
+	namespace Meca {
+		namespace Utils{
 
 			class Matrix3x3 {
 			public:
@@ -23,8 +23,8 @@ namespace Meca {
 				double Componant(int i, int j) const;
 				Vector3D Line(int i) const;
 				Vector3D Column(int i) const;
-				void Line(int i, Vector3D l);
-				void Column(int i, Vector3D c);
+				void Line(int i, Vector3D & l);
+				void Column(int i, Vector3D & c);
 				double Determinant() const;
 				Matrix3x3 Product(const double & b) const;
 				Matrix3x3 Div(const double & b) const;

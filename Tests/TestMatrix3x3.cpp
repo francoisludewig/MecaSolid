@@ -2,11 +2,11 @@
 #include <cmath>
 #include <fstream>
 
-#include "Basis/Matrix3x3.h"
+#include "Utils/Matrix3x3.h"
 #include "Resource/DoublePrecision.h"
 
 using namespace std;
-using namespace Meca::Libs::Basis;
+using namespace Luga::Meca::Utils;
 
 
 TEST(Matrix3x3,Constructor){

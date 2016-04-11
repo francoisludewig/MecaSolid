@@ -1,14 +1,15 @@
+#include "../../Utils/Include/Utils/Matrix3x3.h"
+
 #include <iostream>
 #include <cmath>
-#include "../Include/Basis/Matrix3x3.h"
 
 #define precision 1E-15
 
 using namespace std;
 
-namespace Meca {
-	namespace Libs {
-		namespace Basis{
+namespace Luga {
+	namespace Meca {
+		namespace Utils{
 
 			Matrix3x3::Matrix3x3(){
 				m[0][0] = 1; m[0][1] = 0; m[0][2] = 0;
@@ -45,13 +46,13 @@ namespace Meca {
 				return Vector3D(m[0][i],m[1][i],m[2][i]);
 			}
 
-			void Matrix3x3::Line(int i, Vector3D l){
+			void Matrix3x3::Line(int i, Vector3D & l){
 				m[i][0] = l.X();
 				m[i][1] = l.Y();
 				m[i][2] = l.Z();
 			}
 
-			void Matrix3x3::Column(int i, Vector3D c){
+			void Matrix3x3::Column(int i, Vector3D & c){
 				m[0][i] = c.X();
 				m[1][i] = c.Y();
 				m[2][i] = c.Z();

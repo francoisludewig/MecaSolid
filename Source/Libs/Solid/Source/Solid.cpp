@@ -6,10 +6,11 @@
 #define precision 1E-15
 
 using namespace std;
+using namespace Luga::Meca::Utils;
 
-namespace Meca {
-	namespace Libs {
-		namespace Basis{
+namespace Luga {
+	namespace Meca {
+		namespace Solid{
 
 			Solid::Solid():b(),velocity(0,0,0),angularVelocity(0,0,0),force(0,0,0),momentum(0,0,0),inertia(){
 				mass = 1;
@@ -33,9 +34,24 @@ namespace Meca {
 			void Solid::AngularVelocity(Vector3D w) {this->angularVelocity = w;}
 			void Solid::Force(Vector3D f) {this->force = f;}
 			void Solid::Momentum(Vector3D m) {this->momentum = m;}
-			void Solid::Inertia(Matrix3x3 i) {this->inertia = i;}
+			void Solid::Inertia(Matrix3x3 i){
+				this->inertia = i;
+				this->interia_1 = inertia.MatrixInverse();
+			}
 			void Solid::Mass(double m) {this->mass = m;}
 
+
+			void Solid::UpdateVelocities(double dt){
+				velocity += dt*force/mass;
+				localMomentum = momentum;
+				b.Local(localMomentum);
+				angularVelocity += dt*(interia_1*localMomentum);
+			}
+
+			void Solid::UpdatePosition(double dt){
+				b += dt*velocity;
+				b*= Quaternion(angularVelocity*dt);
+			}
 
 			void Solid::LoadFromIstream(istream & in){
 				in >> b >> velocity >> angularVelocity >> force >> momentum >> inertia >> mass;

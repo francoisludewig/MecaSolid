@@ -7,6 +7,7 @@ set(SOURCES_FILES
 	TestQuaternion.cpp
 	TestBasis.cpp
 	TestMatrix3x3.cpp
+	TestSolid.cpp
 )
 
 set(FILES
@@ -22,7 +23,8 @@ add_executable(
 
 target_link_libraries(
 	mecasolid.Tests
-	mecasolidBasis.libs
+	mecasolidUtils.libs
+	mecasolidSolid.libs
 	gtest
 )
 

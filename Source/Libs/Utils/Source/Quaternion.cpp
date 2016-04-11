@@ -1,16 +1,17 @@
 
-#include <Basis/Quaternion.h>
+#include "../../Utils/Include/Utils/Quaternion.h"
+
 #include <iostream>
 #include <cmath>
-#include "../Include/Basis/Vector3D.h"
+#include "../../Utils/Include/Utils/Vector3D.h"
 
 #define precision 1E-15
 
 using namespace std;
 
-namespace Meca {
-	namespace Libs {
-		namespace Basis{
+namespace Luga {
+	namespace Meca {
+		namespace Utils{
 
 			Quaternion::Quaternion() {
 				q0 = 1.0;

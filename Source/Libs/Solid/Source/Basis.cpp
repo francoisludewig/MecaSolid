@@ -1,16 +1,16 @@
 
 #include <iostream>
 #include <cmath>
-#include "../Include/Basis/Basis.h"
+#include "../Include/Solid/Basis.h"
 
 #define precision 1E-15
 
 using namespace std;
+using namespace Luga::Meca::Utils;
 
-
-namespace Meca {
-	namespace Libs {
-		namespace Basis{
+namespace Luga {
+	namespace Meca {
+		namespace Solid{
 
 			Basis::Basis():o(),e1(1,0,0),e2(0,1,0),e3(0,0,1),q(){
 

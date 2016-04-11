@@ -16,10 +16,9 @@ add_executable(mecasolid
 
 target_link_libraries(
 	mecasolid
-	mecasolidBasis.libs
+	mecasolidUtils.libs
 	mecasolidSolid.libs
 )
-
 
 add_subdirectory("Tests")
 add_subdirectory("Source/Libs")
