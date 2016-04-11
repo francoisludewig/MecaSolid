@@ -147,8 +147,6 @@ TEST(Matrix3x3,IO_Operator){
 
 	for(int i = 0 ; i < 3 ; i++){
 		for(int j = 0 ; j < 3 ; j++){
-			cout << a.Componant(i,j) << " = " << b.Componant(i,j) << endl;
-			cout << a.Componant(i,j)-b.Componant(i,j) << endl;
 			ASSERT_TRUE(isEquals (a.Componant(i,j),b.Componant(i,j)));
 		}
 	}

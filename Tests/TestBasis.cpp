@@ -70,6 +70,18 @@ TEST(Basis,rotate){
 	ASSERT_TRUE(isEquals( b.E3().X() , -a.E3().X() ));
 	ASSERT_TRUE(isEquals( b.E3().Y() , -a.E3().Y() ));
 	ASSERT_TRUE(isEquals( b.E3().Z() , -a.E3().Z() ));
+
+	a*=q;
+
+	ASSERT_TRUE(isEquals( b.E1().X() , a.E1().X() ));
+	ASSERT_TRUE(isEquals( b.E1().Y() , a.E1().Y() ));
+	ASSERT_TRUE(isEquals( b.E1().Z() , a.E1().Z() ));
+	ASSERT_TRUE(isEquals( b.E2().X() , a.E2().X() ));
+	ASSERT_TRUE(isEquals( b.E2().Y() , a.E2().Y() ));
+	ASSERT_TRUE(isEquals( b.E2().Z() , a.E2().Z() ));
+	ASSERT_TRUE(isEquals( b.E3().X() , a.E3().X() ));
+	ASSERT_TRUE(isEquals( b.E3().Y() , a.E3().Y() ));
+	ASSERT_TRUE(isEquals( b.E3().Z() , a.E3().Z() ));
 }
 
 
