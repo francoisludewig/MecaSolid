@@ -2,11 +2,11 @@
 #include <cmath>
 #include <fstream>
 
-#include "Basis/Vector3D.h"
+#include "Utils/Vector3D.h"
 #include "Resource/DoublePrecision.h"
 
 using namespace std;
-using namespace Meca::Libs::Basis;
+using namespace Luga::Meca::Utils;
 
 
 TEST(Vector3D,Constructor){

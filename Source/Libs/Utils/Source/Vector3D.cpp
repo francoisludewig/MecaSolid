@@ -5,15 +5,16 @@
  *      Author: ludewigfrancois
  */
 
+#include "../../Utils/Include/Utils/Vector3D.h"
+
 #include <iostream>
 #include <cmath>
-#include "../Include/Basis/Vector3D.h"
 
 using namespace std;
 
-namespace Meca {
-	namespace Libs {
-		namespace Basis{
+namespace Luga {
+	namespace Meca {
+		namespace Utils{
 
 			Vector3D::Vector3D() {
 				x = y = z = 0.0;
@@ -134,7 +135,7 @@ namespace Meca {
 
 			ostream & operator << (ostream & out, Vector3D const& a){
 				out << scientific << setprecision(15);
-				out << a.X() << "\t" << a.Y() << "\t" << a.Z();
+				out << a.X() << " " << a.Y() << " " << a.Z();
 				return out;
 			}
 
@@ -144,6 +145,7 @@ namespace Meca {
 				a.SetValue(x,y,z);
 				return in;
 			}
+
 			Vector3D operator*(const double & b, Vector3D const & a){
 				return a.Product(b);
 			}

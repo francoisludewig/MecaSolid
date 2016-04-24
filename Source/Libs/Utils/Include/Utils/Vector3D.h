@@ -4,9 +4,9 @@
 #include <iomanip>
 using namespace std;
 
-namespace Meca {
-	namespace Libs {
-		namespace Basis{
+namespace Luga {
+	namespace Meca {
+		namespace Utils{
 
 			class Vector3D {
 			public:
