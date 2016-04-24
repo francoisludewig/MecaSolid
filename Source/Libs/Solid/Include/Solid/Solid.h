@@ -40,6 +40,7 @@ namespace Luga {
 			void UpdateVelocities(double dt);
 			void UpdatePosition(double dt);
 
+			void ResetForceAndMomemtum();
 
 		private:
 			Basis b;

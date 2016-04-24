@@ -108,7 +108,7 @@ namespace Luga {
 			}
 
 			ostream & operator << (ostream & out, Basis const& a){
-				out << a.O() << "\t" << a.Q();
+				out << a.O() << " " << a.Q();
 				return out;
 			}
 

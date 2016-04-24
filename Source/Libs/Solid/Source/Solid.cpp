@@ -53,12 +53,17 @@ namespace Luga {
 				b*= Quaternion(angularVelocity*dt);
 			}
 
+			void Solid::ResetForceAndMomemtum(){
+				force.SetValue(0,0,0);
+				momentum.SetValue(0,0,0);
+			}
+
 			void Solid::LoadFromIstream(istream & in){
 				in >> b >> velocity >> angularVelocity >> force >> momentum >> inertia >> mass;
 			}
 
 			ostream & operator << (ostream & out, Solid const& a){
-				out << a.B() << a.Velocity() << a.AngularVelocity() << a.Force() << a.Momentum() << a.Inertia() << a.Mass();
+				out << a.B() << " " << a.Velocity() << " " << a.AngularVelocity() << " " << a.Force() << " " << a.Momentum() << " " << a.Inertia() << " " << a.Mass();
 				return out;
 			}
 

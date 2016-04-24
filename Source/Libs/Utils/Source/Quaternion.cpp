@@ -139,7 +139,7 @@ namespace Luga {
 
 			ostream & operator << (ostream & out, Quaternion const& a){
 				out << scientific << setprecision(15);
-				out << a.Q0() << "\t" << a.Q1() << "\t" << a.Q2() << "\t" << a.Q3();
+				out << a.Q0() << " " << a.Q1() << " " << a.Q2() << " " << a.Q3();
 				return out;
 			}
 		}

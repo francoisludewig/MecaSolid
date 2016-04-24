@@ -7,13 +7,17 @@
 
 using namespace std;
 
+/*! \class Matrix3x3
+	\brief In order to represent Inertia matrix
+*/
+
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
 			Matrix3x3::Matrix3x3(){
 				m[0][0] = 1; m[0][1] = 0; m[0][2] = 0;
-				m[1][0] = 0; m[1][1] = 1; m[1][2] = 0;
+			 	m[1][0] = 0; m[1][1] = 1; m[1][2] = 0;
 				m[2][0] = 0; m[2][1] = 0; m[2][2] = 1;
 			}
 
@@ -147,7 +151,7 @@ namespace Luga {
 				out << scientific << setprecision(15);
 				for(int i = 0 ; i < 3 ; i++){
 					for(int j = 0 ; j < 3 ; j++){
-						out << a.Componant(i,j) << "\t";
+						out << a.Componant(i,j) << " ";
 					}
 					out << "\n";
 				}

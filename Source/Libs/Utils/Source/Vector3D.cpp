@@ -135,7 +135,7 @@ namespace Luga {
 
 			ostream & operator << (ostream & out, Vector3D const& a){
 				out << scientific << setprecision(15);
-				out << a.X() << "\t" << a.Y() << "\t" << a.Z();
+				out << a.X() << " " << a.Y() << " " << a.Z();
 				return out;
 			}
 
@@ -145,6 +145,7 @@ namespace Luga {
 				a.SetValue(x,y,z);
 				return in;
 			}
+
 			Vector3D operator*(const double & b, Vector3D const & a){
 				return a.Product(b);
 			}
