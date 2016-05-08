@@ -20,7 +20,7 @@ namespace Luga {
 
 			}
 
-			Vector3D Basis::O() const{
+			Point Basis::O() const{
 				return o;
 			}
 			Vector3D Basis::E1() const{
@@ -36,7 +36,7 @@ namespace Luga {
 				return q;
 			}
 
-			void Basis::O(Vector3D o){
+			void Basis::O(Point o){
 				this->o = o;
 			}
 
