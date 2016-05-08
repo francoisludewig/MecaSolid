@@ -4,6 +4,7 @@
 #include <iomanip>
 #include "Utils/Quaternion.h"
 #include "Utils/Vector3D.h"
+#include "Utils/Point.h"
 
 using namespace std;
 using namespace Luga::Meca::Utils;
@@ -17,13 +18,13 @@ namespace Luga {
 				Basis();
 				~Basis();
 
-				Vector3D O() const;
+				Point O() const;
 				Vector3D E1() const;
 				Vector3D E2() const;
 				Vector3D E3() const;
 				Quaternion Q() const;
 
-				void O(Vector3D o);
+				void O(Point o);
 				void Q(Quaternion q);
 
 				void Rotate(Quaternion const & q);
@@ -41,7 +42,8 @@ namespace Luga {
 				void operator*=(Quaternion const& q);
 				void operator+=(Vector3D const& o);
 			private:
-				Vector3D o,e1,e2,e3;
+				Vector3D e1,e2,e3;
+				Point o;
 				Quaternion q;
 			};
 

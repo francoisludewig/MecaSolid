@@ -8,6 +8,7 @@ set(SOURCES_FILES
 	TestBasis.cpp
 	TestMatrix3x3.cpp
 	TestSolid.cpp
+	TestPoint.cpp
 )
 
 set(FILES
