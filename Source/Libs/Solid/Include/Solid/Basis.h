@@ -1,10 +1,10 @@
 #pragma once
 
+#include <Utils/Segment.h>
 #include <iostream>
 #include <iomanip>
 #include "Utils/Quaternion.h"
 #include "Utils/Vector3D.h"
-#include "Utils/Point.h"
 
 using namespace std;
 using namespace Luga::Meca::Utils;

@@ -5,6 +5,8 @@ set(SOURCES_FILES
 	Source/Quaternion.cpp
 	Source/Matrix3x3.cpp
 	Source/Point.cpp
+	Source/Segment.cpp
+	Source/Line.cpp
 )
 
 set(HEADER_FILES
@@ -12,6 +14,8 @@ set(HEADER_FILES
 	Include/Utils/Quaternion.h
 	Include/Utils/Matrix3x3.h	
 	Include/Utils/Point.h	
+	Include/Utils/Segment.h	
+	Include/Utils/Line.h	
 )
 
 
