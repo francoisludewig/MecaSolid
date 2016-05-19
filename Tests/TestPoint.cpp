@@ -1,9 +1,10 @@
+#include <Utils/Segment.h>
+
 #include <gtest/gtest.h>
 #include <cmath>
 #include <fstream>
 
 
-#include "Utils/Point.h"
 #include "Utils/Vector3D.h"
 #include "Resource/DoublePrecision.h"
 

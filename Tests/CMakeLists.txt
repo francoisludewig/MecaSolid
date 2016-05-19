@@ -9,6 +9,9 @@ set(SOURCES_FILES
 	TestMatrix3x3.cpp
 	TestSolid.cpp
 	TestPoint.cpp
+	TestSegment.cpp
+	TestLine.cpp
+	TestVectorsQuaternionConverter.cpp
 )
 
 set(FILES

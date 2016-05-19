@@ -2,11 +2,11 @@
 #include <cmath>
 #include <fstream>
 
-#include "Solid/Basis.h"
+#include "Utils/Basis.h"
 #include "Resource/DoublePrecision.h"
 
 using namespace std;
-using namespace Luga::Meca::Solid;
+using namespace Luga::Meca::Utils;
 
 
 TEST(Basis,Constructor){
@@ -19,7 +19,7 @@ TEST(Basis,Constructor){
 	ASSERT_EQ (0,q.Q3());
 
 
-	Vector3D o = a.O();
+	Point o = a.O();
 	ASSERT_EQ (0,o.X());
 	ASSERT_EQ (0,o.Y());
 	ASSERT_EQ (0,o.Z());
@@ -103,12 +103,15 @@ TEST(Basis,LocalGlobal){
 	ASSERT_TRUE(isEquals( v.Z() , M_PI/7 ));
 }
 
+
+
+
 TEST(Basis,IO_Operator){
 	Basis a;
 	Basis b;
 
 	a.Q(Quaternion(M_PI,2*M_PI,M_PI/2,M_PI/3));
-	a.O(Vector3D(2*M_PI,M_PI/2,M_PI/3));
+	a.O(Point(2*M_PI,M_PI/2,M_PI/3));
 
 	ofstream fichierOut("testBasis.txt", ios::out | ios::trunc);
 	if(fichierOut){
@@ -122,8 +125,8 @@ TEST(Basis,IO_Operator){
 		fichierIn.close();
 	}
 
-	Vector3D o_a = a.O();
-	Vector3D o_b = b.O();
+	Point o_a = a.O();
+	Point o_b = b.O();
 
 	ASSERT_TRUE(isEquals (o_a.X(),o_b.X()));
 	ASSERT_TRUE(isEquals (o_a.Y(),o_b.Y()));

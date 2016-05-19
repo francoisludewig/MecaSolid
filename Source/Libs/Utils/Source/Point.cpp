@@ -1,4 +1,4 @@
-#include "../../Utils/Include/Utils/Point.h"
+#include <Utils/Segment.h>
 #include "../../Utils/Include/Utils/Vector3D.h"
 
 #include <iostream>
@@ -8,14 +8,9 @@
 
 using namespace std;
 
-/*! \class Point
-	\brief In order to represent Inertia matrix
-*/
-
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
-
 
 			Point::Point():x(0),y(0),z(0){
 			}
