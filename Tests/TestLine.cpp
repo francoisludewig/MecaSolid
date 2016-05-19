@@ -4,15 +4,12 @@
 #include <cmath>
 #include <fstream>
 
-
-#include "Utils/Vector3D.h"
-#include "Utils/Point.h"
+#include <Utils/Vector3D.h>
+#include <Utils/Point.h>
 #include "Resource/DoublePrecision.h"
 
 using namespace std;
 using namespace Luga::Meca::Utils;
-
-
 
 TEST(Line,Constructor){
 	Line a;
@@ -36,7 +33,6 @@ TEST(Line,Constructor2){
 	ASSERT_EQ (u.Y(),l.GetVector().Y());
 	ASSERT_EQ (u.Z(),l.GetVector().Z());
 }
-
 
 TEST(Line,IO_Operator){
 	Point a(M_PI,2*M_PI,M_PI/5);

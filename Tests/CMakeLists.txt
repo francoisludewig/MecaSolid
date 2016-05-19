@@ -11,6 +11,7 @@ set(SOURCES_FILES
 	TestPoint.cpp
 	TestSegment.cpp
 	TestLine.cpp
+	TestVectorsQuaternionConverter.cpp
 )
 
 set(FILES

@@ -2,11 +2,11 @@
 #include <cmath>
 #include <fstream>
 
-#include "Solid/Basis.h"
+#include "Utils/Basis.h"
 #include "Resource/DoublePrecision.h"
 
 using namespace std;
-using namespace Luga::Meca::Solid;
+using namespace Luga::Meca::Utils;
 
 
 TEST(Basis,Constructor){
@@ -102,6 +102,9 @@ TEST(Basis,LocalGlobal){
 	ASSERT_TRUE(isEquals( v.Y() , M_PI/3 ));
 	ASSERT_TRUE(isEquals( v.Z() , M_PI/7 ));
 }
+
+
+
 
 TEST(Basis,IO_Operator){
 	Basis a;

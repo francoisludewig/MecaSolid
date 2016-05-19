@@ -1,12 +1,10 @@
 cmake_minimum_required(VERSION 3.1.2)
 
 set(SOURCES_FILES
-	Source/Basis.cpp
 	Source/Solid.cpp
 )
 
 set(HEADER_FILES
-	Include/Solid/Basis.h	
 	Include/Solid/Solid.h	
 )
 

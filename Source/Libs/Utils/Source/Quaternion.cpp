@@ -48,12 +48,19 @@ namespace Luga {
 				return sqrt(q0*q0+q1*q1+q2*q2+q3*q3);
 			}
 
+			void Quaternion::Normalize(){
+				double n = Norme();
+				q0 /= n;
+				q1 /= n;
+				q2 /= n;
+				q3 /= n;
+			}
+
 			void Quaternion::SetValue(double q0, double q1, double q2, double q3){
 				this->q0 = q0;
 				this->q1 = q1;
 				this->q2 = q2;
 				this->q3 = q3;
-
 			}
 
 			Quaternion Quaternion::Product(const Quaternion & b) const{

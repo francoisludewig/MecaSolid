@@ -7,6 +7,9 @@ set(SOURCES_FILES
 	Source/Point.cpp
 	Source/Segment.cpp
 	Source/Line.cpp
+	Source/Plan.cpp
+	Source/Basis.cpp
+	Source/VectorsQuaternionConverter.cpp
 )
 
 set(HEADER_FILES
@@ -16,14 +19,15 @@ set(HEADER_FILES
 	Include/Utils/Point.h	
 	Include/Utils/Segment.h	
 	Include/Utils/Line.h	
+	Include/Utils/Plan.h	
+	Include/Utils/Basis.h
+	Include/Utils/VectorsQuaternionConverter.h	
 )
-
 
 set(FILES
     ${SOURCES_FILES}
     ${HEADER_FILES}
 )
-
 
 add_library(
 	mecasolidUtils.libs STATIC

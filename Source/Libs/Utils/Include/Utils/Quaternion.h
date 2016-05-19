@@ -22,6 +22,7 @@ namespace Luga {
 				double Q2() const;
 				double Q3() const;
 				double Norme();
+				void Normalize();
 				void SetValue(double q0, double q1, double q2, double q3);
 
 				Quaternion Product(const Quaternion & b) const;
