@@ -9,6 +9,7 @@ set(SOURCES_FILES
 	Source/Line.cpp
 	Source/Plan.cpp
 	Source/Basis.cpp
+	Source/Polygon.cpp
 	Source/VectorsQuaternionConverter.cpp
 )
 
@@ -20,7 +21,8 @@ set(HEADER_FILES
 	Include/Utils/Segment.h	
 	Include/Utils/Line.h	
 	Include/Utils/Plan.h	
-	Include/Utils/Basis.h
+	Include/Utils/Basis.h	
+	Include/Utils/Polygon.h
 	Include/Utils/VectorsQuaternionConverter.h	
 )
 
