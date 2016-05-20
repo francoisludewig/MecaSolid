@@ -43,7 +43,6 @@ namespace Luga {
 				void operator+=(Vector3D const& o);
 
 			private:
-				//TODO place these functions in another class ? !!!
 				void ConstructE2AndE3FromE1();
 
 				Vector3D e1,e2,e3;
