@@ -39,19 +39,19 @@ namespace Luga {
 				return q;
 			}
 
-			void Basis::O(Point o){
+			void Basis::O(Point & o){
 				this->o = o;
 			}
 
-			void Basis::Q(Quaternion q){
+			void Basis::Q(Quaternion & q){
 				this->q = q;
 				vQc.ConvertQuaternionIntoVectors(q,e1,e2,e3);
 			}
 
-			void Basis::E1(Vector3D e1){
-				e1 /= e1.Norme();
+			void Basis::E1(Vector3D & e1){
+				e1.Normalize();
 				this->e1 = e1;
-				this->BluidFromE1();
+				this->ConstructE2AndE3FromE1();
 			}
 
 			void Basis::Local(Vector3D & a){
@@ -101,11 +101,11 @@ namespace Luga {
 				this->Translate(o);
 			}
 
-			void Basis::BluidFromE1(){
+			void Basis::ConstructE2AndE3FromE1(){
 				if((e1.X() != 0 || e1.Y() != 0) || (e1.X() != 0 || e1.Z() != 0)  || (e1.Y() != 0 || e1.Z() != 0)){
 					e2.X(e1.Y()*e1.Z());
-					e2.Y(e1.X()*e1.Y());
-					e2.Z(-2*e1.X()*e1.Z());
+					e2.Y(e1.X()*e1.Z());
+					e2.Z(-2*e1.X()*e1.Y());
 				}
 				else{
 					if(e1.X() == 0 || e1.Y() == 0){
@@ -124,7 +124,7 @@ namespace Luga {
 						e2.Z(0);
 					}
 				}
-				e2 /= e2.Norme();
+				e2.Normalize();
 				e3 = e1^e2;
 			  	vQc.ConvertVectorsIntoQuaternion(e1,e2,e3,q);
 			}

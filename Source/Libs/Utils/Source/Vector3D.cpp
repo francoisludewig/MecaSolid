@@ -39,6 +39,12 @@ namespace Luga {
 				return sqrt(x*x+y*y+z*z);
 			}
 
+			void Vector3D::Normalize(){
+				double n = Norme();
+				x /= n;
+				y /= n;
+				z /= n;
+			}
 
 			double Vector3D::ScalarProduct(const Vector3D & b) const {
 				double ps = (this->x*b.X()+this->y*b.Y()+this->z*b.Z());
@@ -75,7 +81,6 @@ namespace Luga {
 				a.z -= b.z;
 				return a;
 			}
-
 
 			Vector3D Vector3D::VectorialProduct(const Vector3D& b) const {
 				Vector3D a = *this;

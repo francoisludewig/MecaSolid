@@ -34,6 +34,17 @@ TEST(Vector3D,Norme){
 	ASSERT_EQ (sqrt(14.),a.Norme());
 }
 
+
+TEST(Vector3D,Normalize){
+	Vector3D a(1,2,3),b = a;
+	a.Normalize();
+	ASSERT_EQ(1,a.Norme());
+	Vector3D pv = a^b;
+	ASSERT_EQ(0,pv.X());
+	ASSERT_EQ(0,pv.Y());
+	ASSERT_EQ(0,pv.Z());
+}
+
 TEST(Vector3D,ScalarProduct){
 	Vector3D a(1,0,0);
 	Vector3D b(0,1,0);
@@ -88,6 +99,20 @@ TEST(Vector3D,Product){
 	ASSERT_TRUE(isEquals(0,a*(b^a)));
 	ASSERT_TRUE(isEquals(0,b*(b^a)));
 }
+
+
+TEST(Vector3D,ProductUnit){
+	Vector3D a(M_PI,2*M_PI,M_PI/2);
+	Vector3D b(a.Y()*a.Z(),a.X()*a.Z(),-2*a.X()*a.Y());
+	a.Normalize();
+	b.Normalize();
+	Vector3D c = a^b;
+
+	ASSERT_TRUE(isEquals(0,c*a));
+	ASSERT_TRUE(isEquals(0,c*b));
+	ASSERT_TRUE(isEquals(1,c.Norme()));
+}
+
 
 TEST(Vector3D,MultiplicationEqual){
 	Vector3D a(5,17,-57);
