@@ -65,6 +65,6 @@ int main()
     	}
     	fichierOut.close();
     }
-    cout << "End" << endl;
+    cout << "End" << endl << endl;
     return 0;
 }
