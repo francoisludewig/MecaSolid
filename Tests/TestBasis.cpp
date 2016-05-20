@@ -104,14 +104,35 @@ TEST(Basis,LocalGlobal){
 }
 
 
+TEST(Basis,Construct){
+	Basis a;
+	Vector3D u(2*M_PI,M_PI/2,M_PI/3);
+	a.E1(u);
+	Vector3D n,t,s;
+	n = a.E1();
+	t = a.E2();
+	s = a.E3();
+
+	ASSERT_TRUE(isEquals(0,n*t));
+	ASSERT_TRUE(isEquals(0,n*s));
+	ASSERT_TRUE(isEquals(0,s*t));
+
+	ASSERT_TRUE(isEquals(1,n.Norme()));
+	ASSERT_TRUE(isEquals(1,t.Norme()));
+	ASSERT_TRUE(isEquals(1,s.Norme()));
+
+}
+
+
 
 
 TEST(Basis,IO_Operator){
 	Basis a;
 	Basis b;
-
-	a.Q(Quaternion(M_PI,2*M_PI,M_PI/2,M_PI/3));
-	a.O(Point(2*M_PI,M_PI/2,M_PI/3));
+	Quaternion q(M_PI,2*M_PI,M_PI/2,M_PI/3);
+	Point p(2*M_PI,M_PI/2,M_PI/3);
+	a.Q(q);
+	a.O(p);
 
 	ofstream fichierOut("testBasis.txt", ios::out | ios::trunc);
 	if(fichierOut){

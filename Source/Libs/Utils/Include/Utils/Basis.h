@@ -24,9 +24,9 @@ namespace Luga {
 				Vector3D E3() const;
 				Quaternion Q() const;
 
-				void E1(Vector3D e1);
-				void O(Point o);
-				void Q(Quaternion q);
+				void E1(Vector3D & e1);
+				void O(Point & o);
+				void Q(Quaternion & q);
 
 				void Rotate(Quaternion const & q);
 				void Translate(Vector3D const & o);
@@ -44,7 +44,7 @@ namespace Luga {
 
 			private:
 				//TODO place these functions in another class ? !!!
-				void BluidFromE1();
+				void ConstructE2AndE3FromE1();
 
 				Vector3D e1,e2,e3;
 				Point o;

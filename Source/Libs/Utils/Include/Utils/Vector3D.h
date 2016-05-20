@@ -17,6 +17,7 @@ namespace Luga {
 
 				void SetValue(double x, double y, double z);
 				double Norme() const;
+				void Normalize();
 				double ScalarProduct(const Vector3D & b) const;
 				Vector3D VectorialProduct(const Vector3D & b) const;
 				Vector3D Product(const double & b) const;
