@@ -15,15 +15,15 @@ namespace Luga {
 				Plan();
 				Plan(Point p, Vector3D n);
 				~Plan();
-				Basis B() const;
+				Basis Position() const;
 				Vector3D Normal() const;
 				Point Origin() const;
 
-				void B(Basis b);
+				void Position(Basis b);
 				void Normal(Vector3D n);
 				void Origin(Point p);
 			private:
-				Basis b;
+				Basis position;
 			};
 
 			ostream & operator << (ostream & out, Plan const& a);

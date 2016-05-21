@@ -17,13 +17,13 @@ namespace Luga {
 				Quaternion(const Vector3D & w);
 				~Quaternion();
 
-				double Q0() const;
-				double Q1() const;
-				double Q2() const;
-				double Q3() const;
+				double ComponantReal() const;
+				double ComponantI() const;
+				double ComponantJ() const;
+				double ComponantK() const;
 				double Norme();
 				void Normalize();
-				void SetValue(double q0, double q1, double q2, double q3);
+				void SetComponants(double q0, double q1, double q2, double q3);
 
 				Quaternion Product(const Quaternion & b) const;
 				Quaternion Sum(const Quaternion & b) const;
@@ -36,7 +36,7 @@ namespace Luga {
 				void operator+=(Quaternion const& a);
 				void operator-=(Quaternion const& a);
 			private:
-				double q0,q1,q2,q3;
+				double componantReal,componantI,componantJ,componantK;
 			};
 
 			ostream & operator << (ostream & out, Quaternion const& a);

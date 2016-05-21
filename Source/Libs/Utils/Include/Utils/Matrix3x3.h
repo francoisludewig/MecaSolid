@@ -19,8 +19,8 @@ namespace Luga {
 						  double m20, double m21,double m22);
 				~Matrix3x3();
 
-				void Componant(int i, int j , double c);
-				double Componant(int i, int j) const;
+				void Element(int i, int j , double c);
+				double Element(int i, int j) const;
 				Vector3D Line(int i) const;
 				Vector3D Column(int i) const;
 				void Line(int i, Vector3D & l);
@@ -40,7 +40,7 @@ namespace Luga {
 				void operator*=(double const& a);
 				void operator/=(double const& a);
 			private:
-				double m[3][3];
+				double element[3][3];
 			};
 
 			ostream & operator << (ostream & out, Matrix3x3 const& a);

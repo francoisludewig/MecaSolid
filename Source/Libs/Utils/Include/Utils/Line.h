@@ -15,14 +15,14 @@ namespace Luga {
 				Line();
 				Line(Point a, Vector3D u);
 				~Line();
-				Point GetPoint() const;
-				Vector3D GetVector() const;
-				void SetPoint(Point a);
-				void SetVector(Vector3D b);
+				Point Origin() const;
+				Vector3D Direction() const;
+				void Origin(Point a);
+				void Direction(Vector3D b);
 
 			private:
-				Point a;
-				Vector3D u;
+				Point origin;
+				Vector3D direction;
 			};
 
 			ostream & operator << (ostream & out, Line const& a);

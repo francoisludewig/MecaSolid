@@ -14,80 +14,80 @@ namespace Luga {
 		namespace Utils{
 
 			Quaternion::Quaternion() {
-				q0 = 1.0;
-				q1 = q2 = q3 = 0.0;
+				componantReal = 1.0;
+				componantI = componantJ = componantK = 0.0;
 			}
 
 			Quaternion::Quaternion(double q0, double q1, double q2, double q3){
-				this->q0 = q0;
-				this->q1 = q1;
-				this->q2 = q2;
-				this->q3 = q3;
+				this->componantReal = q0;
+				this->componantI = q1;
+				this->componantJ = q2;
+				this->componantK = q3;
 			}
 
 			Quaternion::Quaternion(const Vector3D & w){
 				double a = w.Norme();
 				double sa = sin(a/2);
 				double ca = cos(a/2);
-				q0 = ca;
-				q1 = w.X()/a*sa;
-				q2 = w.Y()/a*sa;
-				q3 = w.Z()/a*sa;
+				componantReal = ca;
+				componantI = w.ComponantX()/a*sa;
+				componantJ = w.ComponantY()/a*sa;
+				componantK = w.ComponantZ()/a*sa;
 			}
 
 			Quaternion::~Quaternion(){
 
 			}
 
-			double Quaternion::Q0() const{return q0;}
-			double Quaternion::Q1() const{return q1;}
-			double Quaternion::Q2() const{return q2;}
-			double Quaternion::Q3() const{return q3;}
+			double Quaternion::ComponantReal() const{return componantReal;}
+			double Quaternion::ComponantI() const{return componantI;}
+			double Quaternion::ComponantJ() const{return componantJ;}
+			double Quaternion::ComponantK() const{return componantK;}
 
 			double Quaternion::Norme(){
-				return sqrt(q0*q0+q1*q1+q2*q2+q3*q3);
+				return sqrt(componantReal*componantReal+componantI*componantI+componantJ*componantJ+componantK*componantK);
 			}
 
 			void Quaternion::Normalize(){
 				double n = Norme();
-				q0 /= n;
-				q1 /= n;
-				q2 /= n;
-				q3 /= n;
+				componantReal /= n;
+				componantI /= n;
+				componantJ /= n;
+				componantK /= n;
 			}
 
-			void Quaternion::SetValue(double q0, double q1, double q2, double q3){
-				this->q0 = q0;
-				this->q1 = q1;
-				this->q2 = q2;
-				this->q3 = q3;
+			void Quaternion::SetComponants(double q0, double q1, double q2, double q3){
+				this->componantReal = q0;
+				this->componantI = q1;
+				this->componantJ = q2;
+				this->componantK = q3;
 			}
 
 			Quaternion Quaternion::Product(const Quaternion & b) const{
 				Quaternion a = *this;
-				a.q0 = this->q0*b.Q0() - this->q1*b.Q1() - this->q2*b.Q2() - this->q3*b.Q3();
-				a.q1 = this->q0*b.Q1() + this->q1*b.Q0() - this->q2*b.Q3() + this->q3*b.Q2();
-				a.q2 = this->q0*b.Q2() + this->q1*b.Q3() + this->q2*b.Q0() - this->q3*b.Q1();
-				a.q3 = this->q0*b.Q3() - this->q1*b.Q2() + this->q2*b.Q1() + this->q3*b.Q0();
+				a.componantReal = this->componantReal*b.ComponantReal() - this->componantI*b.ComponantI() - this->componantJ*b.ComponantJ() - this->componantK*b.ComponantK();
+				a.componantI = this->componantReal*b.ComponantI() + this->componantI*b.ComponantReal() - this->componantJ*b.ComponantK() + this->componantK*b.ComponantJ();
+				a.componantJ = this->componantReal*b.ComponantJ() + this->componantI*b.ComponantK() + this->componantJ*b.ComponantReal() - this->componantK*b.ComponantI();
+				a.componantK = this->componantReal*b.ComponantK() - this->componantI*b.ComponantJ() + this->componantJ*b.ComponantI() + this->componantK*b.ComponantReal();
 				return a;
 			}
 
 
 			Quaternion Quaternion::Sum(const Quaternion & b) const{
 				Quaternion a = *this;
-				a.q0 += b.Q0();
-				a.q1 += b.Q1();
-				a.q2 += b.Q2();
-				a.q3 += b.Q3();
+				a.componantReal += b.ComponantReal();
+				a.componantI += b.ComponantI();
+				a.componantJ += b.ComponantJ();
+				a.componantK += b.ComponantK();
 				return a;
 			}
 
 			Quaternion Quaternion::Diff(const Quaternion & b) const{
 				Quaternion a = *this;
-				a.q0 -= b.Q0();
-				a.q1 -= b.Q1();
-				a.q2 -= b.Q2();
-				a.q3 -= b.Q3();
+				a.componantReal -= b.ComponantReal();
+				a.componantI -= b.ComponantI();
+				a.componantJ -= b.ComponantJ();
+				a.componantK -= b.ComponantK();
 				return a;
 			}
 
@@ -106,47 +106,47 @@ namespace Luga {
 
 			Quaternion Quaternion::operator~(){
 				Quaternion a = *this;
-				a.q1 *= -1;
-				a.q2 *= -1;
-				a.q3 *= -1;
+				a.componantI *= -1;
+				a.componantJ *= -1;
+				a.componantK *= -1;
 				return a;
 			}
 
 			void Quaternion::operator*=(Quaternion const& b){
-				double p0 = this->q0*b.Q0() - this->q1*b.Q1() - this->q2*b.Q2() - this->q3*b.Q3();
-				double p1 = this->q0*b.Q1() + this->q1*b.Q0() - this->q2*b.Q3() + this->q3*b.Q2();
-				double p2 = this->q0*b.Q2() + this->q1*b.Q3() + this->q2*b.Q0() - this->q3*b.Q1();
-				double p3 = this->q0*b.Q3() - this->q1*b.Q2() + this->q2*b.Q1() + this->q3*b.Q0();
-				q0 = p0;
-				q1 = p1;
-				q2 = p2;
-				q3 = p3;
+				double p0 = this->componantReal*b.ComponantReal() - this->componantI*b.ComponantI() - this->componantJ*b.ComponantJ() - this->componantK*b.ComponantK();
+				double p1 = this->componantReal*b.ComponantI() + this->componantI*b.ComponantReal() - this->componantJ*b.ComponantK() + this->componantK*b.ComponantJ();
+				double p2 = this->componantReal*b.ComponantJ() + this->componantI*b.ComponantK() + this->componantJ*b.ComponantReal() - this->componantK*b.ComponantI();
+				double p3 = this->componantReal*b.ComponantK() - this->componantI*b.ComponantJ() + this->componantJ*b.ComponantI() + this->componantK*b.ComponantReal();
+				componantReal = p0;
+				componantI = p1;
+				componantJ = p2;
+				componantK = p3;
 			}
 
 			void Quaternion::operator+=(Quaternion const& b){
-				q0 += b.Q0();
-				q1 += b.Q1();
-				q2 += b.Q2();
-				q3 += b.Q3();
+				componantReal += b.ComponantReal();
+				componantI += b.ComponantI();
+				componantJ += b.ComponantJ();
+				componantK += b.ComponantK();
 			}
 
 			void Quaternion::operator-=(Quaternion const& b){
-				q0 -= b.Q0();
-				q1 -= b.Q1();
-				q2 -= b.Q2();
-				q3 -= b.Q3();
+				componantReal -= b.ComponantReal();
+				componantI -= b.ComponantI();
+				componantJ -= b.ComponantJ();
+				componantK -= b.ComponantK();
 			}
 
 			istream & operator >> (istream & in, Quaternion & a){
 				double q0,q1,q2,q3;
 				in >> q0 >> q1 >> q2 >> q3;
-				a.SetValue(q0,q1,q2,q3);
+				a.SetComponants(q0,q1,q2,q3);
 				return in;
 			}
 
 			ostream & operator << (ostream & out, Quaternion const& a){
 				out << scientific << setprecision(15);
-				out << a.Q0() << " " << a.Q1() << " " << a.Q2() << " " << a.Q3();
+				out << a.ComponantReal() << " " << a.ComponantI() << " " << a.ComponantJ() << " " << a.ComponantK();
 				return out;
 			}
 		}

@@ -16,18 +16,18 @@ namespace Luga {
 				Point();
 				Point(double x, double y, double z);
 				~Point();
-				double X() const;
-				double Y() const;
-				double Z() const;
-				void SetValue(double x, double y, double z);
-				void Add(Vector3D const & a);
+				double CoordinateX() const;
+				double CoordinateY() const;
+				double CoordinateZ() const;
+				void SetCoordinates(double x, double y, double z);
+				void Translate(Vector3D const & a);
 
-				Point operator+(Vector3D const &b);
-				Vector3D operator-(Point const &b);
+				Point operator+(Vector3D const &b) const;
+				Vector3D operator-(Point const &b) const;
 				void operator+=(Vector3D const& a);
-
+				// TODO Rotate with a reference basis
 			private:
-				double x,y,z;
+				double coordinateX,coordinateY,coordinateZ;
 			};
 
 			ostream & operator << (ostream & out, Point const& a);

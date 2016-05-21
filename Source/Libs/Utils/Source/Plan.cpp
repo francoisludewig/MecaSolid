@@ -12,31 +12,31 @@ namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
-			Plan::Plan():b(){
+			Plan::Plan():position(){
 			}
 
 			Plan::~Plan(){
 			}
 
-			Plan::Plan(Point p, Vector3D n):b(){
-				b.O(p);
-				b.E1(n);
+			Plan::Plan(Point p, Vector3D n):position(){
+				position.Origin(p);
+				position.AxisX(n);
 			}
 
-			Basis Plan::B() const{
-				return b;
+			Basis Plan::Position() const{
+				return position;
 			}
 
 			Vector3D Plan::Normal() const {
-				return b.E1();
+				return position.AxisX();
 			}
 
 			Point Plan::Origin() const{
-				return b.O();
+				return position.Origin();
 			}
 
-			void Plan::B(Basis b){
-				this->b = b;
+			void Plan::Position(Basis b){
+				this->position = b;
 			}
 
 			void Plan::Normal(Vector3D n){
@@ -48,7 +48,7 @@ namespace Luga {
 
 			ostream & operator << (ostream & out, Plan const& a){
 				out << scientific << setprecision(15);
-				out << a.B();
+				out << a.Position();
 				return out;
 			}
 

@@ -15,38 +15,38 @@ namespace Luga {
 
 				virtual ~Vector3D();
 
-				void SetValue(double x, double y, double z);
+				void SetComponants(double x, double y, double z);
 				double Norme() const;
 				void Normalize();
 				double ScalarProduct(const Vector3D & b) const;
 				Vector3D VectorialProduct(const Vector3D & b) const;
 				Vector3D Product(const double & b) const;
-				Vector3D Div(const double & b) const;
+				Vector3D Division(const double & b) const;
 				Vector3D Sum(const Vector3D & b) const;
-				Vector3D Diff(const Vector3D & b) const;
+				Vector3D Difference(const Vector3D & b) const;
 
-				double X() const{return x;};
-				double Y() const{return y;};
-				double Z() const{return z;};
+				double ComponantX() const{return componantX;};
+				double ComponantY() const{return componantY;};
+				double ComponantZ() const{return componantZ;};
 
-				void X(double x) {this->x = x;};
-				void Y(double y) {this->y = y;};
-				void Z(double z) {this->z = z;};
+				void ComponantX(double x) {this->componantX = x;};
+				void ComponantY(double y) {this->componantY = y;};
+				void ComponantZ(double z) {this->componantZ = z;};
 
 				void operator+=(Vector3D const& a);
 				void operator-=(Vector3D const& a);
 				void operator*=(double const& a);
 				void operator/=(double const& a);
 
-				double operator*(Vector3D const &b);
-				Vector3D operator^(Vector3D const &b);
-				Vector3D operator*(double const &b);
-				Vector3D operator/(double const &b);
-				Vector3D operator+(Vector3D const &b);
-				Vector3D operator-(Vector3D const &b);
+				double operator*(Vector3D const &b) const;
+				Vector3D operator^(Vector3D const &b) const;
+				Vector3D operator*(double const &b) const;
+				Vector3D operator/(double const &b) const;
+				Vector3D operator+(Vector3D const &b) const;
+				Vector3D operator-(Vector3D const &b) const;
 
 			private:
-				double x,y,z;
+				double componantX,componantY,componantZ;
 			};
 
 			ostream & operator << (ostream & out, Vector3D const& a);

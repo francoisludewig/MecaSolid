@@ -16,38 +16,43 @@ namespace Luga {
 			class Basis {
 			public:
 				Basis();
+				Basis(Point o, Quaternion q);
 				~Basis();
 
-				Point O() const;
-				Vector3D E1() const;
-				Vector3D E2() const;
-				Vector3D E3() const;
-				Quaternion Q() const;
+				Point Origin() const;
+				Vector3D AxisX() const;
+				Vector3D AxisY() const;
+				Vector3D AxisZ() const;
+				Quaternion Orientation() const;
 
-				void E1(Vector3D & e1);
-				void O(Point & o);
-				void Q(Quaternion & q);
+				void AxisX(Vector3D & e1);
+				void Origin(Point & o);
+				void Orientation(Quaternion & q);
 
 				void Rotate(Quaternion const & q);
 				void Translate(Vector3D const & o);
 
-				void Local(Vector3D & a);
-				void Global(Vector3D & a);
+				void Local(Vector3D & a) const;
+				void Global(Vector3D & a) const;
+
+
+				Point Local(const Point & a) const;
+				Point Global(const Point & a) const;
 
 				void LoadFromIstream(istream & in);
 
-				Basis operator*(Quaternion const & q);
-				Basis operator+(Vector3D const & o);
+				Basis operator*(Quaternion const & q) const;
+				Basis operator+(Vector3D const & o) const;
 
 				void operator*=(Quaternion const& q);
 				void operator+=(Vector3D const& o);
 
 			private:
-				void ConstructE2AndE3FromE1();
+				void ConstructAxisYAndZFromX();
 
-				Vector3D e1,e2,e3;
-				Point o;
-				Quaternion q;
+				Vector3D axisX,axisY,axisZ;
+				Point origin;
+				Quaternion orientation;
 				VectorsQuaternionConverter vQc;
 			};
 

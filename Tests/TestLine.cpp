@@ -13,12 +13,12 @@ using namespace Luga::Meca::Utils;
 
 TEST(Line,Constructor){
 	Line a;
-	ASSERT_EQ (0,a.GetPoint().X());
-	ASSERT_EQ (0,a.GetPoint().Y());
-	ASSERT_EQ (0,a.GetPoint().Z());
-	ASSERT_EQ (1./sqrt(3),a.GetVector().X());
-	ASSERT_EQ (1./sqrt(3),a.GetVector().Y());
-	ASSERT_EQ (1./sqrt(3),a.GetVector().Z());
+	ASSERT_EQ (0,a.Origin().CoordinateX());
+	ASSERT_EQ (0,a.Origin().CoordinateY());
+	ASSERT_EQ (0,a.Origin().CoordinateZ());
+	ASSERT_EQ (1./sqrt(3),a.Direction().ComponantX());
+	ASSERT_EQ (1./sqrt(3),a.Direction().ComponantY());
+	ASSERT_EQ (1./sqrt(3),a.Direction().ComponantZ());
 }
 
 TEST(Line,Constructor2){
@@ -26,12 +26,12 @@ TEST(Line,Constructor2){
 	Vector3D u(M_PI,2*M_PI,M_PI/5);
 	Line l(a,u);
 	u /= u.Norme();
-	ASSERT_EQ (a.X(),l.GetPoint().X());
-	ASSERT_EQ (a.Y(),l.GetPoint().Y());
-	ASSERT_EQ (a.Z(),l.GetPoint().Z());
-	ASSERT_EQ (u.X(),l.GetVector().X());
-	ASSERT_EQ (u.Y(),l.GetVector().Y());
-	ASSERT_EQ (u.Z(),l.GetVector().Z());
+	ASSERT_EQ (a.CoordinateX(),l.Origin().CoordinateX());
+	ASSERT_EQ (a.CoordinateY(),l.Origin().CoordinateY());
+	ASSERT_EQ (a.CoordinateZ(),l.Origin().CoordinateZ());
+	ASSERT_EQ (u.ComponantX(),l.Direction().ComponantX());
+	ASSERT_EQ (u.ComponantY(),l.Direction().ComponantY());
+	ASSERT_EQ (u.ComponantZ(),l.Direction().ComponantZ());
 }
 
 TEST(Line,IO_Operator){
@@ -51,12 +51,12 @@ TEST(Line,IO_Operator){
 		fichierIn.close();
 	}
 
-	ASSERT_EQ (m.GetPoint().X(),l.GetPoint().X());
-	ASSERT_EQ (m.GetPoint().Y(),l.GetPoint().Y());
-	ASSERT_EQ (m.GetPoint().Z(),l.GetPoint().Z());
-	ASSERT_EQ (m.GetVector().X(),l.GetVector().X());
-	ASSERT_EQ (m.GetVector().Y(),l.GetVector().Y());
-	ASSERT_EQ (m.GetVector().Z(),l.GetVector().Z());
+	ASSERT_EQ (m.Origin().CoordinateX(),l.Origin().CoordinateX());
+	ASSERT_EQ (m.Origin().CoordinateY(),l.Origin().CoordinateY());
+	ASSERT_EQ (m.Origin().CoordinateZ(),l.Origin().CoordinateZ());
+	ASSERT_EQ (m.Direction().ComponantX(),l.Direction().ComponantX());
+	ASSERT_EQ (m.Direction().ComponantY(),l.Direction().ComponantY());
+	ASSERT_EQ (m.Direction().ComponantZ(),l.Direction().ComponantZ());
 
 	remove("testLine.txt");
 }
