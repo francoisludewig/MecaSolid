@@ -11,83 +11,100 @@ namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
-			Basis::Basis():o(),e1(1,0,0),e2(0,1,0),e3(0,0,1),q(){
+			Basis::Basis():origin(),axisX(1,0,0),axisY(0,1,0),axisZ(0,0,1),orientation(){
 
+			}
+
+			Basis::Basis(Point o, Quaternion q):origin(o),orientation(q){
+				vQc.ConvertQuaternionIntoVectors(q,axisX,axisY,axisZ);
 			}
 
 			Basis::~Basis(){
 
 			}
 
-			Point Basis::O() const{
-				return o;
+			Point Basis::Origin() const{
+				return origin;
 			}
 
-			Vector3D Basis::E1() const{
-				return e1;
+			Vector3D Basis::AxisX() const{
+				return axisX;
 			}
 
-			Vector3D Basis::E2() const{
-				return e2;
+			Vector3D Basis::AxisY() const{
+				return axisY;
 			}
 
-			Vector3D Basis::E3() const{
-				return e3;
+			Vector3D Basis::AxisZ() const{
+				return axisZ;
 			}
 
-			Quaternion Basis::Q() const{
-				return q;
+			Quaternion Basis::Orientation() const{
+				return orientation;
 			}
 
-			void Basis::O(Point & o){
-				this->o = o;
+			void Basis::Origin(Point & o){
+				this->origin = o;
 			}
 
-			void Basis::Q(Quaternion & q){
-				this->q = q;
-				vQc.ConvertQuaternionIntoVectors(q,e1,e2,e3);
+			void Basis::Orientation(Quaternion & q){
+				this->orientation = q;
+				vQc.ConvertQuaternionIntoVectors(q,axisX,axisY,axisZ);
 			}
 
-			void Basis::E1(Vector3D & e1){
+			void Basis::AxisX(Vector3D & e1){
 				e1.Normalize();
-				this->e1 = e1;
-				this->ConstructE2AndE3FromE1();
+				this->axisX = e1;
+				this->ConstructAxisYAndZFromX();
 			}
 
-			void Basis::Local(Vector3D & a){
+			void Basis::Local(Vector3D & a) const{
 				double x,y,z;
-				x = a*e1;
-				y = a*e2;
-				z = a*e3;
-				a.SetValue(x,y,z);
+				x = a*axisX;
+				y = a*axisY;
+				z = a*axisZ;
+				a.SetComponants(x,y,z);
 			}
 
-			void Basis::Global(Vector3D & a){
-				a = a.X()*e1 + a.Y()*e2 + a.Z()*e3;
+			void Basis::Global(Vector3D & a) const{
+				a = a.ComponantX()*axisX + a.ComponantY()*axisY + a.ComponantZ()*axisZ;
 			}
+
+
+			Point Basis::Local(const Point & a) const{
+				Vector3D v = a-origin;
+				return Point(axisX*v,axisY*v,axisZ*v);
+			}
+
+			Point Basis::Global(const Point & a) const{
+				Point b = origin;
+				b += a.CoordinateX()*axisX + a.CoordinateY()*axisY + a.CoordinateZ()*axisZ;
+				return b;
+			}
+
 
 			void Basis::Rotate(Quaternion const & q){
-				this->q *= q;
-				vQc.ConvertQuaternionIntoVectors(this->q,e1,e2,e3);
+				this->orientation *= q;
+				vQc.ConvertQuaternionIntoVectors(this->orientation,axisX,axisY,axisZ);
 			}
 
 			void Basis::Translate(Vector3D const & o){
-				this->o += o;
+				this->origin += o;
 			}
 
 			void Basis::LoadFromIstream(istream & in){
-				in >> o;
-				in >> q;
-				vQc.ConvertQuaternionIntoVectors(q,e1,e2,e3);
+				in >> origin;
+				in >> orientation;
+				vQc.ConvertQuaternionIntoVectors(orientation,axisX,axisY,axisZ);
 			}
 
-			Basis Basis::operator*(Quaternion const & q){
+			Basis Basis::operator*(Quaternion const & q) const{
 				Basis b = *this;
 				b.Rotate(q);
 				return b;
 			}
 
-			Basis Basis::operator+(Vector3D const & o){
+			Basis Basis::operator+(Vector3D const & o) const{
 				Basis b = *this;
 				b.Translate(o);
 				return b;
@@ -101,36 +118,36 @@ namespace Luga {
 				this->Translate(o);
 			}
 
-			void Basis::ConstructE2AndE3FromE1(){
-				if((e1.X() != 0 || e1.Y() != 0) || (e1.X() != 0 || e1.Z() != 0)  || (e1.Y() != 0 || e1.Z() != 0)){
-					e2.X(e1.Y()*e1.Z());
-					e2.Y(e1.X()*e1.Z());
-					e2.Z(-2*e1.X()*e1.Y());
+			void Basis::ConstructAxisYAndZFromX(){
+				if((axisX.ComponantX() != 0 || axisX.ComponantY() != 0) || (axisX.ComponantX() != 0 || axisX.ComponantZ() != 0)  || (axisX.ComponantY() != 0 || axisX.ComponantZ() != 0)){
+					axisY.ComponantX(axisX.ComponantY()*axisX.ComponantZ());
+					axisY.ComponantY(axisX.ComponantX()*axisX.ComponantZ());
+					axisY.ComponantZ(-2*axisX.ComponantX()*axisX.ComponantY());
 				}
 				else{
-					if(e1.X() == 0 || e1.Y() == 0){
-						e2.X(e1.Z());
-						e2.Y(0);
-						e2.Z(0);
+					if(axisX.ComponantX() == 0 || axisX.ComponantY() == 0){
+						axisY.ComponantX(axisX.ComponantZ());
+						axisY.ComponantY(0);
+						axisY.ComponantZ(0);
 					}
-					else if(e1.X() == 0 || e1.Z() == 0){
-						e2.X(0);
-						e2.Y(0);
-						e2.Z(e1.Y());
+					else if(axisX.ComponantX() == 0 || axisX.ComponantZ() == 0){
+						axisY.ComponantX(0);
+						axisY.ComponantY(0);
+						axisY.ComponantZ(axisX.ComponantY());
 					}
-					else if(e1.Y() == 0 || e1.Z() == 0){
-						e2.X(0);
-						e2.Y(e1.X());
-						e2.Z(0);
+					else if(axisX.ComponantY() == 0 || axisX.ComponantZ() == 0){
+						axisY.ComponantX(0);
+						axisY.ComponantY(axisX.ComponantX());
+						axisY.ComponantZ(0);
 					}
 				}
-				e2.Normalize();
-				e3 = e1^e2;
-			  	vQc.ConvertVectorsIntoQuaternion(e1,e2,e3,q);
+				axisY.Normalize();
+				axisZ = axisX^axisY;
+			  	vQc.ConvertVectorsIntoQuaternion(axisX,axisY,axisZ,orientation);
 			}
 
 			ostream & operator << (ostream & out, Basis const& a){
-				out << a.O() << " " << a.Q();
+				out << a.Origin() << " " << a.Orientation();
 				return out;
 			}
 

@@ -11,36 +11,36 @@ namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
-			Line::Line():a(),u(1./sqrt(3),1./sqrt(3),1./sqrt(3)){
+			Line::Line():origin(),direction(1./sqrt(3),1./sqrt(3),1./sqrt(3)){
 
 			}
 
-			Line::Line(Point a, Vector3D u):a(a){
+			Line::Line(Point a, Vector3D u):origin(a){
 				u /= u.Norme();
-				this->u = u;
+				this->direction = u;
 			}
 
 			Line::~Line(){}
 
-			Point Line::GetPoint() const{
-				return a;
+			Point Line::Origin() const{
+				return origin;
 			}
 
-			Vector3D Line::GetVector() const{
-				return u;
+			Vector3D Line::Direction() const{
+				return direction;
 			}
 
-			void Line::SetPoint(Point a){
-				this->a = a;
+			void Line::Origin(Point a){
+				this->origin = a;
 			}
-			void Line::SetVector(Vector3D u){
-				this->u = u;
+			void Line::Direction(Vector3D u){
+				this->direction = u;
 				u /= u.Norme();
 			}
 
 			ostream & operator << (ostream & out, Line const& a){
 				out << scientific << setprecision(15);
-				out << a.GetPoint() << " " << a.GetVector();
+				out << a.Origin() << " " << a.Direction();
 				return out;
 			}
 
@@ -48,8 +48,8 @@ namespace Luga {
 				Point x;
 				Vector3D y;
 				in >> x >> y;
-				a.SetPoint(x);
-				a.SetVector(y);
+				a.Origin(x);
+				a.Direction(y);
 				return in;
 			}
 

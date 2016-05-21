@@ -16,17 +16,17 @@ using namespace Luga::Meca::Utils;
 TEST(Point,Constructor){
 	Point a;
 
-	ASSERT_EQ (0,a.X());
-	ASSERT_EQ (0,a.Y());
-	ASSERT_EQ (0,a.Z());
+	ASSERT_EQ (0,a.CoordinateX());
+	ASSERT_EQ (0,a.CoordinateY());
+	ASSERT_EQ (0,a.CoordinateZ());
 }
 
 TEST(Point,Constructor2){
 	Point a(M_PI,2*M_PI,M_PI/5);
 
-	ASSERT_EQ (M_PI, a.X());
-	ASSERT_EQ (2*M_PI,a.Y());
-	ASSERT_EQ (M_PI/5,a.Z());
+	ASSERT_EQ (M_PI, a.CoordinateX());
+	ASSERT_EQ (2*M_PI,a.CoordinateY());
+	ASSERT_EQ (M_PI/5,a.CoordinateZ());
 }
 
 
@@ -36,21 +36,21 @@ TEST(Point,Calculus){
 
 	Vector3D c = b-a;
 
-	ASSERT_TRUE(isEquals(-4*M_PI , c.X()));
-	ASSERT_TRUE(isEquals(-M_PI   , c.Y()));
-	ASSERT_TRUE(isEquals(3*M_PI/5, c.Z()));
+	ASSERT_TRUE(isEquals(-4*M_PI , c.ComponantX()));
+	ASSERT_TRUE(isEquals(-M_PI   , c.ComponantY()));
+	ASSERT_TRUE(isEquals(3*M_PI/5, c.ComponantZ()));
 
 	Point d = a + c;
 
-	ASSERT_TRUE(isEquals(d.X(), b.X()));
-	ASSERT_TRUE(isEquals(d.Y(), b.Y()));
-	ASSERT_TRUE(isEquals(d.Z(), b.Z()));
+	ASSERT_TRUE(isEquals(d.CoordinateX(), b.CoordinateX()));
+	ASSERT_TRUE(isEquals(d.CoordinateY(), b.CoordinateY()));
+	ASSERT_TRUE(isEquals(d.CoordinateZ(), b.CoordinateZ()));
 
 	a += c;
 
-	ASSERT_TRUE(isEquals(a.X(), b.X()));
-	ASSERT_TRUE(isEquals(a.Y(), b.Y()));
-	ASSERT_TRUE(isEquals(a.Z(), b.Z()));
+	ASSERT_TRUE(isEquals(a.CoordinateX(), b.CoordinateX()));
+	ASSERT_TRUE(isEquals(a.CoordinateY(), b.CoordinateY()));
+	ASSERT_TRUE(isEquals(a.CoordinateZ(), b.CoordinateZ()));
 }
 
 
@@ -70,9 +70,9 @@ TEST(Point,IO_Operator){
 		fichierIn.close();
 	}
 
-	ASSERT_EQ (b.X(), a.X());
-	ASSERT_EQ (b.Y(), a.Y());
-	ASSERT_EQ (b.Z(), a.Z());
+	ASSERT_EQ (b.CoordinateX(), a.CoordinateX());
+	ASSERT_EQ (b.CoordinateY(), a.CoordinateY());
+	ASSERT_EQ (b.CoordinateZ(), a.CoordinateZ());
 
 	remove("testPoint.txt");
 }

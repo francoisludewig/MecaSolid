@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <vector>
 #include "Utils/Point.h"
+#include "Utils/Basis.h"
 
 using namespace std;
 
@@ -16,10 +17,15 @@ namespace Luga {
 			class Polygon {
 			public:
 				Polygon();
+				Polygon(Basis & b, vector<Point> & p);
 				~Polygon();
 
 			private:
-				vector<Point> summit;
+				vector<Point> localSummit;
+				vector<Point> GlobalSummit;
+				Basis b;
+
+				void UpdateGlobalSummit();
 			};
 
 			ostream & operator << (ostream & out, Polygon const& a);

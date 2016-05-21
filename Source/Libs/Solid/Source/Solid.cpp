@@ -54,8 +54,8 @@ namespace Luga {
 			}
 
 			void Solid::ResetForceAndMomemtum(){
-				force.SetValue(0,0,0);
-				momentum.SetValue(0,0,0);
+				force.SetComponants(0,0,0);
+				momentum.SetComponants(0,0,0);
 			}
 
 			void Solid::LoadFromIstream(istream & in){

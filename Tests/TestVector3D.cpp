@@ -11,22 +11,22 @@ using namespace Luga::Meca::Utils;
 
 TEST(Vector3D,Constructor){
 	Vector3D a;
-	ASSERT_EQ (0,a.X());
-	ASSERT_EQ (0,a.Y());
-	ASSERT_EQ (0,a.Z());
+	ASSERT_EQ (0,a.ComponantX());
+	ASSERT_EQ (0,a.ComponantY());
+	ASSERT_EQ (0,a.ComponantZ());
 }
 
 
 TEST(Vector3D,ConstructorValue){
 	Vector3D a(1,2,3);
-	ASSERT_EQ (1,a.X());
-	ASSERT_EQ (2,a.Y());
-	ASSERT_EQ (3,a.Z());
+	ASSERT_EQ (1,a.ComponantX());
+	ASSERT_EQ (2,a.ComponantY());
+	ASSERT_EQ (3,a.ComponantZ());
 
 	Vector3D b(M_PI,2*M_PI,M_PI/2);
-	ASSERT_EQ (M_PI,b.X());
-	ASSERT_EQ (2*M_PI,b.Y());
-	ASSERT_EQ (M_PI/2,b.Z());
+	ASSERT_EQ (M_PI,b.ComponantX());
+	ASSERT_EQ (2*M_PI,b.ComponantY());
+	ASSERT_EQ (M_PI/2,b.ComponantZ());
 }
 
 TEST(Vector3D,Norme){
@@ -40,9 +40,9 @@ TEST(Vector3D,Normalize){
 	a.Normalize();
 	ASSERT_EQ(1,a.Norme());
 	Vector3D pv = a^b;
-	ASSERT_EQ(0,pv.X());
-	ASSERT_EQ(0,pv.Y());
-	ASSERT_EQ(0,pv.Z());
+	ASSERT_EQ(0,pv.ComponantX());
+	ASSERT_EQ(0,pv.ComponantY());
+	ASSERT_EQ(0,pv.ComponantZ());
 }
 
 TEST(Vector3D,ScalarProduct){
@@ -68,17 +68,17 @@ TEST(Vector3D,VectorialProduct){
 	Vector3D expectedA = b^c;
 	Vector3D expectedB = c^a;
 
-	ASSERT_EQ (c.X(),expectedC.X());
-	ASSERT_EQ (c.Y(),expectedC.Y());
-	ASSERT_EQ (c.Z(),expectedC.Z());
+	ASSERT_EQ (c.ComponantX(),expectedC.ComponantX());
+	ASSERT_EQ (c.ComponantY(),expectedC.ComponantY());
+	ASSERT_EQ (c.ComponantZ(),expectedC.ComponantZ());
 
-	ASSERT_EQ (a.X(),expectedA.X());
-	ASSERT_EQ (a.Y(),expectedA.Y());
-	ASSERT_EQ (a.Z(),expectedA.Z());
+	ASSERT_EQ (a.ComponantX(),expectedA.ComponantX());
+	ASSERT_EQ (a.ComponantY(),expectedA.ComponantY());
+	ASSERT_EQ (a.ComponantZ(),expectedA.ComponantZ());
 
-	ASSERT_EQ (b.X(),expectedB.X());
-	ASSERT_EQ (b.Y(),expectedB.Y());
-	ASSERT_EQ (b.Z(),expectedB.Z());
+	ASSERT_EQ (b.ComponantX(),expectedB.ComponantX());
+	ASSERT_EQ (b.ComponantY(),expectedB.ComponantY());
+	ASSERT_EQ (b.ComponantZ(),expectedB.ComponantZ());
 }
 
 
@@ -91,8 +91,8 @@ TEST(Vector3D,Product){
 	ASSERT_TRUE(isEquals(0,a*(b^a)));
 	ASSERT_TRUE(isEquals(0,b*(b^a)));
 
-	a.SetValue(0,0,0);
-	b.SetValue(1,3,1);
+	a.SetComponants(0,0,0);
+	b.SetComponants(1,3,1);
 
 	ASSERT_TRUE(isEquals(0,a*(a^b)));
 	ASSERT_TRUE(isEquals(0,b*(a^b)));
@@ -103,7 +103,7 @@ TEST(Vector3D,Product){
 
 TEST(Vector3D,ProductUnit){
 	Vector3D a(M_PI,2*M_PI,M_PI/2);
-	Vector3D b(a.Y()*a.Z(),a.X()*a.Z(),-2*a.X()*a.Y());
+	Vector3D b(a.ComponantY()*a.ComponantZ(),a.ComponantX()*a.ComponantZ(),-2*a.ComponantX()*a.ComponantY());
 	a.Normalize();
 	b.Normalize();
 	Vector3D c = a^b;
@@ -119,9 +119,9 @@ TEST(Vector3D,MultiplicationEqual){
 	double b = -13;
 	Vector3D c = a*b;
 	a *=b;
-	ASSERT_TRUE(isEquals(a.X(),c.X()));
-	ASSERT_TRUE(isEquals(a.Y(),c.Y()));
-	ASSERT_TRUE(isEquals(a.Z(),c.Z()));
+	ASSERT_TRUE(isEquals(a.ComponantX(),c.ComponantX()));
+	ASSERT_TRUE(isEquals(a.ComponantY(),c.ComponantY()));
+	ASSERT_TRUE(isEquals(a.ComponantZ(),c.ComponantZ()));
 }
 
 
@@ -141,9 +141,9 @@ TEST(Vector3D,IO_Operator){
 		fichierIn.close();
 	}
 
-	EXPECT_DOUBLE_EQ (a.X(),b.X());
-	EXPECT_DOUBLE_EQ (a.Y(),b.Y());
-	EXPECT_DOUBLE_EQ (a.Z(),b.Z());
+	EXPECT_DOUBLE_EQ (a.ComponantX(),b.ComponantX());
+	EXPECT_DOUBLE_EQ (a.ComponantY(),b.ComponantY());
+	EXPECT_DOUBLE_EQ (a.ComponantZ(),b.ComponantZ());
 
 	remove("testVector3D.txt");
 }
@@ -153,9 +153,9 @@ TEST(Vector3D,Sum){
 	Vector3D b(7*M_PI,-2*M_PI,-4*M_PI/2);
 	Vector3D c = a+b;
 
-	EXPECT_DOUBLE_EQ (a.X()+b.X(),c.X());
-	EXPECT_DOUBLE_EQ (a.Y()+b.Y(),c.Y());
-	EXPECT_DOUBLE_EQ (a.Z()+b.Z(),c.Z());
+	EXPECT_DOUBLE_EQ (a.ComponantX()+b.ComponantX(),c.ComponantX());
+	EXPECT_DOUBLE_EQ (a.ComponantY()+b.ComponantY(),c.ComponantY());
+	EXPECT_DOUBLE_EQ (a.ComponantZ()+b.ComponantZ(),c.ComponantZ());
 }
 
 
@@ -164,9 +164,9 @@ TEST(Vector3D,Diff){
 	Vector3D b(7*M_PI,2*M_PI,-4*M_PI/2);
 	Vector3D c = a-b;
 
-	EXPECT_DOUBLE_EQ (a.X()-b.X(),c.X());
-	EXPECT_DOUBLE_EQ (a.Y()-b.Y(),c.Y());
-	EXPECT_DOUBLE_EQ (a.Z()-b.Z(),c.Z());
+	EXPECT_DOUBLE_EQ (a.ComponantX()-b.ComponantX(),c.ComponantX());
+	EXPECT_DOUBLE_EQ (a.ComponantY()-b.ComponantY(),c.ComponantY());
+	EXPECT_DOUBLE_EQ (a.ComponantZ()-b.ComponantZ(),c.ComponantZ());
 }
 
 
@@ -175,9 +175,9 @@ TEST(Vector3D,Div){
 	double b = sqrt(2.);
 	Vector3D c = a/b;
 
-	EXPECT_DOUBLE_EQ (a.X()/b,c.X());
-	EXPECT_DOUBLE_EQ (a.Y()/b,c.Y());
-	EXPECT_DOUBLE_EQ (a.Z()/b,c.Z());
+	EXPECT_DOUBLE_EQ (a.ComponantX()/b,c.ComponantX());
+	EXPECT_DOUBLE_EQ (a.ComponantY()/b,c.ComponantY());
+	EXPECT_DOUBLE_EQ (a.ComponantZ()/b,c.ComponantZ());
 }
 
 
@@ -186,9 +186,9 @@ TEST(Vector3D,DivEqual){
 	double b = sqrt(2.);
 	Vector3D c = a/b;
 	a /=b;
-	EXPECT_DOUBLE_EQ (a.X(),c.X());
-	EXPECT_DOUBLE_EQ (a.Y(),c.Y());
-	EXPECT_DOUBLE_EQ (a.Z(),c.Z());
+	EXPECT_DOUBLE_EQ (a.ComponantX(),c.ComponantX());
+	EXPECT_DOUBLE_EQ (a.ComponantY(),c.ComponantY());
+	EXPECT_DOUBLE_EQ (a.ComponantZ(),c.ComponantZ());
 }
 
 
@@ -198,23 +198,23 @@ TEST(Vector3D,LinearCombination){
 	Vector3D c(0,0,1);
 
 	Vector3D d = sqrt(3)*a+sqrt(5)*b-sqrt(7)*c;
-	EXPECT_DOUBLE_EQ (sqrt(3.0),d.X());
-	EXPECT_DOUBLE_EQ (sqrt(5.0),d.Y());
-	EXPECT_DOUBLE_EQ (-sqrt(7.0),d.Z());
+	EXPECT_DOUBLE_EQ (sqrt(3.0),d.ComponantX());
+	EXPECT_DOUBLE_EQ (sqrt(5.0),d.ComponantY());
+	EXPECT_DOUBLE_EQ (-sqrt(7.0),d.ComponantZ());
 }
 
 
 TEST(Vector3D,increment){
 	Vector3D a(M_PI,0,0);
 	a += 2*a;
-	EXPECT_DOUBLE_EQ (3*M_PI,a.X());
+	EXPECT_DOUBLE_EQ (3*M_PI,a.ComponantX());
 }
 
 
 TEST(Vector3D,decrement){
 	Vector3D a(M_PI,0,0);
 	a -= 2*a;
-	EXPECT_DOUBLE_EQ (-M_PI,a.X());
+	EXPECT_DOUBLE_EQ (-M_PI,a.ComponantX());
 }
 
 TEST(Vector3D,ScalarDecomposition){
@@ -234,9 +234,9 @@ TEST(Vector3D,VectorialRandom){
 
 	Vector3D pvExpected = a^b;
 
-	EXPECT_DOUBLE_EQ (a.Y()*b.Z()-a.Z()*b.Y(),pvExpected.X());
-	EXPECT_DOUBLE_EQ (a.Z()*b.X()-a.X()*b.Z(),pvExpected.Y());
-	EXPECT_DOUBLE_EQ (a.X()*b.Y()-a.Y()*b.X(),pvExpected.Z());
+	EXPECT_DOUBLE_EQ (a.ComponantY()*b.ComponantZ()-a.ComponantZ()*b.ComponantY(),pvExpected.ComponantX());
+	EXPECT_DOUBLE_EQ (a.ComponantZ()*b.ComponantX()-a.ComponantX()*b.ComponantZ(),pvExpected.ComponantY());
+	EXPECT_DOUBLE_EQ (a.ComponantX()*b.ComponantY()-a.ComponantY()*b.ComponantX(),pvExpected.ComponantZ());
 }
 
 

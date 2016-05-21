@@ -11,45 +11,45 @@ namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
-			Segment::Segment():a(),b(1,0,0){
+			Segment::Segment():beginPoint(),endPoint(1,0,0){
 			}
 
-			Segment::Segment(Point a, Point b):a(a),b(b){
+			Segment::Segment(Point a, Point b):beginPoint(a),endPoint(b){
 			}
 
 			Segment::~Segment(){
 			}
 
-			Point Segment::A() const{
-				return a;
+			Point Segment::BeginPoint() const{
+				return beginPoint;
 			}
 
-			Point Segment::B() const{
-				return b;
+			Point Segment::EndPoint() const{
+				return endPoint;
 			}
 
-			void Segment::SetA(Point a){
-				this->a = a;
+			void Segment::BeginPoint(Point a){
+				this->beginPoint = a;
 			}
-			void Segment::SetB(Point b){
-				this->b = b;
+			void Segment::EndPoint(Point b){
+				this->endPoint = b;
 			}
 
-			Line Segment::GetLine(){
-				return Line(a,b-a);
+			Line Segment::AssiociatedLine() const{
+				return Line(beginPoint,endPoint-beginPoint);
 			}
 
 			ostream & operator << (ostream & out, Segment const& a){
 				out << scientific << setprecision(15);
-				out << a.A() << " " << a.B();
+				out << a.BeginPoint() << " " << a.EndPoint();
 				return out;
 			}
 
 			istream & operator >> (istream & in, Segment & a){
 				Point x,y;
 				in >> x >> y;
-				a.SetA(x);
-				a.SetB(y);
+				a.BeginPoint(x);
+				a.EndPoint(y);
 				return in;
 			}
 

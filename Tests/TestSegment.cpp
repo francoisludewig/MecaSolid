@@ -16,13 +16,13 @@ using namespace Luga::Meca::Utils;
 TEST(Segment,Constructor){
 	Segment a;
 
-	ASSERT_EQ (0,a.A().X());
-	ASSERT_EQ (0,a.A().Y());
-	ASSERT_EQ (0,a.A().Z());
+	ASSERT_EQ (0,a.BeginPoint().CoordinateX());
+	ASSERT_EQ (0,a.BeginPoint().CoordinateY());
+	ASSERT_EQ (0,a.BeginPoint().CoordinateZ());
 
-	ASSERT_EQ (1,a.B().X());
-	ASSERT_EQ (0,a.B().Y());
-	ASSERT_EQ (0,a.B().Z());
+	ASSERT_EQ (1,a.EndPoint().CoordinateX());
+	ASSERT_EQ (0,a.EndPoint().CoordinateY());
+	ASSERT_EQ (0,a.EndPoint().CoordinateZ());
 }
 
 TEST(Segment,Constructor2){
@@ -30,28 +30,28 @@ TEST(Segment,Constructor2){
 	Point b(M_PI/7,3*M_PI,-M_PI/4);
 	Segment s(a,b);
 
-	ASSERT_EQ (a.X(),s.A().X());
-	ASSERT_EQ (a.Y(),s.A().Y());
-	ASSERT_EQ (a.Z(),s.A().Z());
+	ASSERT_EQ (a.CoordinateX(),s.BeginPoint().CoordinateX());
+	ASSERT_EQ (a.CoordinateY(),s.BeginPoint().CoordinateY());
+	ASSERT_EQ (a.CoordinateZ(),s.BeginPoint().CoordinateZ());
 
-	ASSERT_EQ (b.X(),s.B().X());
-	ASSERT_EQ (b.Y(),s.B().Y());
-	ASSERT_EQ (b.Z(),s.B().Z());
+	ASSERT_EQ (b.CoordinateX(),s.EndPoint().CoordinateX());
+	ASSERT_EQ (b.CoordinateY(),s.EndPoint().CoordinateY());
+	ASSERT_EQ (b.CoordinateZ(),s.EndPoint().CoordinateZ());
 }
 
-TEST(Segment,GetLine){
+TEST(Segment,AssiociatedLine){
 	Point a(M_PI,2*M_PI,M_PI/5);
 	Point b(M_PI/7,3*M_PI,-M_PI/4);
 	Segment s(a,b);
-	Line l = s.GetLine();
+	Line l = s.AssiociatedLine();
 	Vector3D u = b-a;
 	u /= u.Norme();
-	ASSERT_EQ (a.X(),l.GetPoint().X());
-	ASSERT_EQ (a.Y(),l.GetPoint().Y());
-	ASSERT_EQ (a.Z(),l.GetPoint().Z());
-	ASSERT_EQ (u.X(),l.GetVector().X());
-	ASSERT_EQ (u.Y(),l.GetVector().Y());
-	ASSERT_EQ (u.Z(),l.GetVector().Z());
+	ASSERT_EQ (a.CoordinateX(),l.Origin().CoordinateX());
+	ASSERT_EQ (a.CoordinateY(),l.Origin().CoordinateY());
+	ASSERT_EQ (a.CoordinateZ(),l.Origin().CoordinateZ());
+	ASSERT_EQ (u.ComponantX(),l.Direction().ComponantX());
+	ASSERT_EQ (u.ComponantY(),l.Direction().ComponantY());
+	ASSERT_EQ (u.ComponantZ(),l.Direction().ComponantZ());
 }
 
 TEST(Segment,IO_Operator){
@@ -71,13 +71,13 @@ TEST(Segment,IO_Operator){
 		fichierIn.close();
 	}
 
-	ASSERT_EQ (t.A().X(),s.A().X());
-	ASSERT_EQ (t.A().Y(),s.A().Y());
-	ASSERT_EQ (t.A().Z(),s.A().Z());
+	ASSERT_EQ (t.BeginPoint().CoordinateX(),s.BeginPoint().CoordinateX());
+	ASSERT_EQ (t.BeginPoint().CoordinateY(),s.BeginPoint().CoordinateY());
+	ASSERT_EQ (t.BeginPoint().CoordinateZ(),s.BeginPoint().CoordinateZ());
 
-	ASSERT_EQ (t.B().X(),s.B().X());
-	ASSERT_EQ (t.B().Y(),s.B().Y());
-	ASSERT_EQ (t.B().Z(),s.B().Z());
+	ASSERT_EQ (t.EndPoint().CoordinateX(),s.EndPoint().CoordinateX());
+	ASSERT_EQ (t.EndPoint().CoordinateY(),s.EndPoint().CoordinateY());
+	ASSERT_EQ (t.EndPoint().CoordinateZ(),s.EndPoint().CoordinateZ());
 
 	remove("testSegment.txt");
 }

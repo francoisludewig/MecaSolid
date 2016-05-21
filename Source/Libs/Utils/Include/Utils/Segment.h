@@ -16,14 +16,14 @@ namespace Luga {
 				Segment();
 				Segment(Point a, Point b);
 				~Segment();
-				Point A() const;
-				Point B() const;
-				void SetA(Point a);
-				void SetB(Point b);
-				Line GetLine();
+				Point BeginPoint() const;
+				Point EndPoint() const;
+				void BeginPoint(Point a);
+				void EndPoint(Point b);
+				Line AssiociatedLine() const;
 
 			private:
-				Point a,b;
+				Point beginPoint,endPoint;
 			};
 
 			ostream & operator << (ostream & out, Segment const& a);

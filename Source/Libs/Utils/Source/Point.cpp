@@ -12,54 +12,54 @@ namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
-			Point::Point():x(0),y(0),z(0){
+			Point::Point():coordinateX(0),coordinateY(0),coordinateZ(0){
 			}
 
-			Point::Point(double x, double y, double z):x(x),y(y),z(z){
+			Point::Point(double x, double y, double z):coordinateX(x),coordinateY(y),coordinateZ(z){
 
 			}
 
 			Point::~Point(){
 			}
 
-			double Point::X() const{return x;}
-			double Point::Y() const{return y;}
-			double Point::Z() const{return z;}
+			double Point::CoordinateX() const{return coordinateX;}
+			double Point::CoordinateY() const{return coordinateY;}
+			double Point::CoordinateZ() const{return coordinateZ;}
 
-			void Point::SetValue(double x, double y, double z){
-				this->x = x;
-				this->y = y;
-				this->z = z;
+			void Point::SetCoordinates(double x, double y, double z){
+				this->coordinateX = x;
+				this->coordinateY = y;
+				this->coordinateZ = z;
 			}
 
-			void Point::Add(Vector3D const & a){
-				x += a.X();
-				y += a.Y();
-				z += a.Z();
+			void Point::Translate(Vector3D const & a){
+				coordinateX += a.ComponantX();
+				coordinateY += a.ComponantY();
+				coordinateZ += a.ComponantZ();
 			}
 
-			Point Point::operator+(Vector3D const &b){
-				return Point(b.X()+x,b.Y()+y,b.Z()+z);
+			Point Point::operator+(Vector3D const &b) const{
+				return Point(b.ComponantX()+coordinateX,b.ComponantY()+coordinateY,b.ComponantZ()+coordinateZ);
 			}
 
-			Vector3D Point::operator-(Point const &b){
-				return Vector3D(x-b.X(),y-b.Y(),z-b.Z());
+			Vector3D Point::operator-(Point const &b) const{
+				return Vector3D(coordinateX-b.CoordinateX(),coordinateY-b.CoordinateY(),coordinateZ-b.CoordinateZ());
 			}
 
 			void Point::operator+=(Vector3D const& a){
-				Add(a);
+				Translate(a);
 			}
 
 			ostream & operator << (ostream & out, Point const& a){
 				out << scientific << setprecision(15);
-				out << a.X() << " " << a.Y() << " " << a.Z();
+				out << a.CoordinateX() << " " << a.CoordinateY() << " " << a.CoordinateZ();
 				return out;
 			}
 
 			istream & operator >> (istream & in, Point & a){
 				double x,y,z;
 				in >> x >> y >> z;
-				a.SetValue(x,y,z);
+				a.SetCoordinates(x,y,z);
 				return in;
 			}
 

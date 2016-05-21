@@ -12,11 +12,11 @@ int main()
 	int x;
 
 	Vector3D a;
-	a.SetValue(1,2,3);
+	a.SetComponants(1,2,3);
 	cout << a << endl;
 
 	Quaternion b;
-	b.SetValue(1,1,1,1);
+	b.SetComponants(1,1,1,1);
 	cout << b << endl;
 
 	cout << "Enter an integer value : ";
@@ -56,7 +56,7 @@ int main()
     	for(double x = -1 ; x <= 4 ; x+=0.1){
     		for(double y = -5 ; y <= 6 ; y += 0.1){
     			for(double z = -3 ; z <= 5 ; z += 0.1){
-    				p.SetValue(x,y,z);
+    				p.SetComponants(x,y,z);
     				if(0 < (p-s1)*e1 < e1.Norme() && 0 < (p-s1)*e2 < e2.Norme() && 0 < (p-s1)*e3 < e3.Norme()){
     					fichierOut << p << endl;
     				}

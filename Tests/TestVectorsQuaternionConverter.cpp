@@ -18,17 +18,17 @@ TEST(VectorsQuaternionConverter,DefaultQuaternion){
 
 	vqc.ConvertQuaternionIntoVectors(q,x,y,z);
 
-	ASSERT_EQ (1,x.X());
-	ASSERT_EQ (0,x.Y());
-	ASSERT_EQ (0,x.Z());
+	ASSERT_EQ (1,x.ComponantX());
+	ASSERT_EQ (0,x.ComponantY());
+	ASSERT_EQ (0,x.ComponantZ());
 
-	ASSERT_EQ (0,y.X());
-	ASSERT_EQ (1,y.Y());
-	ASSERT_EQ (0,y.Z());
+	ASSERT_EQ (0,y.ComponantX());
+	ASSERT_EQ (1,y.ComponantY());
+	ASSERT_EQ (0,y.ComponantZ());
 
-	ASSERT_EQ (0,z.X());
-	ASSERT_EQ (0,z.Y());
-	ASSERT_EQ (1,z.Z());
+	ASSERT_EQ (0,z.ComponantX());
+	ASSERT_EQ (0,z.ComponantY());
+	ASSERT_EQ (1,z.ComponantZ());
 }
 
 
@@ -39,10 +39,10 @@ TEST(VectorsQuaternionConverter,DefaultVectors){
 
 	vqc.ConvertVectorsIntoQuaternion(x,y,z,q);
 
-	ASSERT_EQ (1,q.Q0());
-	ASSERT_EQ (0,q.Q1());
-	ASSERT_EQ (0,q.Q2());
-	ASSERT_EQ (0,q.Q3());
+	ASSERT_EQ (1,q.ComponantReal());
+	ASSERT_EQ (0,q.ComponantI());
+	ASSERT_EQ (0,q.ComponantJ());
+	ASSERT_EQ (0,q.ComponantK());
 }
 
 
@@ -61,10 +61,10 @@ TEST(VectorsQuaternionConverter,QuatVectorsQuat){
 
 	vqc.ConvertVectorsIntoQuaternion(x,y,z,p);
 
-	ASSERT_TRUE(isEquals(q.Q0(),p.Q0()));
-	ASSERT_TRUE (isEquals(q.Q1(),p.Q1()));
-	ASSERT_TRUE (isEquals(q.Q2(),p.Q2()));
-	ASSERT_TRUE (isEquals(q.Q3(),p.Q3()));
+	ASSERT_TRUE(isEquals(q.ComponantReal(),p.ComponantReal()));
+	ASSERT_TRUE (isEquals(q.ComponantI(),p.ComponantI()));
+	ASSERT_TRUE (isEquals(q.ComponantJ(),p.ComponantJ()));
+	ASSERT_TRUE (isEquals(q.ComponantK(),p.ComponantK()));
 }
 
 TEST(VectorsQuaternionConverter,VectorsQuaternionVectors){
@@ -84,15 +84,15 @@ TEST(VectorsQuaternionConverter,VectorsQuaternionVectors){
 	ASSERT_TRUE(isEquals (1,t.Norme()));
 	ASSERT_TRUE(isEquals (1,s.Norme()));
 
-	ASSERT_TRUE(isEquals (x.X(),n.X()));
-	ASSERT_TRUE(isEquals (x.Y(),n.Y()));
-	ASSERT_TRUE(isEquals (x.Z(),n.Z()));
+	ASSERT_TRUE(isEquals (x.ComponantX(),n.ComponantX()));
+	ASSERT_TRUE(isEquals (x.ComponantY(),n.ComponantY()));
+	ASSERT_TRUE(isEquals (x.ComponantZ(),n.ComponantZ()));
 
-	ASSERT_TRUE(isEquals (y.X(),t.X()));
-	ASSERT_TRUE(isEquals (y.Y(),t.Y()));
-	ASSERT_TRUE(isEquals (y.Z(),t.Z()));
+	ASSERT_TRUE(isEquals (y.ComponantX(),t.ComponantX()));
+	ASSERT_TRUE(isEquals (y.ComponantY(),t.ComponantY()));
+	ASSERT_TRUE(isEquals (y.ComponantZ(),t.ComponantZ()));
 
-	ASSERT_TRUE(isEquals (z.X(),s.X()));
-	ASSERT_TRUE(isEquals (z.Y(),s.Y()));
-	ASSERT_TRUE(isEquals (z.Z(),s.Z()));
+	ASSERT_TRUE(isEquals (z.ComponantX(),s.ComponantX()));
+	ASSERT_TRUE(isEquals (z.ComponantY(),s.ComponantY()));
+	ASSERT_TRUE(isEquals (z.ComponantZ(),s.ComponantZ()));
 }
