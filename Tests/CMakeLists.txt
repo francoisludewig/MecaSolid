@@ -15,6 +15,8 @@ set(SOURCES_FILES
 	TestVectorsQuaternionConverter.cpp
 	TestBasisSwitcherGlobalToBasis.cpp
 	TestBasisSwitcherBasisToGlobal.cpp
+	TestBasisSwitcherBasisToBasis.cpp
+	TestBasisSwitcher.cpp
 )
 
 set(FILES

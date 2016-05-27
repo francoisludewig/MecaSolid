@@ -3,10 +3,6 @@
 #include <cmath>
 #include "../Include/Utils/BasisSwitcher.h"
 
-#define precision 1E-15
-
-using namespace std;
-
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
@@ -22,6 +18,10 @@ namespace Luga {
 			void BasisSwitcher::Type(BasisSwitcherType type){
 				this->type = type;
 				UpdateSwitcher();
+			}
+
+			BasisSwitcherType BasisSwitcher::Type(){
+				return type;
 			}
 
 			void BasisSwitcher::UpdateSwitcher(){
@@ -66,6 +66,26 @@ namespace Luga {
 				basisToGlobal.From(from);
 				basisToBasis.From(from);
 				globalToBasis.From(from);
+				if(from != NULL){
+					if(to == NULL){
+						type = From_Basis_To_Global;
+						UpdateSwitcher();
+					}
+					else{
+						type = From_Basis_To_Basis;
+						UpdateSwitcher();
+					}
+				}
+				else{
+					if(to == NULL){
+						type = None;
+						UpdateSwitcher();
+					}
+					else{
+						type = From_Global_To_Basis;
+						UpdateSwitcher();
+					}
+				}
 			}
 
 			void BasisSwitcher::To(Basis *to){
@@ -73,6 +93,26 @@ namespace Luga {
 				basisToGlobal.To(to);
 				basisToBasis.To(to);
 				globalToBasis.To(to);
+				if(to != NULL){
+					if(from == NULL){
+						type = From_Global_To_Basis;
+						UpdateSwitcher();
+					}
+					else{
+						type = From_Basis_To_Basis;
+						UpdateSwitcher();
+					}
+				}
+				else{
+					if(from == NULL){
+						type = None;
+						UpdateSwitcher();
+					}
+					else{
+						type = From_Global_To_Basis;
+						UpdateSwitcher();
+					}
+				}
 			}
 
 		}

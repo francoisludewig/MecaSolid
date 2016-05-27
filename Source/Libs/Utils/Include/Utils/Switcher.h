@@ -19,7 +19,7 @@ namespace Luga {
 			class Switcher {
 			public:
 				Switcher();
-				~Switcher();
+				virtual ~Switcher();
 				virtual void SwithPoint(Point & point) const = 0;
 				virtual void SwithVector(Vector3D & vector3d) const  = 0;
 				virtual void SwithLine(Line & line) const;
