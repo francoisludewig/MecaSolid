@@ -8,7 +8,6 @@
 using namespace std;
 using namespace Luga::Meca::Utils;
 
-
 TEST(Basis,Constructor){
 	Basis a;
 	Quaternion q = a.Orientation();
@@ -17,7 +16,6 @@ TEST(Basis,Constructor){
 	ASSERT_EQ (0,q.ComponantI());
 	ASSERT_EQ (0,q.ComponantJ());
 	ASSERT_EQ (0,q.ComponantK());
-
 
 	Point o = a.Origin();
 	ASSERT_EQ (0,o.CoordinateX());
@@ -40,6 +38,15 @@ TEST(Basis,Constructor){
 	ASSERT_EQ (0,e3.ComponantY());
 	ASSERT_EQ (1,e3.ComponantZ());
 }
+
+TEST(Basis,ConstructorID){
+	Basis a,b,c;
+
+	ASSERT_FALSE(a.ID() == b.ID());
+	ASSERT_FALSE(a.ID() == c.ID());
+	ASSERT_FALSE(c.ID() == b.ID());
+}
+
 
 TEST(Basis,translate){
 	Basis a;

@@ -16,7 +16,6 @@ TEST(Vector3D,Constructor){
 	ASSERT_EQ (0,a.ComponantZ());
 }
 
-
 TEST(Vector3D,ConstructorValue){
 	Vector3D a(1,2,3);
 	ASSERT_EQ (1,a.ComponantX());
@@ -237,6 +236,57 @@ TEST(Vector3D,VectorialRandom){
 	EXPECT_DOUBLE_EQ (a.ComponantY()*b.ComponantZ()-a.ComponantZ()*b.ComponantY(),pvExpected.ComponantX());
 	EXPECT_DOUBLE_EQ (a.ComponantZ()*b.ComponantX()-a.ComponantX()*b.ComponantZ(),pvExpected.ComponantY());
 	EXPECT_DOUBLE_EQ (a.ComponantX()*b.ComponantY()-a.ComponantY()*b.ComponantX(),pvExpected.ComponantZ());
+}
+
+TEST(Vector3D,sumForDifferentBasisId){
+	Vector3D a(M_PI,2*M_PI,M_PI/2,0);
+	Vector3D b(M_PI/6,M_PI/3,M_PI/4,1);
+	Vector3D c = a+b;
+	EXPECT_DOUBLE_EQ (c.ComponantX(),a.ComponantX());
+	EXPECT_DOUBLE_EQ (c.ComponantY(),a.ComponantY());
+	EXPECT_DOUBLE_EQ (c.ComponantZ(),a.ComponantZ());
+}
+
+
+TEST(Vector3D,diffForDifferentBasisId){
+	Vector3D a(M_PI,2*M_PI,M_PI/2,0);
+	Vector3D b(M_PI/6,M_PI/3,M_PI/4,1);
+	Vector3D c = a-b;
+	EXPECT_DOUBLE_EQ (c.ComponantX(),a.ComponantX());
+	EXPECT_DOUBLE_EQ (c.ComponantY(),a.ComponantY());
+	EXPECT_DOUBLE_EQ (c.ComponantZ(),a.ComponantZ());
+}
+
+
+TEST(Vector3D,incrSumForDifferentBasisId){
+	Vector3D a(M_PI,2*M_PI,M_PI/2,0);
+	Vector3D b(M_PI/6,M_PI/3,M_PI/4,1);
+	Vector3D c = a;
+	a+=b;
+	EXPECT_DOUBLE_EQ (c.ComponantX(),a.ComponantX());
+	EXPECT_DOUBLE_EQ (c.ComponantY(),a.ComponantY());
+	EXPECT_DOUBLE_EQ (c.ComponantZ(),a.ComponantZ());
+}
+
+
+TEST(Vector3D,incrDiffForDifferentBasisId){
+	Vector3D a(M_PI,2*M_PI,M_PI/2,0);
+	Vector3D b(M_PI/6,M_PI/3,M_PI/4,1);
+	Vector3D c = a;
+	a-=b;
+	EXPECT_DOUBLE_EQ (c.ComponantX(),a.ComponantX());
+	EXPECT_DOUBLE_EQ (c.ComponantY(),a.ComponantY());
+	EXPECT_DOUBLE_EQ (c.ComponantZ(),a.ComponantZ());
+}
+
+
+TEST(Vector3D,vectorialProductForDifferentBasisId){
+	Vector3D a(M_PI,2*M_PI,M_PI/2,0);
+	Vector3D b(M_PI/6,M_PI/3,M_PI/4,1);
+	Vector3D c = a^b;
+	EXPECT_DOUBLE_EQ (c.ComponantX(),a.ComponantX());
+	EXPECT_DOUBLE_EQ (c.ComponantY(),a.ComponantY());
+	EXPECT_DOUBLE_EQ (c.ComponantZ(),a.ComponantZ());
 }
 
 

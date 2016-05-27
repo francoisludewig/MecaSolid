@@ -6,6 +6,8 @@
 #include "Utils/Point.h"
 #include "Utils/Basis.h"
 
+#include "BasisId.h"
+
 using namespace std;
 
 namespace Luga {
@@ -14,7 +16,7 @@ namespace Luga {
 
 			class Point;
 
-			class Polygon {
+			class Polygon : public BasisId {
 			public:
 				Polygon();
 				Polygon(Basis & b, vector<Point> & p);

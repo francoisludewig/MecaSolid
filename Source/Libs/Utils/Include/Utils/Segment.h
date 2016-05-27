@@ -3,6 +3,9 @@
 #include <iostream>
 #include <iomanip>
 #include "../Include/Utils/Point.h"
+
+#include "BasisId.h"
+
 using namespace std;
 
 namespace Luga {
@@ -11,7 +14,7 @@ namespace Luga {
 
 			class Line;
 
-			class Segment {
+			class Segment : public BasisId {
 			public:
 				Segment();
 				Segment(Point a, Point b);

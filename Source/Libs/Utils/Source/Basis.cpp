@@ -11,17 +11,27 @@ namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
-			Basis::Basis():origin(),axisX(1,0,0),axisY(0,1,0),axisZ(0,0,1),orientation(){
+			int Basis::instanceCount = 0;
 
+			Basis::Basis():origin(),axisX(1,0,0),axisY(0,1,0),axisZ(0,0,1),orientation(){
+				id = instanceCount;
+				instanceCount++;
 			}
 
 			Basis::Basis(Point o, Quaternion q):origin(o),orientation(q){
 				vQc.ConvertQuaternionIntoVectors(q,axisX,axisY,axisZ);
+				id = instanceCount;
+				instanceCount++;
 			}
 
 			Basis::~Basis(){
 
 			}
+
+			int Basis::ID() const{
+				return id;
+			}
+
 
 			Point Basis::Origin() const{
 				return origin;
@@ -59,17 +69,20 @@ namespace Luga {
 			}
 
 			void Basis::Local(Vector3D & a) const{
-				double x,y,z;
-				x = a*axisX;
-				y = a*axisY;
-				z = a*axisZ;
-				a.SetComponants(x,y,z);
+				if(a.Id() == -1){
+					double x,y,z;
+					x = a*axisX;
+					y = a*axisY;
+					z = a*axisZ;
+					a.SetComponants(x,y,z);
+					a.Id(id);
+				}
 			}
 
 			void Basis::Global(Vector3D & a) const{
 				a = a.ComponantX()*axisX + a.ComponantY()*axisY + a.ComponantZ()*axisZ;
+				a.Id(-1);
 			}
-
 
 			Point Basis::Local(const Point & a) const{
 				Vector3D v = a-origin;
@@ -81,7 +94,6 @@ namespace Luga {
 				b += a.CoordinateX()*axisX + a.CoordinateY()*axisY + a.CoordinateZ()*axisZ;
 				return b;
 			}
-
 
 			void Basis::Rotate(Quaternion const & q){
 				this->orientation *= q;

@@ -2,16 +2,21 @@
 
 #include <iostream>
 #include <iomanip>
+
+#include "BasisId.h"
+
 using namespace std;
 
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
-			class Vector3D {
+			class Vector3D : public BasisId{
 			public:
 				Vector3D();
+				Vector3D(int basisId);
 				Vector3D(double x,double y, double z);
+				Vector3D(double x,double y, double z,int basisId);
 
 				virtual ~Vector3D();
 

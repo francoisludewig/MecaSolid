@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <iomanip>
+
+#include "BasisId.h"
+
 #include "../../../Utils/Include/Utils/Quaternion.h"
 #include "../../../Utils/Include/Utils/Vector3D.h"
 
@@ -11,7 +14,7 @@ namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
-			class Matrix3x3 {
+			class Matrix3x3 : public BasisId {
 			public:
 				Matrix3x3();
 				Matrix3x3(double m00, double m01,double m02,

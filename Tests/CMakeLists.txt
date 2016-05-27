@@ -6,12 +6,15 @@ set(SOURCES_FILES
 	TestVector3D.cpp
 	TestQuaternion.cpp
 	TestBasis.cpp
+	TestBasisId.cpp
 	TestMatrix3x3.cpp
 	TestSolid.cpp
 	TestPoint.cpp
 	TestSegment.cpp
 	TestLine.cpp
 	TestVectorsQuaternionConverter.cpp
+	TestBasisSwitcherGlobalToBasis.cpp
+	TestBasisSwitcherBasisToGlobal.cpp
 )
 
 set(FILES

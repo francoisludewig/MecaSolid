@@ -19,6 +19,8 @@ namespace Luga {
 				Basis(Point o, Quaternion q);
 				~Basis();
 
+				int ID() const;
+
 				Point Origin() const;
 				Vector3D AxisX() const;
 				Vector3D AxisY() const;
@@ -34,7 +36,6 @@ namespace Luga {
 
 				void Local(Vector3D & a) const;
 				void Global(Vector3D & a) const;
-
 
 				Point Local(const Point & a) const;
 				Point Global(const Point & a) const;
@@ -54,6 +55,8 @@ namespace Luga {
 				Point origin;
 				Quaternion orientation;
 				VectorsQuaternionConverter vQc;
+				int id;
+				static int instanceCount;
 			};
 
 			ostream & operator << (ostream & out, Basis const& a);

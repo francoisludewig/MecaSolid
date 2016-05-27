@@ -9,8 +9,14 @@ set(SOURCES_FILES
 	Source/Line.cpp
 	Source/Plan.cpp
 	Source/Basis.cpp
+	Source/BasisId.cpp
 	Source/Polygon.cpp
-	Source/VectorsQuaternionConverter.cpp
+	Source/VectorsQuaternionConverter.cpp	
+	Source/Switcher.cpp
+	Source/BasisSwitcher.cpp
+	Source/BasisSwitcherFromGlobalToBasis.cpp
+	Source/BasisSwitcherFromBasisToBasis.cpp
+	Source/BasisSwitcherFromBasisToGlobal.cpp
 )
 
 set(HEADER_FILES
@@ -21,9 +27,15 @@ set(HEADER_FILES
 	Include/Utils/Segment.h	
 	Include/Utils/Line.h	
 	Include/Utils/Plan.h	
-	Include/Utils/Basis.h	
+	Include/Utils/Basis.h		
+	Include/Utils/BasisId.h	
 	Include/Utils/Polygon.h
 	Include/Utils/VectorsQuaternionConverter.h	
+	Include/Utils/Switcher.h
+	Include/Utils/BasisSwitcher.h
+	Include/Utils/BasisSwitcherFromGlobalToBasis.h
+	Include/Utils/BasisSwitcherFromBasisToBasis.h
+	Include/Utils/BasisSwitcherFromBasisToGlobal.h
 )
 
 set(FILES
