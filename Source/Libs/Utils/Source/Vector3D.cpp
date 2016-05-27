@@ -26,6 +26,18 @@ namespace Luga {
 				this->componantZ = z;
 			}
 
+			Vector3D::Vector3D(int basisId) {
+				componantX = componantY = componantZ = 0.0;
+				Id(basisId);
+			}
+
+			Vector3D::Vector3D(double x,double y, double z,int basisId){
+				this->componantX = x;
+				this->componantY = y;
+				this->componantZ = z;
+				Id(basisId);
+			}
+
 			Vector3D::~Vector3D() {
 			}
 
@@ -69,37 +81,48 @@ namespace Luga {
 
 			Vector3D Vector3D::Sum(const Vector3D & b) const{
 				Vector3D a = *this;
-				a.componantX += b.componantX;
-				a.componantY += b.componantY;
-				a.componantZ += b.componantZ;
+				if(Id() == b.Id()){
+					a.componantX += b.componantX;
+					a.componantY += b.componantY;
+					a.componantZ += b.componantZ;
+				}
 				return a;
 			}
+
 			Vector3D Vector3D::Difference(const Vector3D & b) const{
 				Vector3D a = *this;
-				a.componantX -= b.componantX;
-				a.componantY -= b.componantY;
-				a.componantZ -= b.componantZ;
+				if(Id() == b.Id()){
+					a.componantX -= b.componantX;
+					a.componantY -= b.componantY;
+					a.componantZ -= b.componantZ;
+				}
 				return a;
 			}
 
 			Vector3D Vector3D::VectorialProduct(const Vector3D& b) const {
 				Vector3D a = *this;
-				a.componantX = (componantY*b.componantZ-componantZ*b.componantY);
-				a.componantY = (componantZ*b.componantX-componantX*b.componantZ);
-				a.componantZ = (componantX*b.componantY-componantY*b.componantX);
+				if(Id() == b.Id()){
+					a.componantX = (componantY*b.componantZ-componantZ*b.componantY);
+					a.componantY = (componantZ*b.componantX-componantX*b.componantZ);
+					a.componantZ = (componantX*b.componantY-componantY*b.componantX);
+				}
 				return a;
 			}
 
 			void Vector3D::operator+=(Vector3D const& a){
-				componantX += a.componantX;
-				componantY += a.componantY;
-				componantZ += a.componantZ;
+				if(Id() == a.Id()){
+					componantX += a.componantX;
+					componantY += a.componantY;
+					componantZ += a.componantZ;
+				}
 			}
 
 			void Vector3D::operator-=(Vector3D const& a){
-				componantX -= a.componantX;
-				componantY -= a.componantY;
-				componantZ -= a.componantZ;
+				if(Id() == a.Id()){
+					componantX -= a.componantX;
+					componantY -= a.componantY;
+					componantZ -= a.componantZ;
+				}
 			}
 
 			void Vector3D::operator*=(double const& a){

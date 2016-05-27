@@ -3,6 +3,8 @@
 #include <iostream>
 #include <iomanip>
 
+#include "BasisId.h"
+
 using namespace std;
 
 namespace Luga {
@@ -11,7 +13,7 @@ namespace Luga {
 
 			class Vector3D;
 
-			class Point {
+			class Point : public BasisId {
 			public:
 				Point();
 				Point(double x, double y, double z);

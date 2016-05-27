@@ -4,13 +4,15 @@
 #include <iomanip>
 #include "Basis.h"
 
+#include "BasisId.h"
+
 using namespace std;
 
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
-			class Plan {
+			class Plan : public BasisId {
 			public:
 				Plan();
 				Plan(Point p, Vector3D n);
