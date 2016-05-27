@@ -27,6 +27,7 @@ namespace Luga {
 				BasisSwitcher();
 				~BasisSwitcher();
 				void Type(BasisSwitcherType type);
+				BasisSwitcherType Type();
 
 				virtual void SwithPoint(Point & point) const;
 				virtual void SwithVector(Vector3D & vector3d) const;

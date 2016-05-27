@@ -9,10 +9,6 @@
 #include "../Include/Utils/Line.h"
 #include "../Include/Utils/Plan.h"
 
-#define precision 1E-15
-
-using namespace std;
-
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
@@ -21,7 +17,6 @@ namespace Luga {
 				to = NULL;
 				from = NULL;
 			}
-
 
 			Switcher::~Switcher(){
 
