@@ -1,0 +1,5 @@
+<map id="Luga::Meca::Utils::Line" name="Luga::Meca::Utils::Line">
+<area shape="rect" id="node2" href="$class_luga_1_1_meca_1_1_utils_1_1_basis_id.html" title="{Luga::Meca::Utils::\lBasisId\n|&#45; id\l|+ BasisId()\l+ ~BasisId()\l+ Id()\l+ Id()\l}" alt="" coords="45,5,177,132"/>
+<area shape="rect" id="node3" href="$class_luga_1_1_meca_1_1_utils_1_1_vector3_d.html" title="{Luga::Meca::Utils::\lVector3D\n|&#45; componantX\l&#45; componantY\l&#45; componantZ\l|+ Vector3D()\l+ Vector3D()\l+ Vector3D()\l+ Vector3D()\l+ ~Vector3D()\l+ SetComponants()\l+ Norme()\l+ Normalize()\l+ ScalarProduct()\l+ VectorialProduct()\land 20 more...\l}" alt="" coords="41,181,180,428"/>
+<area shape="rect" id="node4" href="$class_luga_1_1_meca_1_1_utils_1_1_point.html" title="{Luga::Meca::Utils::\lPoint\n|&#45; coordinateX\l&#45; coordinateY\l&#45; coordinateZ\l|+ Point()\l+ Point()\l+ ~Point()\l+ CoordinateX()\l+ CoordinateY()\l+ CoordinateZ()\l+ SetCoordinates()\l+ Translate()\l+ operator+()\l+ operator&#45;()\l+ operator+=()\l}" alt="" coords="204,181,337,428"/>
+</map>
