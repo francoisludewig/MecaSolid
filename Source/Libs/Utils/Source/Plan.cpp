@@ -1,12 +1,10 @@
 #include <Utils/Plan.h>
-#include "../../Utils/Include/Utils/Vector3D.h"
+#include "../../Utils/Include/Utils/Vector.h"
 
 #include <iostream>
 #include <cmath>
 
 #define precision 1E-15
-
-using namespace std;
 
 namespace Luga {
 	namespace Meca {
@@ -18,7 +16,7 @@ namespace Luga {
 			Plan::~Plan(){
 			}
 
-			Plan::Plan(Point p, Vector3D n):position(){
+			Plan::Plan(Point p, Vector n):position(){
 				position.Origin(p);
 				position.AxisX(n);
 			}
@@ -27,7 +25,7 @@ namespace Luga {
 				return position;
 			}
 
-			Vector3D Plan::Normal() const {
+			Vector Plan::Normal() const {
 				return position.AxisX();
 			}
 
@@ -39,20 +37,20 @@ namespace Luga {
 				this->position = b;
 			}
 
-			void Plan::Normal(Vector3D n){
+			void Plan::Normal(Vector n){
 			}
 
 			void Plan::Origin(Point p){
 
 			}
 
-			ostream & operator << (ostream & out, Plan const& a){
-				out << scientific << setprecision(15);
+			std::ostream & operator << (std::ostream & out, Plan const& a){
+				out << std::scientific << std::setprecision(15);
 				out << a.Position();
 				return out;
 			}
 
-			istream & operator >> (istream & in, Plan & a){
+			std::istream & operator >> (std::istream & in, Plan & a){
 				Basis b;
 				in >> b;
 				return in;

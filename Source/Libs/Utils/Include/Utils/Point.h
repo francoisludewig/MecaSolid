@@ -5,13 +5,11 @@
 
 #include "BasisId.h"
 
-using namespace std;
-
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
-			class Vector3D;
+			class Vector;
 
 			class Point : public BasisId {
 			public:
@@ -22,18 +20,18 @@ namespace Luga {
 				double CoordinateY() const;
 				double CoordinateZ() const;
 				void SetCoordinates(double x, double y, double z);
-				void Translate(Vector3D const & a);
+				void Translate(Vector const & a);
 
-				Point operator+(Vector3D const &b) const;
-				Vector3D operator-(Point const &b) const;
-				void operator+=(Vector3D const& a);
+				Point operator+(Vector const &b) const;
+				Vector operator-(Point const &b) const;
+				void operator+=(Vector const& a);
 				// TODO Rotate with a reference basis
 			private:
 				double coordinateX,coordinateY,coordinateZ;
 			};
 
-			ostream & operator << (ostream & out, Point const& a);
-			istream & operator >> (istream & in, Point & a);
+			std::ostream & operator << (std::ostream & out, Point const& a);
+			std::istream & operator >> (std::istream & in, Point & a);
 		}
 	}
 }

@@ -1,13 +1,12 @@
 #pragma once
 
+#include <Utils/Vector.h>
 #include <iostream>
 #include <iomanip>
 
 #include "BasisId.h"
 
 #include "../Include/Utils/Point.h"
-#include "../Include/Utils/Vector3D.h"
-using namespace std;
 
 namespace Luga {
 	namespace Meca {
@@ -16,20 +15,20 @@ namespace Luga {
 			class Line : public BasisId {
 			public:
 				Line();
-				Line(Point a, Vector3D u);
+				Line(Point a, Vector u);
 				~Line();
 				Point Origin() const;
-				Vector3D Direction() const;
+				Vector Direction() const;
 				void Origin(Point a);
-				void Direction(Vector3D b);
+				void Direction(Vector b);
 
 			private:
 				Point origin;
-				Vector3D direction;
+				Vector direction;
 			};
 
-			ostream & operator << (ostream & out, Line const& a);
-			istream & operator >> (istream & in, Line & a);
+			std::ostream & operator << (std::ostream & out, Line const& a);
+			std::istream & operator >> (std::istream & in, Line & a);
 		}
 	}
 }

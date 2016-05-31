@@ -5,8 +5,6 @@
 
 #define precision 1E-15
 
-using namespace std;
-
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
@@ -28,10 +26,10 @@ namespace Luga {
 				return endPoint;
 			}
 
-			void Segment::BeginPoint(Point a){
+			void Segment::BeginPoint(Point & a){
 				this->beginPoint = a;
 			}
-			void Segment::EndPoint(Point b){
+			void Segment::EndPoint(Point & b){
 				this->endPoint = b;
 			}
 
@@ -39,13 +37,13 @@ namespace Luga {
 				return Line(beginPoint,endPoint-beginPoint);
 			}
 
-			ostream & operator << (ostream & out, Segment const& a){
-				out << scientific << setprecision(15);
+			std::ostream & operator << (std::ostream & out, Segment const& a){
+				out << std::scientific << std::setprecision(15);
 				out << a.BeginPoint() << " " << a.EndPoint();
 				return out;
 			}
 
-			istream & operator >> (istream & in, Segment & a){
+			std::istream & operator >> (std::istream & in, Segment & a){
 				Point x,y;
 				in >> x >> y;
 				a.BeginPoint(x);

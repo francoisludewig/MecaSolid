@@ -1,9 +1,10 @@
+#include <Utils/BasisChangerFromBasisToBasis.h>
+#include <Utils/Vector.h>
+
 #include <gtest/gtest.h>
 #include <cmath>
 #include <fstream>
 
-#include "Utils/BasisSwitcherFromBasisToBasis.h"
-#include "Utils/Vector3D.h"
 #include "Utils/Quaternion.h"
 #include "Utils/Basis.h"
 #include "Utils/Point.h"
@@ -12,18 +13,18 @@
 using namespace std;
 using namespace Luga::Meca::Utils;
 
-TEST(BasisSwitcherFromBasisToBasis,SwithVector){
+TEST(BasisChangerFromBasisToBasis,ChangeVector){
 	Point o(1,-3,2);
-	Quaternion q(Vector3D(M_PI/4,M_PI/4,M_PI/4));
+	Quaternion q(Vector(M_PI/4,M_PI/4,M_PI/4));
 	Basis from(o,q),to;
-	BasisSwitcherFromBasisToBasis basisToBasis;
-	basisToBasis.To(&to);
-	basisToBasis.From(&from);
+	BasisChangerFromBasisToBasis basisToBasis;
+	basisToBasis.ToBasis(&to);
+	basisToBasis.FromBasis(&from);
 
-	Vector3D u(M_PI,M_PI/5,2*M_PI,from.ID());
-	Vector3D v = u;
+	Vector u(M_PI,M_PI/5,2*M_PI,from.ID());
+	Vector v = u;
 
-	basisToBasis.SwithVector(u);
+	basisToBasis.ChangeVector(u);
 
 	double x = v.ComponantX()*from.AxisX().ComponantX()
 			 + v.ComponantY()*from.AxisY().ComponantX()
@@ -42,19 +43,19 @@ TEST(BasisSwitcherFromBasisToBasis,SwithVector){
 	ASSERT_TRUE(isEquals (z,u.ComponantZ()));
 }
 
-TEST(BasisSwitcherFromBasisToBasis,SwithPoint){
+TEST(BasisChangerFromBasisToBasis,ChangePoint){
 	Point o(1,-3,2);
-	Quaternion q(Vector3D(M_PI/4,M_PI/4,M_PI/4));
+	Quaternion q(Vector(M_PI/4,M_PI/4,M_PI/4));
 	Basis from(o,q),to;
-	BasisSwitcherFromBasisToBasis basisToBasis;
+	BasisChangerFromBasisToBasis basisToBasis;
 
-	basisToBasis.To(&to);
-	basisToBasis.From(&from);
+	basisToBasis.ToBasis(&to);
+	basisToBasis.FromBasis(&from);
 
 	Point u(M_PI,M_PI/5,2*M_PI);
 	u.Id(from.ID());
 	Point v = u;
-	basisToBasis.SwithPoint(u);
+	basisToBasis.ChangePoint(u);
 
 	double x = from.Origin().CoordinateX()
 			+ v.CoordinateX()*from.AxisX().ComponantX()

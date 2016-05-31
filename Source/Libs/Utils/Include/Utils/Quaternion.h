@@ -2,19 +2,18 @@
 
 #include <iostream>
 #include <iomanip>
-using namespace std;
 
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
-			class Vector3D;
+			class Vector;
 
 			class Quaternion {
 			public:
 				Quaternion();
 				Quaternion(double q0, double q1, double q2, double q3);
-				Quaternion(const Vector3D & w);
+				Quaternion(const Vector & w);
 				~Quaternion();
 
 				double ComponantReal() const;
@@ -39,8 +38,8 @@ namespace Luga {
 				double componantReal,componantI,componantJ,componantK;
 			};
 
-			ostream & operator << (ostream & out, Quaternion const& a);
-			istream & operator >> (istream & in, Quaternion & a);
+			std::ostream & operator << (std::ostream & out, Quaternion const& a);
+			std::istream & operator >> (std::istream & in, Quaternion & a);
 		}
 	}
 }

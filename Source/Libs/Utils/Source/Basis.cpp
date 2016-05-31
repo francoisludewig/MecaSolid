@@ -5,11 +5,10 @@
 
 #define precision 1E-15
 
-using namespace std;
-
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
+
 
 			int Basis::instanceCount = 0;
 
@@ -37,15 +36,15 @@ namespace Luga {
 				return origin;
 			}
 
-			Vector3D Basis::AxisX() const{
+			Vector Basis::AxisX() const{
 				return axisX;
 			}
 
-			Vector3D Basis::AxisY() const{
+			Vector Basis::AxisY() const{
 				return axisY;
 			}
 
-			Vector3D Basis::AxisZ() const{
+			Vector Basis::AxisZ() const{
 				return axisZ;
 			}
 
@@ -62,13 +61,13 @@ namespace Luga {
 				vQc.ConvertQuaternionIntoVectors(q,axisX,axisY,axisZ);
 			}
 
-			void Basis::AxisX(Vector3D & e1){
+			void Basis::AxisX(Vector & e1){
 				e1.Normalize();
 				this->axisX = e1;
 				this->ConstructAxisYAndZFromX();
 			}
 
-			void Basis::Local(Vector3D & a) const{
+			void Basis::Local(Vector & a) const{
 				if(a.Id() == -1){
 					double x,y,z;
 					x = a*axisX;
@@ -79,13 +78,13 @@ namespace Luga {
 				}
 			}
 
-			void Basis::Global(Vector3D & a) const{
+			void Basis::Global(Vector & a) const{
 				a = a.ComponantX()*axisX + a.ComponantY()*axisY + a.ComponantZ()*axisZ;
 				a.Id(-1);
 			}
 
 			Point Basis::Local(const Point & a) const{
-				Vector3D v = a-origin;
+				Vector v = a-origin;
 				return Point(axisX*v,axisY*v,axisZ*v);
 			}
 
@@ -100,11 +99,11 @@ namespace Luga {
 				vQc.ConvertQuaternionIntoVectors(this->orientation,axisX,axisY,axisZ);
 			}
 
-			void Basis::Translate(Vector3D const & o){
+			void Basis::Translate(Vector const & o){
 				this->origin += o;
 			}
 
-			void Basis::LoadFromIstream(istream & in){
+			void Basis::LoadFromIstream(std::istream & in){
 				in >> origin;
 				in >> orientation;
 				vQc.ConvertQuaternionIntoVectors(orientation,axisX,axisY,axisZ);
@@ -116,7 +115,7 @@ namespace Luga {
 				return b;
 			}
 
-			Basis Basis::operator+(Vector3D const & o) const{
+			Basis Basis::operator+(Vector const & o) const{
 				Basis b = *this;
 				b.Translate(o);
 				return b;
@@ -126,7 +125,7 @@ namespace Luga {
 				this->Rotate(q);
 			}
 
-			void Basis::operator+=(Vector3D const& o){
+			void Basis::operator+=(Vector const& o){
 				this->Translate(o);
 			}
 
@@ -158,12 +157,12 @@ namespace Luga {
 			  	vQc.ConvertVectorsIntoQuaternion(axisX,axisY,axisZ,orientation);
 			}
 
-			ostream & operator << (ostream & out, Basis const& a){
+			std::ostream & operator << (std::ostream & out, Basis const& a){
 				out << a.Origin() << " " << a.Orientation();
 				return out;
 			}
 
-			istream & operator >> (istream & in, Basis & a){
+			std::istream & operator >> (std::istream & in, Basis & a){
 				a.LoadFromIstream(in);
 				return in;
 			}

@@ -44,7 +44,7 @@ TEST(Segment,AssiociatedLine){
 	Point b(M_PI/7,3*M_PI,-M_PI/4);
 	Segment s(a,b);
 	Line l = s.AssiociatedLine();
-	Vector3D u = b-a;
+	Vector u = b-a;
 	u /= u.Norme();
 	ASSERT_EQ (a.CoordinateX(),l.Origin().CoordinateX());
 	ASSERT_EQ (a.CoordinateY(),l.Origin().CoordinateY());

@@ -1,13 +1,12 @@
-#include "../../Utils/Include/Utils/Matrix3x3.h"
-
+#include <Utils/Matrix.h>
 #include <iostream>
 #include <cmath>
+#include <cassert>
+#include "../../Exceptions/Error.h"
 
 #define precision 1E-15
 
-using namespace std;
-
-/*! \class Matrix3x3
+/*! \class Matrix
 	\brief In order to represent Inertia matrix
 */
 
@@ -15,17 +14,17 @@ namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
-			Matrix3x3::Matrix3x3(){
+			Matrix::Matrix(){
 				element[0][0] = 1; element[0][1] = 0; element[0][2] = 0;
 			 	element[1][0] = 0; element[1][1] = 1; element[1][2] = 0;
 				element[2][0] = 0; element[2][1] = 0; element[2][2] = 1;
 			}
 
-			Matrix3x3::~Matrix3x3(){
+			Matrix::~Matrix(){
 
 			}
 
-			Matrix3x3::Matrix3x3(double m00, double m01,double m02,
+			Matrix::Matrix(double m00, double m01,double m02,
 					  double m10, double m11,double m12,
 					  double m20, double m21,double m22){
 				element[0][0] = m00; element[0][1] = m01; element[0][2] = m02;
@@ -34,42 +33,42 @@ namespace Luga {
 			}
 
 
-			void Matrix3x3::Element(int i, int j , double c){
+			void Matrix::Element(int i, int j , double c){
 				element[i][j] = c;
 			}
 
-			double Matrix3x3::Element(int i, int j) const{
+			double Matrix::Element(int i, int j) const{
 				return element[i][j];
 			}
 
-			Vector3D Matrix3x3::Line(int i) const{
-				return Vector3D(element[i][0],element[i][1],element[i][2]);
+			Vector Matrix::Line(int i) const{
+				return Vector(element[i][0],element[i][1],element[i][2]);
 			}
 
-			Vector3D Matrix3x3::Column(int i) const{
-				return Vector3D(element[0][i],element[1][i],element[2][i]);
+			Vector Matrix::Column(int i) const{
+				return Vector(element[0][i],element[1][i],element[2][i]);
 			}
 
-			void Matrix3x3::Line(int i, Vector3D & l){
+			void Matrix::Line(int i, Vector & l){
 				element[i][0] = l.ComponantX();
 				element[i][1] = l.ComponantY();
 				element[i][2] = l.ComponantZ();
 			}
 
-			void Matrix3x3::Column(int i, Vector3D & c){
+			void Matrix::Column(int i, Vector & c){
 				element[0][i] = c.ComponantX();
 				element[1][i] = c.ComponantY();
 				element[2][i] = c.ComponantZ();
 			}
 
-			double Matrix3x3::Determinant() const{
+			double Matrix::Determinant() const{
 				return element[0][0]*element[1][1]*element[2][2] + element[0][1]*element[1][2]*element[2][0] + element[0][2]*element[1][0]*element[2][1]
 			  - element[0][2]*element[1][1]*element[2][0] - element[1][2]*element[2][1]*element[0][0] - element[2][2]*element[1][0]*element[0][1];
 			}
 
-			Matrix3x3 Matrix3x3::MatrixTranspose(){
-				Matrix3x3 a;
-				Vector3D raw;
+			Matrix Matrix::MatrixTranspose(){
+				Matrix a;
+				Vector raw;
 				for(int i = 0 ; i < 3 ; i++){
 					raw = Line(i);
 					a.Column(i,raw);
@@ -77,8 +76,8 @@ namespace Luga {
 				return a;
 			}
 
-			Matrix3x3 Matrix3x3::MatrixAdjoint(){
-				Matrix3x3 a;
+			Matrix Matrix::MatrixAdjoint(){
+				Matrix a;
 				a.Element(0,0,(element[1][1]*element[2][2]-element[1][2]*element[2][1]));
 				a.Element(0,1,-(element[1][0]*element[2][2]-element[1][2]*element[2][0]));
 				a.Element(0,2,(element[1][0]*element[2][1]-element[1][1]*element[2][0]));
@@ -93,8 +92,8 @@ namespace Luga {
 				return a;
 			}
 
-			Matrix3x3 Matrix3x3::MatrixInverse(){
-				Matrix3x3 a;
+			Matrix Matrix::MatrixInverse(){
+				Matrix a;
 				double det = Determinant();
 				if(det != 0){
 					a = MatrixAdjoint().MatrixTranspose();
@@ -103,52 +102,58 @@ namespace Luga {
 				return a;
 			}
 
-			Matrix3x3 Matrix3x3::Product(const double & b) const{
-				Matrix3x3 a = *this;
+			Matrix Matrix::Product(const double & b) const{
+				Matrix a = *this;
 				for(int i = 0 ; i < 3 ; i++)
 					for(int j = 0 ; j < 3 ; j++)
 						a.Element(i,j,a.Element(i,j)*b);
 				return a;
 			}
 
-			Matrix3x3 Matrix3x3::Div(const double & b) const{
-				Matrix3x3 a = *this;
+			Matrix Matrix::Div(const double & b) const{
+				if(b == 0)
+					throw(Error(1,"Dividing by 0 !",0));
+				Matrix a = *this;
 				for(int i = 0 ; i < 3 ; i++)
 					for(int j = 0 ; j < 3 ; j++)
 						a.Element(i,j,a.Element(i,j)/b);
 				return a;
 			}
 
-			void Matrix3x3::operator*=(double const& a){
+			void Matrix::operator*=(double const& a){
 				for(int i = 0 ; i < 3 ; i++)
 					for(int j = 0 ; j < 3 ; j++)
 						element[i][j]*=a;
 			}
 
-			void Matrix3x3::operator/=(double const& a){
+			void Matrix::operator/=(double const& a){
+				if(a == 0)
+					throw(Error(1,"Dividing by 0 !",0));
 				for(int i = 0 ; i < 3 ; i++)
 					for(int j = 0 ; j < 3 ; j++)
 						element[i][j]/=a;
 			}
 
-			Matrix3x3 Matrix3x3::operator*(double const &b){
+			Matrix Matrix::operator*(double const &b){
 				return this->Product(b);
 			}
 
-			Vector3D Matrix3x3::operator*(Vector3D &b){
-				Vector3D a;
+			Vector Matrix::operator*(Vector &b){
+				Vector a;
 				a.ComponantX(element[0][0]*b.ComponantX() + element[0][1]*b.ComponantY() + element[0][2]*b.ComponantZ());
 				a.ComponantY(element[1][0]*b.ComponantX() + element[1][1]*b.ComponantY() + element[1][2]*b.ComponantZ());
 				a.ComponantZ(element[2][0]*b.ComponantX() + element[2][1]*b.ComponantY() + element[2][2]*b.ComponantZ());
 				return a;
 			}
 
-			Matrix3x3 Matrix3x3::operator/(double const &b){
+			Matrix Matrix::operator/(double const &b){
+				if(b == 0)
+					throw(Error(1,"Dividing by 0 !",0));
 				return this->Div(b);
 			}
 
-			ostream & operator << (ostream & out, Matrix3x3 const& a){
-				out << scientific << setprecision(15);
+			std::ostream & operator << (std::ostream & out, Matrix const& a){
+				out << std::scientific << std::setprecision(15);
 				for(int i = 0 ; i < 3 ; i++){
 					for(int j = 0 ; j < 3 ; j++){
 						out << a.Element(i,j) << " ";
@@ -158,7 +163,7 @@ namespace Luga {
 				return out;
 			}
 
-			istream & operator >> (istream & in, Matrix3x3 & a){
+			std::istream & operator >> (std::istream & in, Matrix & a){
 				double c;
 				for(int i = 0 ; i < 3 ; i++){
 					for(int j = 0 ; j < 3 ; j++){

@@ -1,16 +1,17 @@
+#include <Utils/Matrix.h>
+
 #include <gtest/gtest.h>
 #include <cmath>
 #include <fstream>
 
-#include "Utils/Matrix3x3.h"
 #include "Resource/DoublePrecision.h"
 
 using namespace std;
 using namespace Luga::Meca::Utils;
 
 
-TEST(Matrix3x3,Constructor){
-	Matrix3x3 a;
+TEST(Matrix,Constructor){
+	Matrix a;
 
 	ASSERT_EQ (1,a.Element(0,0));
 	ASSERT_EQ (0,a.Element(0,1));
@@ -25,8 +26,8 @@ TEST(Matrix3x3,Constructor){
 	ASSERT_EQ (1,a.Element(2,2));
 }
 
-TEST(Matrix3x3,det){
-	Matrix3x3 a;
+TEST(Matrix,det){
+	Matrix a;
 
 	a.Element(0,0,-3);
 	a.Element(0,1,5);
@@ -42,8 +43,8 @@ TEST(Matrix3x3,det){
 	ASSERT_EQ (-1,a.Determinant());
 }
 
-TEST(Matrix3x3,Transpose){
-	Matrix3x3 a,b;
+TEST(Matrix,Transpose){
+	Matrix a,b;
 
 	a.Element(0,0,-3);
 	a.Element(0,1,5);
@@ -73,8 +74,8 @@ TEST(Matrix3x3,Transpose){
 }
 
 
-TEST(Matrix3x3,Inverse){
-	Matrix3x3 a,b;
+TEST(Matrix,Inverse){
+	Matrix a,b;
 
 	a.Element(0,0,-3);
 	a.Element(0,1,5);
@@ -104,28 +105,28 @@ TEST(Matrix3x3,Inverse){
 }
 
 
-TEST(Matrix3x3,VectorProductIdentity){
-	Matrix3x3 a;
-	Vector3D v(M_PI,M_PI/2,M_PI/3);
-	Vector3D b = a*v;
+TEST(Matrix,VectorProductIdentity){
+	Matrix a;
+	Vector v(M_PI,M_PI/2,M_PI/3);
+	Vector b = a*v;
 	ASSERT_TRUE(isEquals (v.ComponantX(),b.ComponantX()));
 	ASSERT_TRUE(isEquals (v.ComponantY(),b.ComponantY()));
 	ASSERT_TRUE(isEquals (v.ComponantZ(),b.ComponantZ()));
 }
 
-TEST(Matrix3x3,VectorProduct){
-	Matrix3x3 a(1,2,3,5,4,6,7,-4,-3);
-	Vector3D v(M_PI,M_PI/2,M_PI/3);
-	Vector3D b = a*v;
+TEST(Matrix,VectorProduct){
+	Matrix a(1,2,3,5,4,6,7,-4,-3);
+	Vector v(M_PI,M_PI/2,M_PI/3);
+	Vector b = a*v;
 
 	ASSERT_TRUE(isEquals ( 3*M_PI,b.ComponantX()));
 	ASSERT_TRUE(isEquals ( 9*M_PI,b.ComponantY()));
 	ASSERT_TRUE(isEquals (4*M_PI,b.ComponantZ()));
 }
 
-TEST(Matrix3x3,IO_Operator){
-	Matrix3x3 a;
-	Matrix3x3 b;
+TEST(Matrix,IO_Operator){
+	Matrix a;
+	Matrix b;
 
 
 	for(int i = 0 ; i < 3 ; i++){

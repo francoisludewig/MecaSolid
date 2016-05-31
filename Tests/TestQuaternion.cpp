@@ -1,9 +1,10 @@
+#include <Utils/Vector.h>
+
 #include <gtest/gtest.h>
 #include <cmath>
 #include <fstream>
 
 #include "Utils/Quaternion.h"
-#include "Utils/Vector3D.h"
 #include "Resource/DoublePrecision.h"
 
 using namespace std;
@@ -27,7 +28,7 @@ TEST(Quaternion,ConstructorValue){
 }
 
 TEST(Quaternion,ConstructorVector3D){
-	Vector3D w(M_PI,0,0);
+	Vector w(M_PI,0,0);
 	Quaternion a(w);
 
 	ASSERT_TRUE(isEquals(0,a.ComponantReal()));

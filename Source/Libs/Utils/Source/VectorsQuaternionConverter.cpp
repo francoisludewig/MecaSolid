@@ -1,13 +1,11 @@
 
+#include <Utils/Vector.h>
 #include <iostream>
 #include <cmath>
 #include "../Include/Utils/VectorsQuaternionConverter.h"
-#include "../Include/Utils/Vector3D.h"
 #include "../Include/Utils/Quaternion.h"
 
 #define precision 1E-15
-
-using namespace std;
 
 namespace Luga {
 	namespace Meca {
@@ -22,7 +20,7 @@ namespace Luga {
 			}
 
 
-			void VectorsQuaternionConverter::ConvertQuaternionIntoVectors(const Quaternion& q, Vector3D& e1, Vector3D& e2, Vector3D& e3) const{
+			void VectorsQuaternionConverter::ConvertQuaternionIntoVectors(const Quaternion& q, Vector& e1, Vector& e2, Vector& e3) const{
 				e1.SetComponants(1 - 2*q.ComponantJ()*q.ComponantJ() - 2*q.ComponantK()*q.ComponantK(),
 						2*q.ComponantI()*q.ComponantJ() + 2*q.ComponantK()*q.ComponantReal(),
 						2*q.ComponantI()*q.ComponantK() - 2*q.ComponantJ()*q.ComponantReal());
@@ -37,7 +35,7 @@ namespace Luga {
 						1 - 2*q.ComponantJ()*q.ComponantJ() - 2*q.ComponantI()*q.ComponantI());
 			}
 
-			void VectorsQuaternionConverter::ConvertVectorsIntoQuaternion(const Vector3D& e1,const Vector3D& e2,const Vector3D& e3, Quaternion& q) const{
+			void VectorsQuaternionConverter::ConvertVectorsIntoQuaternion(const Vector& e1,const Vector& e2,const Vector& e3, Quaternion& q) const{
 				double q0,q1,q2,q3;
 				if(-(e2.ComponantY()+e3.ComponantZ()-e1.ComponantX()-1) < 0)
 					q1 = 0.;

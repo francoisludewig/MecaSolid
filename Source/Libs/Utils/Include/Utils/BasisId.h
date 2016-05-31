@@ -3,7 +3,6 @@
 #include <iostream>
 #include <iomanip>
 
-using namespace std;
 
 namespace Luga {
 	namespace Meca {
@@ -19,8 +18,8 @@ namespace Luga {
 				int id;
 			};
 
-			ostream & operator << (ostream & out, BasisId const& a);
-			istream & operator >> (istream & in, BasisId & a);
+			std::ostream & operator << (std::ostream & out, BasisId const& a);
+			std::istream & operator >> (std::istream & in, BasisId & a);
 		}
 	}
 }

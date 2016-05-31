@@ -4,8 +4,9 @@
 #include <cmath>
 #include <fstream>
 
-#include <Utils/Vector3D.h>
 #include <Utils/Point.h>
+#include <Utils/Vector.h>
+
 #include "Resource/DoublePrecision.h"
 
 using namespace std;
@@ -23,7 +24,7 @@ TEST(Line,Constructor){
 
 TEST(Line,Constructor2){
 	Point a(M_PI,2*M_PI,M_PI/5);
-	Vector3D u(M_PI,2*M_PI,M_PI/5);
+	Vector u(M_PI,2*M_PI,M_PI/5);
 	Line l(a,u);
 	u /= u.Norme();
 	ASSERT_EQ (a.CoordinateX(),l.Origin().CoordinateX());
@@ -36,7 +37,7 @@ TEST(Line,Constructor2){
 
 TEST(Line,IO_Operator){
 	Point a(M_PI,2*M_PI,M_PI/5);
-		Vector3D u(M_PI,2*M_PI,M_PI/5);
+		Vector u(M_PI,2*M_PI,M_PI/5);
 		Line l(a,u),m;
 
 	ofstream fichierOut("testLine.txt", ios::out | ios::trunc);

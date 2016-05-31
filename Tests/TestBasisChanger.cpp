@@ -1,9 +1,10 @@
+#include <Utils/BasisChanger.h>
+#include <Utils/Vector.h>
+
 #include <gtest/gtest.h>
 #include <cmath>
 #include <fstream>
 
-#include "Utils/BasisSwitcher.h"
-#include "Utils/Vector3D.h"
 #include "Utils/Quaternion.h"
 #include "Utils/Basis.h"
 #include "Utils/Point.h"
@@ -12,22 +13,22 @@
 using namespace std;
 using namespace Luga::Meca::Utils;
 
-TEST(BasisSwitcher,Status){
+TEST(BasisChanger,Status){
 	Basis b;
-	BasisSwitcher basisSwitcher;
+	BasisChanger basisSwitcher;
 
 	ASSERT_EQ(None,basisSwitcher.Type());
 
-	basisSwitcher.From(&b);
+	basisSwitcher.FromBasis(&b);
 	ASSERT_EQ(From_Basis_To_Global,basisSwitcher.Type());
 
-	basisSwitcher.To(&b);
+	basisSwitcher.ToBasis(&b);
 	ASSERT_EQ(From_Basis_To_Basis,basisSwitcher.Type());
 
-	basisSwitcher.From(NULL);
+	basisSwitcher.FromBasis(NULL);
 	ASSERT_EQ(From_Global_To_Basis,basisSwitcher.Type());
 
-	basisSwitcher.To(NULL);
+	basisSwitcher.ToBasis(NULL);
 	ASSERT_EQ(None,basisSwitcher.Type());
 }
 

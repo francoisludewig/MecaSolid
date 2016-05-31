@@ -23,17 +23,17 @@ TEST(Basis,Constructor){
 	ASSERT_EQ (0,o.CoordinateZ());
 
 
-	Vector3D e1 = a.AxisX();
+	Vector e1 = a.AxisX();
 	ASSERT_EQ (1,e1.ComponantX());
 	ASSERT_EQ (0,e1.ComponantY());
 	ASSERT_EQ (0,e1.ComponantZ());
 
-	Vector3D e2 = a.AxisY();
+	Vector e2 = a.AxisY();
 	ASSERT_EQ (0,e2.ComponantX());
 	ASSERT_EQ (1,e2.ComponantY());
 	ASSERT_EQ (0,e2.ComponantZ());
 
-	Vector3D e3 = a.AxisZ();
+	Vector e3 = a.AxisZ();
 	ASSERT_EQ (0,e3.ComponantX());
 	ASSERT_EQ (0,e3.ComponantY());
 	ASSERT_EQ (1,e3.ComponantZ());
@@ -50,7 +50,7 @@ TEST(Basis,ConstructorID){
 
 TEST(Basis,translate){
 	Basis a;
-	Vector3D o;
+	Vector o;
 	o.SetComponants(M_PI,-M_PI/3,7*M_PI/6);
 	a += o;
 
@@ -62,7 +62,7 @@ TEST(Basis,translate){
 
 TEST(Basis,rotate){
 	Basis a,b;
-	Vector3D w;
+	Vector w;
 	w.SetComponants(0,M_PI,0);
 	Quaternion q(w);
 
@@ -94,9 +94,9 @@ TEST(Basis,rotate){
 
 TEST(Basis,LocalGlobal){
 	Basis a,b;
-	Quaternion q(Vector3D(0,M_PI,0));
+	Quaternion q(Vector(0,M_PI,0));
 	b = a*q;
-	Vector3D v(M_PI,M_PI/3,M_PI/7);
+	Vector v(M_PI,M_PI/3,M_PI/7);
 	b.Local(v);
 
 	ASSERT_TRUE(isEquals( v.ComponantX() , -M_PI ));
@@ -113,9 +113,9 @@ TEST(Basis,LocalGlobal){
 
 TEST(Basis,Construct){
 	Basis a;
-	Vector3D u(2*M_PI,M_PI/2,M_PI/3);
+	Vector u(2*M_PI,M_PI/2,M_PI/3);
 	a.AxisX(u);
-	Vector3D n,t,s;
+	Vector n,t,s;
 	n = a.AxisX();
 	t = a.AxisY();
 	s = a.AxisZ();
