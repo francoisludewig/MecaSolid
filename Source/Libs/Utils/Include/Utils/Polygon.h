@@ -8,8 +8,6 @@
 
 #include "BasisId.h"
 
-using namespace std;
-
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
@@ -19,19 +17,19 @@ namespace Luga {
 			class Polygon : public BasisId {
 			public:
 				Polygon();
-				Polygon(Basis & b, vector<Point> & p);
+				Polygon(Basis & basis, std::vector<Point> & p);
 				~Polygon();
 
 			private:
-				vector<Point> localSummit;
-				vector<Point> GlobalSummit;
-				Basis b;
+				std::vector<Point> localSummit;
+				std::vector<Point> GlobalSummit;
+				Basis basis;
 
 				void UpdateGlobalSummit();
 			};
 
-			ostream & operator << (ostream & out, Polygon const& a);
-			istream & operator >> (istream & in, Polygon & a);
+			std::ostream & operator << (std::ostream & out, Polygon const& a);
+			std::istream & operator >> (std::istream & in, Polygon & a);
 		}
 	}
 }

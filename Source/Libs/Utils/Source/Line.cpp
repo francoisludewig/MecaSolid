@@ -4,9 +4,6 @@
 
 #define precision 1E-15
 
-using namespace std;
-
-
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
@@ -15,7 +12,7 @@ namespace Luga {
 
 			}
 
-			Line::Line(Point a, Vector3D u):origin(a){
+			Line::Line(Point a, Vector u):origin(a){
 				u /= u.Norme();
 				this->direction = u;
 			}
@@ -26,27 +23,27 @@ namespace Luga {
 				return origin;
 			}
 
-			Vector3D Line::Direction() const{
+			Vector Line::Direction() const{
 				return direction;
 			}
 
 			void Line::Origin(Point a){
 				this->origin = a;
 			}
-			void Line::Direction(Vector3D u){
+			void Line::Direction(Vector u){
 				this->direction = u;
 				u /= u.Norme();
 			}
 
-			ostream & operator << (ostream & out, Line const& a){
-				out << scientific << setprecision(15);
+			std::ostream & operator << (std::ostream & out, Line const& a){
+				out << std::scientific << std::setprecision(15);
 				out << a.Origin() << " " << a.Direction();
 				return out;
 			}
 
-			istream & operator >> (istream & in, Line & a){
+			std::istream & operator >> (std::istream & in, Line & a){
 				Point x;
-				Vector3D y;
+				Vector y;
 				in >> x >> y;
 				a.Origin(x);
 				a.Direction(y);

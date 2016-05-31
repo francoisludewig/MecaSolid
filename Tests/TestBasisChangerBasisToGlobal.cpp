@@ -1,9 +1,10 @@
+#include <Utils/BasisChangerFromBasisToGlobal.h>
+#include <Utils/Vector.h>
+
 #include <gtest/gtest.h>
 #include <cmath>
 #include <fstream>
 
-#include "Utils/BasisSwitcherFromBasisToGlobal.h"
-#include "Utils/Vector3D.h"
 #include "Utils/Quaternion.h"
 #include "Utils/Basis.h"
 #include "Utils/Point.h"
@@ -12,17 +13,17 @@
 using namespace std;
 using namespace Luga::Meca::Utils;
 
-TEST(BasisSwitcherFromBasisToGlobal,SwithVector){
+TEST(BasisChangerFromBasisToGlobal,ChangeVector){
 	Point o(1,-3,2);
-	Quaternion q(Vector3D(M_PI/4,M_PI/4,M_PI/4));
+	Quaternion q(Vector(M_PI/4,M_PI/4,M_PI/4));
 	Basis base(o,q);
 
-	Vector3D u(M_PI,M_PI/5,2*M_PI,base.ID());
-	Vector3D v = u;
+	Vector u(M_PI,M_PI/5,2*M_PI,base.ID());
+	Vector v = u;
 
-	BasisSwitcherFromBasisToGlobal basisToGlobal;
-	basisToGlobal.From(&base);
-	basisToGlobal.SwithVector(u);
+	BasisChangerFromBasisToGlobal basisToGlobal;
+	basisToGlobal.FromBasis(&base);
+	basisToGlobal.ChangeVector(u);
 
 	double x = v.ComponantX()*base.AxisX().ComponantX()
 							+ v.ComponantY()*base.AxisY().ComponantX()
@@ -42,18 +43,18 @@ TEST(BasisSwitcherFromBasisToGlobal,SwithVector){
 }
 
 
-TEST(BasisSwitcherFromBasisToGlobal,SwithPoint){
+TEST(BasisChangerFromBasisToGlobal,ChangePoint){
 	Point o(1,-3,2);
-	Quaternion q(Vector3D(M_PI/4,M_PI/4,M_PI/4));
+	Quaternion q(Vector(M_PI/4,M_PI/4,M_PI/4));
 	Basis base(o,q);
 
 	Point u(M_PI,M_PI/5,2*M_PI);
 	u.Id(base.ID());
 	Point v = u;
 
-	BasisSwitcherFromBasisToGlobal basisToGlobal;
-	basisToGlobal.From(&base);
-	basisToGlobal.SwithPoint(u);
+	BasisChangerFromBasisToGlobal basisToGlobal;
+	basisToGlobal.FromBasis(&base);
+	basisToGlobal.ChangePoint(u);
 
 	double x = base.Origin().CoordinateX()
 					+ v.CoordinateX()*base.AxisX().ComponantX()

@@ -6,8 +6,6 @@
 
 #include "BasisId.h"
 
-using namespace std;
-
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
@@ -21,16 +19,16 @@ namespace Luga {
 				~Segment();
 				Point BeginPoint() const;
 				Point EndPoint() const;
-				void BeginPoint(Point a);
-				void EndPoint(Point b);
+				void BeginPoint(Point & a);
+				void EndPoint(Point & b);
 				Line AssiociatedLine() const;
 
 			private:
 				Point beginPoint,endPoint;
 			};
 
-			ostream & operator << (ostream & out, Segment const& a);
-			istream & operator >> (istream & in, Segment & a);
+			std::ostream & operator << (std::ostream & out, Segment const& a);
+			std::istream & operator >> (std::istream & in, Segment & a);
 		}
 	}
 }

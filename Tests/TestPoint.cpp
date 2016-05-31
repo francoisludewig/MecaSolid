@@ -1,11 +1,11 @@
 #include <Utils/Segment.h>
+#include <Utils/Vector.h>
 
 #include <gtest/gtest.h>
 #include <cmath>
 #include <fstream>
 
 
-#include "Utils/Vector3D.h"
 #include "Resource/DoublePrecision.h"
 
 using namespace std;
@@ -34,7 +34,7 @@ TEST(Point,Calculus){
 	Point a(M_PI   ,2*M_PI,M_PI/5);
 	Point b(-3*M_PI,M_PI  ,4*M_PI/5);
 
-	Vector3D c = b-a;
+	Vector c = b-a;
 
 	ASSERT_TRUE(isEquals(-4*M_PI , c.ComponantX()));
 	ASSERT_TRUE(isEquals(-M_PI   , c.ComponantY()));

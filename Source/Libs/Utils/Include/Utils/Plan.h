@@ -6,8 +6,6 @@
 
 #include "BasisId.h"
 
-using namespace std;
-
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
@@ -15,21 +13,21 @@ namespace Luga {
 			class Plan : public BasisId {
 			public:
 				Plan();
-				Plan(Point p, Vector3D n);
+				Plan(Point p, Vector n);
 				~Plan();
 				Basis Position() const;
-				Vector3D Normal() const;
+				Vector Normal() const;
 				Point Origin() const;
 
 				void Position(Basis b);
-				void Normal(Vector3D n);
+				void Normal(Vector n);
 				void Origin(Point p);
 			private:
 				Basis position;
 			};
 
-			ostream & operator << (ostream & out, Plan const& a);
-			istream & operator >> (istream & in, Plan & a);
+			std::ostream & operator << (std::ostream & out, Plan const& a);
+			std::istream & operator >> (std::istream & in, Plan & a);
 		}
 	}
 }

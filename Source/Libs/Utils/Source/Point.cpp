@@ -1,12 +1,9 @@
 #include <Utils/Segment.h>
-#include "../../Utils/Include/Utils/Vector3D.h"
-
+#include <Utils/Vector.h>
 #include <iostream>
 #include <cmath>
 
 #define precision 1E-15
-
-using namespace std;
 
 namespace Luga {
 	namespace Meca {
@@ -32,31 +29,31 @@ namespace Luga {
 				this->coordinateZ = z;
 			}
 
-			void Point::Translate(Vector3D const & a){
+			void Point::Translate(Vector const & a){
 				coordinateX += a.ComponantX();
 				coordinateY += a.ComponantY();
 				coordinateZ += a.ComponantZ();
 			}
 
-			Point Point::operator+(Vector3D const &b) const{
+			Point Point::operator+(Vector const &b) const{
 				return Point(b.ComponantX()+coordinateX,b.ComponantY()+coordinateY,b.ComponantZ()+coordinateZ);
 			}
 
-			Vector3D Point::operator-(Point const &b) const{
-				return Vector3D(coordinateX-b.CoordinateX(),coordinateY-b.CoordinateY(),coordinateZ-b.CoordinateZ());
+			Vector Point::operator-(Point const &b) const{
+				return Vector(coordinateX-b.CoordinateX(),coordinateY-b.CoordinateY(),coordinateZ-b.CoordinateZ());
 			}
 
-			void Point::operator+=(Vector3D const& a){
+			void Point::operator+=(Vector const& a){
 				Translate(a);
 			}
 
-			ostream & operator << (ostream & out, Point const& a){
-				out << scientific << setprecision(15);
+			std::ostream & operator << (std::ostream & out, Point const& a){
+				out << std::scientific << std::setprecision(15);
 				out << a.CoordinateX() << " " << a.CoordinateY() << " " << a.CoordinateZ();
 				return out;
 			}
 
-			istream & operator >> (istream & in, Point & a){
+			std::istream & operator >> (std::istream & in, Point & a){
 				double x,y,z;
 				in >> x >> y >> z;
 				a.SetCoordinates(x,y,z);

@@ -1,13 +1,11 @@
 #pragma once
 
 #include <Utils/Segment.h>
+#include <Utils/Vector.h>
 #include <iostream>
 #include <iomanip>
 #include "Utils/Quaternion.h"
-#include "Utils/Vector3D.h"
 #include "Utils/VectorsQuaternionConverter.h"
-
-using namespace std;
 
 namespace Luga {
 	namespace Meca {
@@ -22,36 +20,36 @@ namespace Luga {
 				int ID() const;
 
 				Point Origin() const;
-				Vector3D AxisX() const;
-				Vector3D AxisY() const;
-				Vector3D AxisZ() const;
+				Vector AxisX() const;
+				Vector AxisY() const;
+				Vector AxisZ() const;
 				Quaternion Orientation() const;
 
-				void AxisX(Vector3D & e1);
+				void AxisX(Vector & e1);
 				void Origin(Point & o);
 				void Orientation(Quaternion & q);
 
 				void Rotate(Quaternion const & q);
-				void Translate(Vector3D const & o);
+				void Translate(Vector const & o);
 
-				void Local(Vector3D & a) const;
-				void Global(Vector3D & a) const;
+				void Local(Vector & a) const;
+				void Global(Vector & a) const;
 
 				Point Local(const Point & a) const;
 				Point Global(const Point & a) const;
 
-				void LoadFromIstream(istream & in);
+				void LoadFromIstream(std::istream & in);
 
 				Basis operator*(Quaternion const & q) const;
-				Basis operator+(Vector3D const & o) const;
+				Basis operator+(Vector const & o) const;
 
 				void operator*=(Quaternion const& q);
-				void operator+=(Vector3D const& o);
+				void operator+=(Vector const& o);
 
 			private:
 				void ConstructAxisYAndZFromX();
 
-				Vector3D axisX,axisY,axisZ;
+				Vector axisX,axisY,axisZ;
 				Point origin;
 				Quaternion orientation;
 				VectorsQuaternionConverter vQc;
@@ -59,8 +57,8 @@ namespace Luga {
 				static int instanceCount;
 			};
 
-			ostream & operator << (ostream & out, Basis const& a);
-			istream & operator >> (istream & in, Basis & a);
+			std::ostream & operator << (std::ostream & out, Basis const& a);
+			std::istream & operator >> (std::istream & in, Basis & a);
 		}
 	}
 }

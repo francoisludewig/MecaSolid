@@ -12,7 +12,7 @@ using namespace Luga::Meca::Solid;
 
 TEST(Solid,UpdatePositionTranslation){
 	Solid s;
-	Vector3D v(M_PI,M_PI/2,M_PI/4);
+	Vector v(M_PI,M_PI/2,M_PI/4);
 	double dt = 0.0001;
 	s.Velocity(v);
 	s.UpdatePosition(dt);
@@ -25,7 +25,7 @@ TEST(Solid,UpdatePositionTranslation){
 
 TEST(Solid,UpdateVelocityTranslation){
 	Solid s;
-	Vector3D f(M_PI,M_PI/2,M_PI/4);
+	Vector f(M_PI,M_PI/2,M_PI/4);
 	double mass = 10.;
 	double dt = 0.0001;
 	s.Force(f);
@@ -39,7 +39,7 @@ TEST(Solid,UpdateVelocityTranslation){
 
 TEST(Solid,UpdateVelocityAndPositionTranslation){
 	Solid s;
-	Vector3D f(M_PI,M_PI/2,M_PI/4);
+	Vector f(M_PI,M_PI/2,M_PI/4);
 	double mass = 10.;
 	double dt = 0.0001;
 	s.Force(f);
@@ -59,7 +59,7 @@ TEST(Solid,UpdateVelocityAndPositionTranslation){
 
 TEST(Solid,UpdateVelocityAndPositionTranslationThetaMethod){
 	Solid s;
-	Vector3D f(M_PI,M_PI/2,M_PI/4);
+	Vector f(M_PI,M_PI/2,M_PI/4);
 	double mass = 10.;
 	double dt = 0.0001;
 	double T = 0;
@@ -84,7 +84,7 @@ TEST(Solid,UpdateVelocityAndPositionTranslationThetaMethod){
 
 TEST(Solid,UpdatePositionRotationX){
 	Solid s;
-	Vector3D w(M_PI/6,0.,0.);
+	Vector w(M_PI/6,0.,0.);
 	double dt = 1;
 
 	s.AngularVelocity(w);
@@ -115,7 +115,7 @@ TEST(Solid,UpdatePositionRotationX){
 
 TEST(Solid,UpdatePositionRotationY){
 	Solid s;
-	Vector3D w(0 ,M_PI/6, 0);
+	Vector w(0 ,M_PI/6, 0);
 	double dt = 1;
 
 	s.AngularVelocity(w);
@@ -145,7 +145,7 @@ TEST(Solid,UpdatePositionRotationY){
 
 TEST(Solid,UpdatePositionRotationZ){
 	Solid s;
-	Vector3D w(0 , 0, M_PI/6);
+	Vector w(0 , 0, M_PI/6);
 	double dt = 1;
 
 	s.AngularVelocity(w);
@@ -176,7 +176,7 @@ TEST(Solid,UpdatePositionRotationZ){
 
 TEST(Solid,UpdatePositionRotationXYZ){
 	Solid s;
-	Vector3D w;
+	Vector w;
 	double dt = 1;
 
 	// Rotation X
@@ -207,8 +207,8 @@ TEST(Solid,UpdatePositionRotationXYZ){
 
 TEST(Solid,UpdateAngularVelocity){
 	Solid s;
-	Vector3D M(M_PI,-M_PI/2,M_PI/5);
-	Matrix3x3 I(M_PI,0,0,
+	Vector M(M_PI,-M_PI/2,M_PI/5);
+	Matrix I(M_PI,0,0,
 				0,M_PI,0,
 				0,0,M_PI);
 
@@ -225,7 +225,7 @@ TEST(Solid,UpdateAngularVelocity){
 
 TEST(Solid,IO_Operator){
 	Solid s,t;
-	Vector3D w,v;
+	Vector w,v;
 
 	// Rotation X
 	w.SetComponants(M_PI,-M_PI/2,M_PI/4);

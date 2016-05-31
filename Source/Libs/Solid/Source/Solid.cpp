@@ -5,7 +5,6 @@
 
 #define precision 1E-15
 
-using namespace std;
 using namespace Luga::Meca::Utils;
 
 namespace Luga {
@@ -21,20 +20,20 @@ namespace Luga {
 			}
 
 			Basis Solid::B() const{return b;}
-			Vector3D Solid::Velocity() const{return velocity;}
-			Vector3D Solid::AngularVelocity() const{return angularVelocity;}
-			Vector3D Solid::Force() const{return force;}
-			Vector3D Solid::Momentum() const{return momentum;}
-			Matrix3x3 Solid::Inertia() const{return inertia;}
+			Vector Solid::Velocity() const{return velocity;}
+			Vector Solid::AngularVelocity() const{return angularVelocity;}
+			Vector Solid::Force() const{return force;}
+			Vector Solid::Momentum() const{return momentum;}
+			Matrix Solid::Inertia() const{return inertia;}
 			double Solid::Mass() const{return mass;}
 
 
 			void Solid::B(Basis & b){this->b = b;}
-			void Solid::Velocity(Vector3D & v) {this->velocity = v;}
-			void Solid::AngularVelocity(Vector3D w) {this->angularVelocity = w;}
-			void Solid::Force(Vector3D f) {this->force = f;}
-			void Solid::Momentum(Vector3D m) {this->momentum = m;}
-			void Solid::Inertia(Matrix3x3 i){
+			void Solid::Velocity(Vector & v) {this->velocity = v;}
+			void Solid::AngularVelocity(Vector w) {this->angularVelocity = w;}
+			void Solid::Force(Vector f) {this->force = f;}
+			void Solid::Momentum(Vector m) {this->momentum = m;}
+			void Solid::Inertia(Matrix i){
 				this->inertia = i;
 				this->interia_1 = inertia.MatrixInverse();
 			}
@@ -58,16 +57,16 @@ namespace Luga {
 				momentum.SetComponants(0,0,0);
 			}
 
-			void Solid::LoadFromIstream(istream & in){
+			void Solid::LoadFromIstream(std::istream & in){
 				in >> b >> velocity >> angularVelocity >> force >> momentum >> inertia >> mass;
 			}
 
-			ostream & operator << (ostream & out, Solid const& a){
+			std::ostream & operator << (std::ostream & out, Solid const& a){
 				out << a.B() << " " << a.Velocity() << " " << a.AngularVelocity() << " " << a.Force() << " " << a.Momentum() << " " << a.Inertia() << " " << a.Mass();
 				return out;
 			}
 
-			istream & operator >> (istream & in, Solid & a){
+			std::istream & operator >> (std::istream & in, Solid & a){
 				a.LoadFromIstream(in);
 				return in;
 			}

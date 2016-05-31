@@ -1,53 +1,55 @@
+#include <Utils/Vector.h>
+
 #include <gtest/gtest.h>
 #include <cmath>
 #include <fstream>
 
-#include "Utils/Vector3D.h"
+#include "../Source/Libs/Exceptions/Error.h"
 #include "Resource/DoublePrecision.h"
 
 using namespace std;
 using namespace Luga::Meca::Utils;
 
 
-TEST(Vector3D,Constructor){
-	Vector3D a;
+TEST(Vector,Constructor){
+	Vector a;
 	ASSERT_EQ (0,a.ComponantX());
 	ASSERT_EQ (0,a.ComponantY());
 	ASSERT_EQ (0,a.ComponantZ());
 }
 
-TEST(Vector3D,ConstructorValue){
-	Vector3D a(1,2,3);
+TEST(Vector,ConstructorValue){
+	Vector a(1,2,3);
 	ASSERT_EQ (1,a.ComponantX());
 	ASSERT_EQ (2,a.ComponantY());
 	ASSERT_EQ (3,a.ComponantZ());
 
-	Vector3D b(M_PI,2*M_PI,M_PI/2);
+	Vector b(M_PI,2*M_PI,M_PI/2);
 	ASSERT_EQ (M_PI,b.ComponantX());
 	ASSERT_EQ (2*M_PI,b.ComponantY());
 	ASSERT_EQ (M_PI/2,b.ComponantZ());
 }
 
-TEST(Vector3D,Norme){
-	Vector3D a(1,2,3);
+TEST(Vector,Norme){
+	Vector a(1,2,3);
 	ASSERT_EQ (sqrt(14.),a.Norme());
 }
 
 
-TEST(Vector3D,Normalize){
-	Vector3D a(1,2,3),b = a;
+TEST(Vector,Normalize){
+	Vector a(1,2,3),b = a;
 	a.Normalize();
 	ASSERT_EQ(1,a.Norme());
-	Vector3D pv = a^b;
+	Vector pv = a^b;
 	ASSERT_EQ(0,pv.ComponantX());
 	ASSERT_EQ(0,pv.ComponantY());
 	ASSERT_EQ(0,pv.ComponantZ());
 }
 
-TEST(Vector3D,ScalarProduct){
-	Vector3D a(1,0,0);
-	Vector3D b(0,1,0);
-	Vector3D c(0,0,1);
+TEST(Vector,ScalarProduct){
+	Vector a(1,0,0);
+	Vector b(0,1,0);
+	Vector c(0,0,1);
 
 	ASSERT_EQ (0,a*b);
 	ASSERT_EQ (0,a*c);
@@ -58,14 +60,14 @@ TEST(Vector3D,ScalarProduct){
 }
 
 
-TEST(Vector3D,VectorialProduct){
-	Vector3D a(1,0,0);
-	Vector3D b(0,1,0);
-	Vector3D c(0,0,1);
+TEST(Vector,VectorialProduct){
+	Vector a(1,0,0);
+	Vector b(0,1,0);
+	Vector c(0,0,1);
 
-	Vector3D expectedC = a^b;
-	Vector3D expectedA = b^c;
-	Vector3D expectedB = c^a;
+	Vector expectedC = a^b;
+	Vector expectedA = b^c;
+	Vector expectedB = c^a;
 
 	ASSERT_EQ (c.ComponantX(),expectedC.ComponantX());
 	ASSERT_EQ (c.ComponantY(),expectedC.ComponantY());
@@ -81,9 +83,9 @@ TEST(Vector3D,VectorialProduct){
 }
 
 
-TEST(Vector3D,Product){
-	Vector3D a(1,-2,3);
-	Vector3D b(6,9,-7);
+TEST(Vector,Product){
+	Vector a(1,-2,3);
+	Vector b(6,9,-7);
 
 	ASSERT_TRUE(isEquals(0,a*(a^b)));
 	ASSERT_TRUE(isEquals(0,b*(a^b)));
@@ -100,12 +102,12 @@ TEST(Vector3D,Product){
 }
 
 
-TEST(Vector3D,ProductUnit){
-	Vector3D a(M_PI,2*M_PI,M_PI/2);
-	Vector3D b(a.ComponantY()*a.ComponantZ(),a.ComponantX()*a.ComponantZ(),-2*a.ComponantX()*a.ComponantY());
+TEST(Vector,ProductUnit){
+	Vector a(M_PI,2*M_PI,M_PI/2);
+	Vector b(a.ComponantY()*a.ComponantZ(),a.ComponantX()*a.ComponantZ(),-2*a.ComponantX()*a.ComponantY());
 	a.Normalize();
 	b.Normalize();
-	Vector3D c = a^b;
+	Vector c = a^b;
 
 	ASSERT_TRUE(isEquals(0,c*a));
 	ASSERT_TRUE(isEquals(0,c*b));
@@ -113,10 +115,10 @@ TEST(Vector3D,ProductUnit){
 }
 
 
-TEST(Vector3D,MultiplicationEqual){
-	Vector3D a(5,17,-57);
+TEST(Vector,MultiplicationEqual){
+	Vector a(5,17,-57);
 	double b = -13;
-	Vector3D c = a*b;
+	Vector c = a*b;
 	a *=b;
 	ASSERT_TRUE(isEquals(a.ComponantX(),c.ComponantX()));
 	ASSERT_TRUE(isEquals(a.ComponantY(),c.ComponantY()));
@@ -124,9 +126,9 @@ TEST(Vector3D,MultiplicationEqual){
 }
 
 
-TEST(Vector3D,IO_Operator){
-	Vector3D a(M_PI,2*M_PI,M_PI/2);
-	Vector3D b;
+TEST(Vector,IO_Operator){
+	Vector a(M_PI,2*M_PI,M_PI/2);
+	Vector b;
 
 	ofstream fichierOut("testVector3D.txt", ios::out | ios::trunc);
 	if(fichierOut){
@@ -147,10 +149,10 @@ TEST(Vector3D,IO_Operator){
 	remove("testVector3D.txt");
 }
 
-TEST(Vector3D,Sum){
-	Vector3D a(M_PI,2*M_PI,M_PI/2);
-	Vector3D b(7*M_PI,-2*M_PI,-4*M_PI/2);
-	Vector3D c = a+b;
+TEST(Vector,Sum){
+	Vector a(M_PI,2*M_PI,M_PI/2);
+	Vector b(7*M_PI,-2*M_PI,-4*M_PI/2);
+	Vector c = a+b;
 
 	EXPECT_DOUBLE_EQ (a.ComponantX()+b.ComponantX(),c.ComponantX());
 	EXPECT_DOUBLE_EQ (a.ComponantY()+b.ComponantY(),c.ComponantY());
@@ -158,10 +160,10 @@ TEST(Vector3D,Sum){
 }
 
 
-TEST(Vector3D,Diff){
-	Vector3D a(M_PI,2*M_PI,M_PI/2);
-	Vector3D b(7*M_PI,2*M_PI,-4*M_PI/2);
-	Vector3D c = a-b;
+TEST(Vector,Diff){
+	Vector a(M_PI,2*M_PI,M_PI/2);
+	Vector b(7*M_PI,2*M_PI,-4*M_PI/2);
+	Vector c = a-b;
 
 	EXPECT_DOUBLE_EQ (a.ComponantX()-b.ComponantX(),c.ComponantX());
 	EXPECT_DOUBLE_EQ (a.ComponantY()-b.ComponantY(),c.ComponantY());
@@ -169,10 +171,10 @@ TEST(Vector3D,Diff){
 }
 
 
-TEST(Vector3D,Div){
-	Vector3D a(M_PI,2*M_PI,M_PI/2);
+TEST(Vector,Div){
+	Vector a(M_PI,2*M_PI,M_PI/2);
 	double b = sqrt(2.);
-	Vector3D c = a/b;
+	Vector c = a/b;
 
 	EXPECT_DOUBLE_EQ (a.ComponantX()/b,c.ComponantX());
 	EXPECT_DOUBLE_EQ (a.ComponantY()/b,c.ComponantY());
@@ -180,10 +182,10 @@ TEST(Vector3D,Div){
 }
 
 
-TEST(Vector3D,DivEqual){
-	Vector3D a(M_PI,2*M_PI,M_PI/2);
+TEST(Vector,DivEqual){
+	Vector a(M_PI,2*M_PI,M_PI/2);
 	double b = sqrt(2.);
-	Vector3D c = a/b;
+	Vector c = a/b;
 	a /=b;
 	EXPECT_DOUBLE_EQ (a.ComponantX(),c.ComponantX());
 	EXPECT_DOUBLE_EQ (a.ComponantY(),c.ComponantY());
@@ -191,102 +193,124 @@ TEST(Vector3D,DivEqual){
 }
 
 
-TEST(Vector3D,LinearCombination){
-	Vector3D a(1,0,0);
-	Vector3D b(0,1,0);
-	Vector3D c(0,0,1);
+TEST(Vector,LinearCombination){
+	Vector a(1,0,0);
+	Vector b(0,1,0);
+	Vector c(0,0,1);
 
-	Vector3D d = sqrt(3)*a+sqrt(5)*b-sqrt(7)*c;
+	Vector d = sqrt(3)*a+sqrt(5)*b-sqrt(7)*c;
 	EXPECT_DOUBLE_EQ (sqrt(3.0),d.ComponantX());
 	EXPECT_DOUBLE_EQ (sqrt(5.0),d.ComponantY());
 	EXPECT_DOUBLE_EQ (-sqrt(7.0),d.ComponantZ());
 }
 
 
-TEST(Vector3D,increment){
-	Vector3D a(M_PI,0,0);
+TEST(Vector,increment){
+	Vector a(M_PI,0,0);
 	a += 2*a;
 	EXPECT_DOUBLE_EQ (3*M_PI,a.ComponantX());
 }
 
 
-TEST(Vector3D,decrement){
-	Vector3D a(M_PI,0,0);
+TEST(Vector,decrement){
+	Vector a(M_PI,0,0);
 	a -= 2*a;
 	EXPECT_DOUBLE_EQ (-M_PI,a.ComponantX());
 }
 
-TEST(Vector3D,ScalarDecomposition){
-	Vector3D a(1,0,0);
-	Vector3D b(0,1,0);
-	Vector3D c(0,0,1);
-	Vector3D d(5*M_PI,-7*M_PI,13*M_PI);
+TEST(Vector,ScalarDecomposition){
+	Vector a(1,0,0);
+	Vector b(0,1,0);
+	Vector c(0,0,1);
+	Vector d(5*M_PI,-7*M_PI,13*M_PI);
 
 	EXPECT_DOUBLE_EQ (5*M_PI,d*a);
 	EXPECT_DOUBLE_EQ (-7*M_PI,d*b);
 	EXPECT_DOUBLE_EQ (13*M_PI,d*c);
 }
 
-TEST(Vector3D,VectorialRandom){
-	Vector3D a(M_PI,2*M_PI,M_PI/2);
-	Vector3D b(M_PI/6,M_PI/3,M_PI/4);
+TEST(Vector,VectorialRandom){
+	Vector a(M_PI,2*M_PI,M_PI/2);
+	Vector b(M_PI/6,M_PI/3,M_PI/4);
 
-	Vector3D pvExpected = a^b;
+	Vector pvExpected = a^b;
 
 	EXPECT_DOUBLE_EQ (a.ComponantY()*b.ComponantZ()-a.ComponantZ()*b.ComponantY(),pvExpected.ComponantX());
 	EXPECT_DOUBLE_EQ (a.ComponantZ()*b.ComponantX()-a.ComponantX()*b.ComponantZ(),pvExpected.ComponantY());
 	EXPECT_DOUBLE_EQ (a.ComponantX()*b.ComponantY()-a.ComponantY()*b.ComponantX(),pvExpected.ComponantZ());
 }
 
-TEST(Vector3D,sumForDifferentBasisId){
-	Vector3D a(M_PI,2*M_PI,M_PI/2,0);
-	Vector3D b(M_PI/6,M_PI/3,M_PI/4,1);
-	Vector3D c = a+b;
-	EXPECT_DOUBLE_EQ (c.ComponantX(),a.ComponantX());
-	EXPECT_DOUBLE_EQ (c.ComponantY(),a.ComponantY());
-	EXPECT_DOUBLE_EQ (c.ComponantZ(),a.ComponantZ());
+TEST(Vector,sumForDifferentBasisId){
+	Vector a(M_PI,2*M_PI,M_PI/2,0);
+	Vector b(M_PI/6,M_PI/3,M_PI/4,1);
+	try{
+		Vector c = a+b;
+		FAIL();
+	}catch(Error & error){
+		EXPECT_EQ("Summing vectors from different basis !",error.Message());
+	}
 }
 
 
-TEST(Vector3D,diffForDifferentBasisId){
-	Vector3D a(M_PI,2*M_PI,M_PI/2,0);
-	Vector3D b(M_PI/6,M_PI/3,M_PI/4,1);
-	Vector3D c = a-b;
-	EXPECT_DOUBLE_EQ (c.ComponantX(),a.ComponantX());
-	EXPECT_DOUBLE_EQ (c.ComponantY(),a.ComponantY());
-	EXPECT_DOUBLE_EQ (c.ComponantZ(),a.ComponantZ());
+TEST(Vector,diffForDifferentBasisId){
+	Vector a(M_PI,2*M_PI,M_PI/2,0);
+	Vector b(M_PI/6,M_PI/3,M_PI/4,1);
+	try{
+		Vector c = a-b;
+		FAIL();
+	}catch(Error &error){
+		EXPECT_EQ("Differencing vectors from different basis !",error.Message());
+	}
 }
 
 
-TEST(Vector3D,incrSumForDifferentBasisId){
-	Vector3D a(M_PI,2*M_PI,M_PI/2,0);
-	Vector3D b(M_PI/6,M_PI/3,M_PI/4,1);
-	Vector3D c = a;
-	a+=b;
-	EXPECT_DOUBLE_EQ (c.ComponantX(),a.ComponantX());
-	EXPECT_DOUBLE_EQ (c.ComponantY(),a.ComponantY());
-	EXPECT_DOUBLE_EQ (c.ComponantZ(),a.ComponantZ());
+TEST(Vector,incrSumForDifferentBasisId){
+	Vector a(M_PI,2*M_PI,M_PI/2,0);
+	Vector b(M_PI/6,M_PI/3,M_PI/4,1);
+	Vector c = a;
+	try{
+		a+=b;
+		FAIL();
+	}catch(Error &error){
+		EXPECT_EQ("Summing vectors from different basis !",error.Message());
+		EXPECT_EQ(0,error.Level());
+	}
 }
 
 
-TEST(Vector3D,incrDiffForDifferentBasisId){
-	Vector3D a(M_PI,2*M_PI,M_PI/2,0);
-	Vector3D b(M_PI/6,M_PI/3,M_PI/4,1);
-	Vector3D c = a;
-	a-=b;
-	EXPECT_DOUBLE_EQ (c.ComponantX(),a.ComponantX());
-	EXPECT_DOUBLE_EQ (c.ComponantY(),a.ComponantY());
-	EXPECT_DOUBLE_EQ (c.ComponantZ(),a.ComponantZ());
+TEST(Vector,incrDiffForDifferentBasisId){
+	Vector a(M_PI,2*M_PI,M_PI/2,0);
+	Vector b(M_PI/6,M_PI/3,M_PI/4,1);
+	Vector c = a;
+	try{
+		a-=b;
+		FAIL();
+	}catch(Error & error){
+		EXPECT_EQ("Differencing vectors from different basis !",error.Message());
+	}
 }
 
 
-TEST(Vector3D,vectorialProductForDifferentBasisId){
-	Vector3D a(M_PI,2*M_PI,M_PI/2,0);
-	Vector3D b(M_PI/6,M_PI/3,M_PI/4,1);
-	Vector3D c = a^b;
-	EXPECT_DOUBLE_EQ (c.ComponantX(),a.ComponantX());
-	EXPECT_DOUBLE_EQ (c.ComponantY(),a.ComponantY());
-	EXPECT_DOUBLE_EQ (c.ComponantZ(),a.ComponantZ());
+TEST(Vector,CrossProductForDifferentBasisId){
+	Vector a(M_PI,2*M_PI,M_PI/2,0);
+	Vector b(M_PI/6,M_PI/3,M_PI/4,1);
+	try{
+		Vector c = a^b;
+		FAIL();
+	}catch(Error & error){
+		EXPECT_EQ("Cross product of vectors from different basis !",error.Message());
+	}
 }
 
+
+TEST(Vector,ScalarProductForDifferentBasisId){
+	Vector a(M_PI,2*M_PI,M_PI/2,0);
+	Vector b(M_PI/6,M_PI/3,M_PI/4,1);
+	try{
+		double c = a*b;
+		FAIL();
+	}catch(Error & error){
+		EXPECT_EQ("Scalar product of vectors from different basis !",error.Message());
+	}
+}
 

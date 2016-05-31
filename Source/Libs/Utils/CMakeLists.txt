@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.1.2)
 
 set(SOURCES_FILES
-	Source/Vector3D.cpp
+	Source/Vector.cpp
 	Source/Quaternion.cpp
-	Source/Matrix3x3.cpp
+	Source/Matrix.cpp
 	Source/Point.cpp
 	Source/Segment.cpp
 	Source/Line.cpp
@@ -12,17 +12,17 @@ set(SOURCES_FILES
 	Source/BasisId.cpp
 	Source/Polygon.cpp
 	Source/VectorsQuaternionConverter.cpp	
-	Source/Switcher.cpp
-	Source/BasisSwitcher.cpp
-	Source/BasisSwitcherFromGlobalToBasis.cpp
-	Source/BasisSwitcherFromBasisToBasis.cpp
-	Source/BasisSwitcherFromBasisToGlobal.cpp
+	Source/BasisChangerImplementation.cpp
+	Source/BasisChanger.cpp
+	Source/BasisChangerFromGlobalToBasis.cpp
+	Source/BasisChangerFromBasisToBasis.cpp
+	Source/BasisChangerFromBasisToGlobal.cpp
 )
 
 set(HEADER_FILES
-	Include/Utils/Vector3D.h
+	Include/Utils/Vector.h
 	Include/Utils/Quaternion.h
-	Include/Utils/Matrix3x3.h	
+	Include/Utils/Matrix.h	
 	Include/Utils/Point.h	
 	Include/Utils/Segment.h	
 	Include/Utils/Line.h	
@@ -31,11 +31,11 @@ set(HEADER_FILES
 	Include/Utils/BasisId.h	
 	Include/Utils/Polygon.h
 	Include/Utils/VectorsQuaternionConverter.h	
-	Include/Utils/Switcher.h
-	Include/Utils/BasisSwitcher.h
-	Include/Utils/BasisSwitcherFromGlobalToBasis.h
-	Include/Utils/BasisSwitcherFromBasisToBasis.h
-	Include/Utils/BasisSwitcherFromBasisToGlobal.h
+	Include/Utils/BasisChanger.h
+	Include/Utils/BasisChangerImplementation.h
+	Include/Utils/BasisChangerFromGlobalToBasis.h
+	Include/Utils/BasisChangerFromBasisToBasis.h
+	Include/Utils/BasisChangerFromBasisToGlobal.h
 )
 
 set(FILES

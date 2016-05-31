@@ -1,30 +1,30 @@
 
+#include <Utils/BasisChanger.h>
 #include <iostream>
 #include <cmath>
-#include "../Include/Utils/BasisSwitcher.h"
 
 namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
-			BasisSwitcher::BasisSwitcher(): type(None), switcher(NULL){
+			BasisChanger::BasisChanger(): from(NULL), to(NULL), type(None), switcher(NULL){
 
 			}
 
-			BasisSwitcher::~BasisSwitcher(){
+			BasisChanger::~BasisChanger(){
 
 			}
 
-			void BasisSwitcher::Type(BasisSwitcherType type){
+			void BasisChanger::Type(BasisChangerType type){
 				this->type = type;
 				UpdateSwitcher();
 			}
 
-			BasisSwitcherType BasisSwitcher::Type(){
+			BasisChangerType BasisChanger::Type(){
 				return type;
 			}
 
-			void BasisSwitcher::UpdateSwitcher(){
+			void BasisChanger::UpdateSwitcher(){
 				switch(type){
 				case None:
 					switcher = NULL;
@@ -41,31 +41,31 @@ namespace Luga {
 				}
 			}
 
-			void BasisSwitcher::SwithPoint(Point & point) const{
-				switcher->SwithPoint(point);
+			void BasisChanger::ChangePoint(Point & point) const{
+				switcher->ChangePoint(point);
 			}
 
-			void BasisSwitcher::SwithVector(Vector3D & vector3d) const{
-				switcher->SwithVector(vector3d);
+			void BasisChanger::ChangeVector(Vector & vector3d) const{
+				switcher->ChangeVector(vector3d);
 			}
 
-			void BasisSwitcher::SwithLine(Line & line) const{
-				switcher->SwithLine(line);
+			void BasisChanger::ChangeLine(Line & line) const{
+				switcher->ChangeLine(line);
 			}
 
-			void BasisSwitcher::SwithSegment(Segment & segment) const{
-				switcher->SwithSegment(segment);
+			void BasisChanger::ChangeSegment(Segment & segment) const{
+				switcher->ChangeSegment(segment);
 			}
 
-			void BasisSwitcher::SwithPlan(Plan & plan) const{
-				switcher->SwithPlan(plan);
+			void BasisChanger::ChangePlan(Plan & plan) const{
+				switcher->ChangePlan(plan);
 			}
 
-			void BasisSwitcher::From(Basis *from){
+			void BasisChanger::FromBasis(Basis *from){
 				this->from = from;
-				basisToGlobal.From(from);
-				basisToBasis.From(from);
-				globalToBasis.From(from);
+				basisToGlobal.FromBasis(from);
+				basisToBasis.FromBasis(from);
+				globalToBasis.FromBasis(from);
 				if(from != NULL){
 					if(to == NULL){
 						type = From_Basis_To_Global;
@@ -88,11 +88,11 @@ namespace Luga {
 				}
 			}
 
-			void BasisSwitcher::To(Basis *to){
+			void BasisChanger::ToBasis(Basis *to){
 				this->to = to;
-				basisToGlobal.To(to);
-				basisToBasis.To(to);
-				globalToBasis.To(to);
+				basisToGlobal.ToBasis(to);
+				basisToBasis.ToBasis(to);
+				globalToBasis.ToBasis(to);
 				if(to != NULL){
 					if(from == NULL){
 						type = From_Global_To_Basis;

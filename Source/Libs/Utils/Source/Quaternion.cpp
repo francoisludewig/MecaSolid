@@ -1,13 +1,11 @@
 
+#include <Utils/Vector.h>
 #include "../../Utils/Include/Utils/Quaternion.h"
 
 #include <iostream>
 #include <cmath>
-#include "../../Utils/Include/Utils/Vector3D.h"
 
 #define precision 1E-15
-
-using namespace std;
 
 namespace Luga {
 	namespace Meca {
@@ -25,14 +23,16 @@ namespace Luga {
 				this->componantK = q3;
 			}
 
-			Quaternion::Quaternion(const Vector3D & w){
+			Quaternion::Quaternion(const Vector & w){
 				double a = w.Norme();
-				double sa = sin(a/2);
-				double ca = cos(a/2);
-				componantReal = ca;
-				componantI = w.ComponantX()/a*sa;
-				componantJ = w.ComponantY()/a*sa;
-				componantK = w.ComponantZ()/a*sa;
+				if(a != 0){
+					double sa = sin(a/2);
+					double ca = cos(a/2);
+					componantReal = ca;
+					componantI = w.ComponantX()/a*sa;
+					componantJ = w.ComponantY()/a*sa;
+					componantK = w.ComponantZ()/a*sa;
+				}
 			}
 
 			Quaternion::~Quaternion(){
@@ -50,10 +50,12 @@ namespace Luga {
 
 			void Quaternion::Normalize(){
 				double n = Norme();
-				componantReal /= n;
-				componantI /= n;
-				componantJ /= n;
-				componantK /= n;
+				if(n != 0){
+					componantReal /= n;
+					componantI /= n;
+					componantJ /= n;
+					componantK /= n;
+				}
 			}
 
 			void Quaternion::SetComponants(double q0, double q1, double q2, double q3){
@@ -137,15 +139,15 @@ namespace Luga {
 				componantK -= b.ComponantK();
 			}
 
-			istream & operator >> (istream & in, Quaternion & a){
+			std::istream & operator >> (std::istream & in, Quaternion & a){
 				double q0,q1,q2,q3;
 				in >> q0 >> q1 >> q2 >> q3;
 				a.SetComponants(q0,q1,q2,q3);
 				return in;
 			}
 
-			ostream & operator << (ostream & out, Quaternion const& a){
-				out << scientific << setprecision(15);
+			std::ostream & operator << (std::ostream & out, Quaternion const& a){
+				out << std::scientific << std::setprecision(15);
 				out << a.ComponantReal() << " " << a.ComponantI() << " " << a.ComponantJ() << " " << a.ComponantK();
 				return out;
 			}
