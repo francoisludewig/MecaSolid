@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <iomanip>
-#include "../../../Utils/Include/Utils/Basis.h"
-#include <Utils/Matrix.h>
+#include "../../../Utils/Basis/Basis.h"
+#include "../../../Utils/Basis/Matrix.h"
 
 using namespace Luga::Meca::Utils;
 
