@@ -1,7 +1,10 @@
 #include <iostream>
 #include <fstream>
-#include <Utils/Quaternion.h>
-#include <Utils/Vector.h>
+#include <cmath>
+#include <climits>
+
+#include "Libs/Utils/Basis/Quaternion.h"
+#include "Libs/Utils/Basis/Vector.h"
 
 
 using namespace Luga::Meca::Utils;
@@ -64,5 +67,10 @@ int main()
     	fichierOut.close();
     }
     std::cout << "End" << std::endl << std::endl;
+
+
+    std::cout << "Size of double " << sizeof(double)*CHAR_BIT << std::endl;
+    std::cout << "Size of long double " << sizeof(long double)*CHAR_BIT << std::endl;
+
     return 0;
 }
