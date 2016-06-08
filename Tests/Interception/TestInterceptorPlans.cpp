@@ -52,9 +52,21 @@ TEST(InterceptorPlans,CrossPlans){
 	Interception interception = interceptorPlans.Intercept(a,b);
 
 	ASSERT_EQ (InterceptionLine,interception.Type());
-	std::cout <<  interception.GetLine() << endl;
-	Line interceptionLine(Point(0,0,0),Vector(1,2,3)^Vector(3,2,1));
-	ASSERT_TRUE(interceptionLine == interception.GetLine());
+	Vector excpectedDirection = baseA.AxisX()^baseB.AxisX();
+	Vector test_pv = excpectedDirection^(interception.GetLine().Direction());
+	ASSERT_TRUE(test_pv == Vector(0,0,0));
+
+	Point intercept = interception.GetLine().Origin();
+	Vector interceptA = intercept-a.Origin();
+	/*
+	 * Test scalar product = 0 is equivalent to test the cosine of the angle between vectors = 0.
+	 * In order to do that more generally, the vectors must be normalized before.
+    */
+	interceptA.Normalize();
+	ASSERT_TRUE(isEquals(0,interceptA*a.Normal()));
+	Vector interceptB = intercept-b.Origin();
+	interceptB.Normalize();
+	ASSERT_TRUE(isEquals(0,interceptB*b.Normal()));
 }
 
 
