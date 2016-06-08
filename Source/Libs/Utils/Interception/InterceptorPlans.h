@@ -8,6 +8,7 @@ namespace Luga {
 			class Plan;
 			class Line;
 			class Vector;
+			class Point;
 
 			class InterceptorPlans {
 			public:
@@ -15,7 +16,8 @@ namespace Luga {
 				virtual ~InterceptorPlans();
 				Interception Intercept(Plan & a, Plan & b);
 			private:
-				void MakeLinesForPointIntersection(const Plan &a, const Plan &b, Line & la, Line & lb, const Vector direction);
+				Point GetIntersectionPoint(const Plan & a, const Plan & b, const Vector & direction);
+
 			};
 
 		} /* namespace Utils */

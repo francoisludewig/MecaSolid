@@ -10,6 +10,7 @@
 #include "InterceptorLines.h"
 #include "../GeometryConcepts/Plan.h"
 #include "../GeometryConcepts/Line.h"
+#include "../GeometryConcepts/Point.h"
 #include "../Basis/DoubleComparison.h"
 
 namespace Luga {
@@ -22,24 +23,25 @@ namespace Luga {
 			InterceptorPlans::~InterceptorPlans() {
 			}
 
-			void InterceptorPlans::MakeLinesForPointIntersection(const Plan &a, const Plan &b, Line & la, Line & lb, const Vector direction){
-				Vector directionA,directionB;
-				if(!DoubleComparison::IsEqual(a.Position().AxisY()*direction,0))
-					directionA = a.Position().AxisY();
-				else
-					directionA = a.Position().AxisZ();
+			Point InterceptorPlans::GetIntersectionPoint(const Plan & a, const Plan & b, const Vector & direction){
+				Vector AB = b.Origin()-a.Origin();
+				Basis baseA = a.Position();
+				Basis baseB = b.Position();
 
-				if(!DoubleComparison::IsEqual(b.Position().AxisY()*direction,0))
-					directionB = b.Position().AxisY();
-				else
-					directionB = b.Position().AxisZ();
-
-				la = Line(a.Origin(),directionA);
-				lb = Line(b.Origin(),directionB);
+				if((baseA.AxisZ()^direction) != Vector(0,0,0)){
+					double beta = ( (baseA.AxisY()*baseB.AxisY())*(AB*baseB.AxisY()) + ((baseA.AxisY()*baseB.AxisZ())*(AB*baseB.AxisZ()) - AB*baseA.AxisY()) )
+									/ ( (baseA.AxisY()*baseB.AxisY())*(baseA.AxisZ()*baseB.AxisY()) + (baseA.AxisY()*baseB.AxisZ())*(baseA.AxisZ()*baseB.AxisZ()));
+					return baseA.Origin() + beta*baseA.AxisZ();
+				}
+				else{
+					double beta = ( (baseA.AxisZ()*baseB.AxisY())*(AB*baseB.AxisY()) + ((baseA.AxisZ()*baseB.AxisZ())*(AB*baseB.AxisZ()) - AB*baseA.AxisZ()) )
+								/ ( (baseA.AxisZ()*baseB.AxisY())*(baseA.AxisY()*baseB.AxisY()) + (baseA.AxisY()*baseB.AxisZ())*(baseA.AxisZ()*baseB.AxisZ()));
+					return baseA.Origin() + beta*baseA.AxisY();
+				}
 			}
 
 			Interception InterceptorPlans::Intercept(Plan& a, Plan& b) {
-				Interception interception;
+ 				Interception interception;
 				Vector direction = a.Normal() ^ b.Normal();
 				if(direction == Vector(0,0,0)){
 					if(a == b){
@@ -52,17 +54,9 @@ namespace Luga {
 					}
 				}
 
-				Line la,lb;
-				MakeLinesForPointIntersection(a,b,la,lb,direction);
-
-				InterceptorLines interceptorLines;
-				Interception interlines = interceptorLines.Intercept(la,lb);
-				if(interlines.Type() == InterceptionPoint){
-					Line solution(interlines.GetPoint(),direction);
-					interception.Type(InterceptionLine);
-					interception.SetLine(solution);
-					return interception;
-				}
+				Line solution(GetIntersectionPoint(a,b,direction),direction);
+				interception.Type(InterceptionLine);
+				interception.SetLine(solution);
 				return interception;
 			}
 
