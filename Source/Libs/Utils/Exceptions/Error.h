@@ -6,7 +6,7 @@ namespace Luga {
 
 			class Error: public std::exception{
 			public:
-				Error(int numero, std::string const& sentence, int level) throw()
+				Error(const int numero, const std::string & sentence, const int level) throw()
 				: numero(numero), sentence(sentence), level(level){
 				}
 

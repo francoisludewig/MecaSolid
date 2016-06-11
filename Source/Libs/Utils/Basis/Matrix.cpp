@@ -26,38 +26,38 @@ namespace Luga {
 
 			}
 
-			Matrix::Matrix(double m00, double m01,double m02,
-					  double m10, double m11,double m12,
-					  double m20, double m21,double m22) : BasisId(){
+			Matrix::Matrix(const double & m00, const double & m01, const double & m02,
+					  	   const double & m10, const double & m11, const double & m12,
+						   const double & m20, const double & m21, const double & m22) : BasisId(){
 				element[0][0] = m00; element[0][1] = m01; element[0][2] = m02;
 				element[1][0] = m10; element[1][1] = m11; element[1][2] = m12;
 				element[2][0] = m20; element[2][1] = m21; element[2][2] = m22;
 			}
 
 
-			void Matrix::Element(int i, int j , double c){
+			void Matrix::Element(const int & i, const int & j , const double & c){
 				element[i][j] = c;
 			}
 
-			double Matrix::Element(int i, int j) const{
+			double Matrix::Element(const int & i, const int & j) const{
 				return element[i][j];
 			}
 
-			Vector Matrix::Line(int i) const{
+			Vector Matrix::Line(const int & i) const{
 				return Vector(element[i][0],element[i][1],element[i][2]);
 			}
 
-			Vector Matrix::Column(int i) const{
+			Vector Matrix::Column(const int & i) const{
 				return Vector(element[0][i],element[1][i],element[2][i]);
 			}
 
-			void Matrix::Line(int i, Vector l){
+			void Matrix::Line(const int & i, const Vector & l){
 				element[i][0] = l.ComponantX();
 				element[i][1] = l.ComponantY();
 				element[i][2] = l.ComponantZ();
 			}
 
-			void Matrix::Column(int i, Vector c){
+			void Matrix::Column(const int & i, const Vector & c){
 				element[0][i] = c.ComponantX();
 				element[1][i] = c.ComponantY();
 				element[2][i] = c.ComponantZ();
@@ -68,7 +68,7 @@ namespace Luga {
 			  - element[0][2]*element[1][1]*element[2][0] - element[1][2]*element[2][1]*element[0][0] - element[2][2]*element[1][0]*element[0][1];
 			}
 
-			Matrix Matrix::MatrixTranspose(){
+			Matrix Matrix::MatrixTranspose() const{
 				Matrix a;
 				Vector raw;
 				for(int i = 0 ; i < 3 ; i++){
@@ -78,7 +78,7 @@ namespace Luga {
 				return a;
 			}
 
-			Matrix Matrix::MatrixAdjoint(){
+			Matrix Matrix::MatrixAdjoint()const {
 				Matrix a;
 				a.Element(0,0,(element[1][1]*element[2][2]-element[1][2]*element[2][1]));
 				a.Element(0,1,-(element[1][0]*element[2][2]-element[1][2]*element[2][0]));
@@ -94,7 +94,7 @@ namespace Luga {
 				return a;
 			}
 
-			Matrix Matrix::MatrixInverse(){
+			Matrix Matrix::MatrixInverse()const {
 				Matrix a;
 				double det = Determinant();
 				if(det != 0){
@@ -122,13 +122,13 @@ namespace Luga {
 				return a;
 			}
 
-			void Matrix::operator*=(double const& a){
+			void Matrix::operator*=(const double & a){
 				for(int i = 0 ; i < 3 ; i++)
 					for(int j = 0 ; j < 3 ; j++)
 						element[i][j]*=a;
 			}
 
-			void Matrix::operator/=(double const& a){
+			void Matrix::operator/=(const double & a){
 				if(a == 0)
 					throw(Error(1,"Dividing by 0 !",0));
 				for(int i = 0 ; i < 3 ; i++)
@@ -136,11 +136,13 @@ namespace Luga {
 						element[i][j]/=a;
 			}
 
-			Matrix Matrix::operator*(double const &b){
-				return this->Product(b);
+			Matrix Matrix::operator*(const double &b) const {
+				Matrix a = *this;
+				a.Product(b);
+				return a;
 			}
 
-			Vector Matrix::operator*(Vector &b){
+			Vector Matrix::operator*(const Vector &b)const{
 				Vector a;
 				a.ComponantX(element[0][0]*b.ComponantX() + element[0][1]*b.ComponantY() + element[0][2]*b.ComponantZ());
 				a.ComponantY(element[1][0]*b.ComponantX() + element[1][1]*b.ComponantY() + element[1][2]*b.ComponantZ());
@@ -148,13 +150,15 @@ namespace Luga {
 				return a;
 			}
 
-			Matrix Matrix::operator/(double const &b){
+			Matrix Matrix::operator/(const double &b) const{
 				if(b == 0)
 					throw(Error(1,"Dividing by 0 !",0));
-				return this->Div(b);
+				Matrix a = *this;
+				a.Div(b);
+				return a;
 			}
 
-			std::ostream & operator << (std::ostream & out, Matrix const& a){
+			std::ostream & operator << (std::ostream & out, const Matrix & a){
 				out << std::scientific << std::setprecision(15);
 				for(int i = 0 ; i < 3 ; i++){
 					for(int j = 0 ; j < 3 ; j++){

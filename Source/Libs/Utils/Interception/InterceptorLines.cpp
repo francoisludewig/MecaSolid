@@ -24,7 +24,7 @@ namespace Luga {
 			InterceptorLines::~InterceptorLines() {
 			}
 
-			bool InterceptorLines::AreVectorsLinearlyIndependant(const Vector& originAB, Line& a, Line& b) {
+			bool InterceptorLines::AreVectorsLinearlyIndependant(const Vector& originAB, const Line& a, const Line& b) {
 				Matrix m;
 				m.Column(0, a.Direction());
 				m.Column(1, b.Direction());
@@ -32,11 +32,11 @@ namespace Luga {
 				return !DoubleComparison::IsEqual(m.Determinant(),0);
 			}
 
-			bool InterceptorLines::AreVectorsParallel(Line& a, Line& b) {
+			bool InterceptorLines::AreVectorsParallel(const Line& a, const Line& b) {
 				return (a.Direction() ^ b.Direction()) == Vector(0, 0, 0);
 			}
 
-			Interception InterceptorLines::Intercept(Line& a, Line& b) {
+			Interception InterceptorLines::Intercept(const Line& a, const Line& b) {
 				Interception interception;
 				Vector originAB = b.Origin()-a.Origin();
 				if(AreVectorsLinearlyIndependant(originAB, a, b))
@@ -53,7 +53,8 @@ namespace Luga {
 				}
 
 				double salarProductDirections = a.Direction()*b.Direction();
-				double beta = (originAB*b.Direction()*salarProductDirections - originAB*b.Direction()) / (1-salarProductDirections*salarProductDirections);
+				double beta = (originAB*b.Direction() - (originAB*a.Direction())*salarProductDirections) / (salarProductDirections*salarProductDirections-1);
+
 				Point inter = b.Origin() + beta*b.Direction();
 				interception.SetPoint(inter);
 				interception.Type(InterceptionPoint);

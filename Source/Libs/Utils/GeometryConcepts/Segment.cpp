@@ -28,10 +28,10 @@ namespace Luga {
 				return endPoint;
 			}
 
-			void Segment::BeginPoint(Point & a){
+			void Segment::BeginPoint(const Point & a){
 				this->beginPoint = a;
 			}
-			void Segment::EndPoint(Point & b){
+			void Segment::EndPoint(const Point & b){
 				this->endPoint = b;
 			}
 
@@ -39,7 +39,7 @@ namespace Luga {
 				return Line(beginPoint,endPoint-beginPoint);
 			}
 
-			std::ostream & operator << (std::ostream & out, Segment const& a){
+			std::ostream & operator << (std::ostream & out, const Segment & a){
 				out << std::scientific << std::setprecision(15);
 				out << a.BeginPoint() << " " << a.EndPoint();
 				return out;
@@ -53,7 +53,7 @@ namespace Luga {
 				return in;
 			}
 
-			bool operator== (Segment const &sg1, Segment const &sg2){
+			bool operator== (const Segment &sg1, const Segment &sg2){
 				if(sg1.BeginPoint() != sg2.BeginPoint())
 					return false;
 				if(sg1.EndPoint() != sg2.EndPoint())
@@ -61,10 +61,9 @@ namespace Luga {
 				return true;
 			}
 
-			bool operator!= (Segment const &sg1, Segment const &sg2){
+			bool operator!= (const Segment &sg1, const Segment &sg2){
 				return !(sg1==sg2);
 			}
-
 
 		}
 	}

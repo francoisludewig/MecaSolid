@@ -13,11 +13,11 @@ namespace Luga {
 				InterceptorLines();
 				virtual ~InterceptorLines();
 
-				Interception Intercept(Line & a, Line & b);
+				Interception Intercept(const Line & a, const Line & b);
 
 			private:
-				bool AreVectorsLinearlyIndependant(const Vector& originAB, Line& a, Line& b);
-				bool AreVectorsParallel(Line& a, Line& b);
+				bool AreVectorsLinearlyIndependant(const Vector& originAB, const Line& a, const Line& b);
+				bool AreVectorsParallel(const Line& a, const Line& b);
 			};
 		}
 	}

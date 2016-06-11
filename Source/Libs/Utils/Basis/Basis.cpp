@@ -18,7 +18,7 @@ namespace Luga {
 				instanceCount++;
 			}
 
-			Basis::Basis(Point o, Quaternion q):origin(o),orientation(q){
+			Basis::Basis(const Point & o, const Quaternion & q):origin(o),orientation(q){
 				vQc.ConvertQuaternionIntoVectors(q,axisX,axisY,axisZ);
 				id = instanceCount;
 				instanceCount++;
@@ -53,18 +53,18 @@ namespace Luga {
 				return orientation;
 			}
 
-			void Basis::Origin(Point & o){
+			void Basis::Origin(const Point & o){
 				this->origin = o;
 			}
 
-			void Basis::Orientation(Quaternion & q){
+			void Basis::Orientation(const Quaternion & q){
 				this->orientation = q;
 				vQc.ConvertQuaternionIntoVectors(q,axisX,axisY,axisZ);
 			}
 
-			void Basis::AxisX(Vector & e1){
-				e1.Normalize();
+			void Basis::AxisX(const Vector & e1){
 				this->axisX = e1;
+				this->axisX.Normalize();
 				this->ConstructAxisYAndZFromX();
 			}
 
@@ -95,12 +95,12 @@ namespace Luga {
 				return b;
 			}
 
-			void Basis::Rotate(Quaternion const & q){
+			void Basis::Rotate(const Quaternion & q){
 				this->orientation *= q;
 				vQc.ConvertQuaternionIntoVectors(this->orientation,axisX,axisY,axisZ);
 			}
 
-			void Basis::Translate(Vector const & o){
+			void Basis::Translate(const Vector & o){
 				this->origin += o;
 			}
 
@@ -116,17 +116,17 @@ namespace Luga {
 				return b;
 			}
 
-			Basis Basis::operator+(Vector const & o) const{
+			Basis Basis::operator+(const Vector & o) const{
 				Basis b = *this;
 				b.Translate(o);
 				return b;
 			}
 
-			void Basis::operator*=(Quaternion const& q){
+			void Basis::operator*=(const Quaternion & q){
 				this->Rotate(q);
 			}
 
-			void Basis::operator+=(Vector const& o){
+			void Basis::operator+=(const Vector & o){
 				this->Translate(o);
 			}
 
@@ -158,7 +158,7 @@ namespace Luga {
 			  	vQc.ConvertVectorsIntoQuaternion(axisX,axisY,axisZ,orientation);
 			}
 
-			std::ostream & operator << (std::ostream & out, Basis const& a){
+			std::ostream & operator << (std::ostream & out, const Basis & a){
 				out << a.Origin() << " " << a.Orientation();
 				return out;
 			}

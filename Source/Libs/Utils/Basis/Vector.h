@@ -12,13 +12,13 @@ namespace Luga {
 			class Vector : public BasisId{
 			public:
 				Vector();
-				Vector(int basisId);
-				Vector(double x,double y, double z);
-				Vector(double x,double y, double z,int basisId);
+				Vector(const int & basisId);
+				Vector(const double &x,const double &y, const double &z);
+				Vector(const double &x,const double &y, const double &z,const int &basisId);
 
 				virtual ~Vector();
 
-				void SetComponants(double x, double y, double z);
+				void SetComponants(const double &x, const double &y, const double &z);
 				double Norme() const;
 				void Normalize();
 				double ScalarProduct(const Vector & b) const;
@@ -36,27 +36,27 @@ namespace Luga {
 				void ComponantY(double y) {this->componantY = y;};
 				void ComponantZ(double z) {this->componantZ = z;};
 
-				void operator+=(Vector const& a);
-				void operator-=(Vector const& a);
-				void operator*=(double const& a);
-				void operator/=(double const& a);
+				void operator+=(const Vector & a);
+				void operator-=(const Vector & a);
+				void operator*=(const double & a);
+				void operator/=(const double & a);
 
-				double operator*(Vector const &b) const;
-				Vector operator^(Vector const &b) const;
-				Vector operator*(double const &b) const;
-				Vector operator/(double const &b) const;
-				Vector operator+(Vector const &b) const;
-				Vector operator-(Vector const &b) const;
+				double operator*(const Vector &b) const;
+				Vector operator^(const Vector &b) const;
+				Vector operator*(const double &b) const;
+				Vector operator/(const double &b) const;
+				Vector operator+(const Vector &b) const;
+				Vector operator-(const Vector &b) const;
 
 			private:
 				double componantX,componantY,componantZ;
 			};
 
-			std::ostream & operator << (std::ostream & out, Vector const& a);
+			std::ostream & operator << (std::ostream & out, const Vector & a);
 			std::istream & operator >> (std::istream & in, Vector & a);
-			Vector operator*(const double & b, Vector const & a);
-			bool operator== (Vector const &vector1, Vector const &vector2);
-			bool operator!= (Vector const &vector1, Vector const &vector2);
+			Vector operator*(const double & b, const Vector & a);
+			bool operator== (const Vector &vector1, const Vector &vector2);
+			bool operator!= (const Vector &vector1, const Vector &vector2);
 
 		}
 	}

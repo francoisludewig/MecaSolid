@@ -56,4 +56,16 @@ TEST(InterceptorLines,CrossLines){
 	ASSERT_TRUE(interceptionPoint == interception.GetPoint());
 }
 
+TEST(InterceptorLines,CrossLinesB){
+	Line a(Point(1,1,1),Vector(1,1,1));
+	Line b(Point(1,2,1),Vector(1,-1,1));
+	InterceptorLines interceptorLines;
+
+	Interception interception = interceptorLines.Intercept(a,b);
+
+	ASSERT_EQ (InterceptionPoint,interception.Type());
+	Point interceptionPoint(1.5,1.5,1.5);
+	ASSERT_TRUE(interceptionPoint == interception.GetPoint());
+}
+
 

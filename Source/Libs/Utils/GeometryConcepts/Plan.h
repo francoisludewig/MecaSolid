@@ -23,17 +23,17 @@ namespace Luga {
 				Vector TangentS() const;
 				Vector TangentT() const;
 
-				void Position(Basis & b);
-				void Normal(Vector & n);
-				void Origin(Point & p);
+				void Position(const Basis & b);
+				void Normal(const Vector & n);
+				void Origin(const Point & p);
 			private:
 				Basis position;
 			};
 
-			std::ostream & operator << (std::ostream & out, Plan const& a);
+			std::ostream & operator << (std::ostream & out, const Plan & a);
 			std::istream & operator >> (std::istream & in, Plan & a);
-			bool operator== (Plan const &plan1, Plan const &plan2);
-			bool operator!= (Plan const &plan1, Plan const &plan2);
+			bool operator== (const Plan &plan1, const Plan &plan2);
+			bool operator!= (const Plan &plan1, const Plan &plan2);
 		}
 	}
 }

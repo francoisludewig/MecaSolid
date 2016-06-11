@@ -14,22 +14,22 @@ namespace Luga {
 			class Line : public BasisId {
 			public:
 				Line();
-				Line(Point a, Vector u);
+				Line(const Point & a, const Vector & u);
 				~Line();
 				Point Origin() const;
 				Vector Direction() const;
-				void Origin(Point & a);
-				void Direction(Vector & b);
+				void Origin(const Point & a);
+				void Direction(const Vector & b);
 
 			private:
 				Point origin;
 				Vector direction;
 			};
 
-			std::ostream & operator << (std::ostream & out, Line const& a);
+			std::ostream & operator << (std::ostream & out, const Line & a);
 			std::istream & operator >> (std::istream & in, Line & a);
-			bool operator== (Line const &line1, Line const &line2);
-			bool operator!= (Line const &line1, Line const &line2);
+			bool operator== (const Line &line1, const Line &line2);
+			bool operator!= (const Line &line1, const Line &line2);
 		}
 	}
 }

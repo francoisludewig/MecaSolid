@@ -22,18 +22,18 @@ namespace Luga {
 				componantX = componantY = componantZ = 0.0;
 			}
 
-			Vector::Vector(double x,double y, double z){
+			Vector::Vector(const double &x,const double &y, const double &z){
 				this->componantX = x;
 				this->componantY = y;
 				this->componantZ = z;
 			}
 
-			Vector::Vector(int basisId) {
+			Vector::Vector(const int &basisId) {
 				componantX = componantY = componantZ = 0.0;
 				Id(basisId);
 			}
 
-			Vector::Vector(double x,double y, double z,int basisId){
+			Vector::Vector(const double &x,const double &y, const double &z,const int &basisId){
 				this->componantX = x;
 				this->componantY = y;
 				this->componantZ = z;
@@ -43,7 +43,7 @@ namespace Luga {
 			Vector::~Vector() {
 			}
 
-			void Vector::SetComponants(double x, double y, double z){
+			void Vector::SetComponants(const double &x, const double &y, const double &z){
 				this->componantX = x;
 				this->componantY = y;
 				this->componantZ = z;
@@ -117,7 +117,7 @@ namespace Luga {
 				return a;
 			}
 
-			void Vector::operator+=(Vector const& a){
+			void Vector::operator+=(const Vector & a){
 				if(this->Id() != a.Id())
 					throw(Error(0,"Summing vectors from different basis !",0));
 				componantX += a.componantX;
@@ -125,7 +125,7 @@ namespace Luga {
 				componantZ += a.componantZ;
 			}
 
-			void Vector::operator-=(Vector const& a){
+			void Vector::operator-=(const Vector & a){
 				if(this->Id() != a.Id())
 					throw(Error(0,"Differencing vectors from different basis !",0));
 				componantX -= a.componantX;
@@ -139,7 +139,7 @@ namespace Luga {
 				componantZ *= a;
 			}
 
-			void Vector::operator/=(double const& a){
+			void Vector::operator/=(const double & a){
 				if(a == 0)
 					throw(Error(1,"Dividing by 0 !",0));
 				componantX /= a;
@@ -147,31 +147,31 @@ namespace Luga {
 				componantZ /= a;
 			}
 
-			double Vector::operator*(Vector const &b) const{
+			double Vector::operator*(const Vector &b) const{
 				return this->ScalarProduct(b);
 			}
 
-			Vector Vector::operator^(Vector const &b) const{
+			Vector Vector::operator^(const Vector &b) const{
 				return this->CrossProduct(b);
 			}
 
-			Vector Vector::operator*(double const &b) const{
+			Vector Vector::operator*(const double &b) const{
 				return this->Product(b);
 			}
 
-			Vector Vector::operator/(double const &b) const{
+			Vector Vector::operator/(const double &b) const{
 				return this->Division(b);
 			}
 
-			Vector Vector::operator+(Vector const &b) const{
+			Vector Vector::operator+(const Vector &b) const{
 				return this->Sum(b);
 			}
 
-			Vector Vector::operator-(Vector const &b) const{
+			Vector Vector::operator-(const Vector &b) const{
 				return this->Difference(b);
 			}
 
-			std::ostream & operator << (std::ostream & out, Vector const& a){
+			std::ostream & operator << (std::ostream & out, const Vector & a){
 				out << std::scientific << std::setprecision(15);
 				out << a.ComponantX() << " " << a.ComponantY() << " " << a.ComponantZ();
 				return out;
@@ -184,12 +184,12 @@ namespace Luga {
 				return in;
 			}
 
-			Vector operator*(const double & b, Vector const & a){
+			Vector operator*(const double & b, const Vector & a){
 				return a.Product(b);
 
 			}
 
-			bool operator== (Vector const &vector1, Vector const &vector2){
+			bool operator== (const Vector &vector1, const Vector &vector2){
 				if(!DoubleComparison::IsEqual(vector1.ComponantX(),vector2.ComponantX()))
 					return false;
 				if(!DoubleComparison::IsEqual(vector1.ComponantY(),vector2.ComponantY()))
@@ -199,7 +199,7 @@ namespace Luga {
 				return true;
 			}
 
-			bool operator!= (Vector const &vector1, Vector const &vector2){
+			bool operator!= (const Vector &vector1, const Vector &vector2){
 				return !(vector1==vector2);
 			}
 

@@ -19,18 +19,18 @@ namespace Luga {
 				~Segment();
 				Point BeginPoint() const;
 				Point EndPoint() const;
-				void BeginPoint(Point & a);
-				void EndPoint(Point & b);
+				void BeginPoint(const Point & a);
+				void EndPoint(const Point & b);
 				Line AssiociatedLine() const;
 
 			private:
 				Point beginPoint,endPoint;
 			};
 
-			std::ostream & operator << (std::ostream & out, Segment const& a);
+			std::ostream & operator << (std::ostream & out, const Segment & a);
 			std::istream & operator >> (std::istream & in, Segment & a);
-			bool operator== (Segment const &sg1, Segment const &sg2);
-			bool operator!= (Segment const &sg1, Segment const &sg2);
+			bool operator== (const Segment &sg1, const Segment &sg2);
+			bool operator!= (const Segment &sg1, const Segment &sg2);
 		}
 	}
 }

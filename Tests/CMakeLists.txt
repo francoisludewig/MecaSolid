@@ -23,6 +23,7 @@ set(SOURCES_FILES
 	
 	Interception/TestInterceptorLines.cpp
 	Interception/TestInterceptorPlans.cpp
+	Interception/TestInterceptorSegments.cpp
 	
 )
 
