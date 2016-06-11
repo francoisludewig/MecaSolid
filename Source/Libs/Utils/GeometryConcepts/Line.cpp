@@ -13,9 +13,9 @@ namespace Luga {
 
 			}
 
-			Line::Line(Point a, Vector u):origin(a){
-				u.Normalize();
+			Line::Line(const Point & a, const Vector & u):origin(a){
 				this->direction = u;
+				this->direction.Normalize();
 			}
 
 			Line::~Line(){}
@@ -28,15 +28,15 @@ namespace Luga {
 				return direction;
 			}
 
-			void Line::Origin(Point & a){
+			void Line::Origin(const Point & a){
 				this->origin = a;
 			}
-			void Line::Direction(Vector & u){
-				u.Normalize();
+			void Line::Direction(const Vector & u){
 				this->direction = u;
+				this->direction.Normalize();
 			}
 
-			std::ostream & operator << (std::ostream & out, Line const& a){
+			std::ostream & operator << (std::ostream & out, const Line & a){
 				out << std::scientific << std::setprecision(15);
 				out << a.Origin() << " " << a.Direction();
 				return out;
@@ -51,7 +51,7 @@ namespace Luga {
 				return in;
 			}
 
-			bool operator== (Line const &line1, Line const &line2){
+			bool operator== (const Line  &line1, const Line &line2){
 				if((line1.Direction()^line2.Direction()) != Vector(0,0,0))
 					return false;
 
@@ -60,7 +60,7 @@ namespace Luga {
 				return true;
 			}
 
-			bool operator!= (Line const &line1, Line const &line2){
+			bool operator!= (const Line &line1, const Line &line2){
 				return !(line1==line2);
 			}
 

@@ -34,7 +34,7 @@ namespace Luga {
 				return position.Origin();
 			}
 
-			void Plan::Position(Basis & b){
+			void Plan::Position(const Basis & b){
 				this->position = b;
 			}
 
@@ -46,15 +46,15 @@ namespace Luga {
 			return position.AxisZ();
 			}
 
-			void Plan::Normal(Vector & n){
+			void Plan::Normal(const Vector & n){
 				position.AxisX(n);
 			}
 
-			void Plan::Origin(Point & p){
+			void Plan::Origin(const Point & p){
 				position.Origin(p);
 			}
 
-			std::ostream & operator << (std::ostream & out, Plan const& a){
+			std::ostream & operator << (std::ostream & out, const Plan & a){
 				out << std::scientific << std::setprecision(15);
 				out << a.Position();
 				return out;
@@ -66,7 +66,7 @@ namespace Luga {
 				return in;
 			}
 
-			bool operator== (Plan const &plan1, Plan const &plan2){
+			bool operator== (const Plan &plan1, const Plan &plan2){
 				if((plan1.Normal()^plan2.Normal()) != Vector(0,0,0))
 					return false;
 				if(plan1.Normal()*(plan1.Origin()-plan2.Origin()) != 0)
@@ -74,7 +74,7 @@ namespace Luga {
 				return true;
 			}
 
-			bool operator!= (Plan const &plan1, Plan const &plan2){
+			bool operator!= (const Plan &plan1, const Plan &plan2){
 				return !(plan1==plan2);
 			}
 

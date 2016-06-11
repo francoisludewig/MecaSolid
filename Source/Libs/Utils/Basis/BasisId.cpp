@@ -18,7 +18,7 @@ namespace Luga {
 
 			}
 
-			void BasisId::Id(int id){
+			void BasisId::Id(const int & id){
 				this->id = id;
 			}
 
@@ -26,7 +26,7 @@ namespace Luga {
 				return id;
 			}
 
-			std::ostream & operator << (std::ostream & out, BasisId const& a){
+			std::ostream & operator << (std::ostream & out, const BasisId & a){
 				out << a.Id();
 				return out;
 			}

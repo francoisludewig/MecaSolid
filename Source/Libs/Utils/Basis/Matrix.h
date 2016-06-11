@@ -14,31 +14,31 @@ namespace Luga {
 			class Matrix : public BasisId {
 			public:
 				Matrix();
-				Matrix(double m00, double m01,double m02,
-						  double m10, double m11,double m12,
-						  double m20, double m21,double m22);
+				Matrix(const double & m00, const double & m01,const double & m02,
+						  const double & m10, const double & m11,const double & m12,
+						  const double & m20, const double & m21,const double & m22);
 				~Matrix();
 
-				void Element(int i, int j , double c);
-				double Element(int i, int j) const;
-				Vector Line(int i) const;
-				Vector Column(int i) const;
-				void Line(int i, Vector l);
-				void Column(int i, Vector c);
+				void Element(const int & i, const int & j , const double & c);
+				double Element(const int & i, const int & j) const;
+				Vector Line(const int & i) const;
+				Vector Column(const int & i) const;
+				void Line(const int & i, const Vector & l);
+				void Column(const int & i, const Vector & c);
 				double Determinant() const;
 				Matrix Product(const double & b) const;
 				Matrix Div(const double & b) const;
 
-				Matrix MatrixTranspose();
-				Matrix MatrixAdjoint();
-				Matrix MatrixInverse();
+				Matrix MatrixTranspose() const;
+				Matrix MatrixAdjoint() const;
+				Matrix MatrixInverse() const;
 
-				Matrix operator*(double const &b);
-				Vector operator*(Vector &b);
-				Matrix operator/(double const &b);
+				Matrix operator*(const double &b) const;
+				Vector operator*(const Vector &b) const;
+				Matrix operator/(const double &b) const;
 
-				void operator*=(double const& a);
-				void operator/=(double const& a);
+				void operator*=(const double & a);
+				void operator/=(const double & a);
 			private:
 				double element[3][3];
 			};

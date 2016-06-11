@@ -16,7 +16,7 @@ namespace Luga {
 				componantI = componantJ = componantK = 0.0;
 			}
 
-			Quaternion::Quaternion(double q0, double q1, double q2, double q3){
+			Quaternion::Quaternion(const double & q0, const double & q1, const double & q2, const double & q3){
 				this->componantReal = q0;
 				this->componantI = q1;
 				this->componantJ = q2;
@@ -58,7 +58,7 @@ namespace Luga {
 				}
 			}
 
-			void Quaternion::SetComponants(double q0, double q1, double q2, double q3){
+			void Quaternion::SetComponants(const double & q0, const double & q1, const double & q2, const double & q3){
 				this->componantReal = q0;
 				this->componantI = q1;
 				this->componantJ = q2;
@@ -93,15 +93,15 @@ namespace Luga {
 				return a;
 			}
 
-			Quaternion Quaternion::operator*(Quaternion const &b){
+			Quaternion Quaternion::operator*(const Quaternion &b) const{
 				return this->Product(b);
 			}
 
-			Quaternion Quaternion::operator+(Quaternion const &b){
+			Quaternion Quaternion::operator+(const Quaternion &b) const{
 				return this->Sum(b);
 			}
 
-			Quaternion Quaternion::operator-(Quaternion const &b){
+			Quaternion Quaternion::operator-(const Quaternion &b) const{
 				return this->Diff(b);
 			}
 
@@ -114,7 +114,7 @@ namespace Luga {
 				return a;
 			}
 
-			void Quaternion::operator*=(Quaternion const& b){
+			void Quaternion::operator*=(const Quaternion & b){
 				double p0 = this->componantReal*b.ComponantReal() - this->componantI*b.ComponantI() - this->componantJ*b.ComponantJ() - this->componantK*b.ComponantK();
 				double p1 = this->componantReal*b.ComponantI() + this->componantI*b.ComponantReal() - this->componantJ*b.ComponantK() + this->componantK*b.ComponantJ();
 				double p2 = this->componantReal*b.ComponantJ() + this->componantI*b.ComponantK() + this->componantJ*b.ComponantReal() - this->componantK*b.ComponantI();
@@ -125,14 +125,14 @@ namespace Luga {
 				componantK = p3;
 			}
 
-			void Quaternion::operator+=(Quaternion const& b){
+			void Quaternion::operator+=(const Quaternion & b){
 				componantReal += b.ComponantReal();
 				componantI += b.ComponantI();
 				componantJ += b.ComponantJ();
 				componantK += b.ComponantK();
 			}
 
-			void Quaternion::operator-=(Quaternion const& b){
+			void Quaternion::operator-=(const Quaternion & b){
 				componantReal -= b.ComponantReal();
 				componantI -= b.ComponantI();
 				componantJ -= b.ComponantJ();
@@ -146,7 +146,7 @@ namespace Luga {
 				return in;
 			}
 
-			std::ostream & operator << (std::ostream & out, Quaternion const& a){
+			std::ostream & operator << (std::ostream & out, const Quaternion & a){
 				out << std::scientific << std::setprecision(15);
 				out << a.ComponantReal() << " " << a.ComponantI() << " " << a.ComponantJ() << " " << a.ComponantK();
 				return out;

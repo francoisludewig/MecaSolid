@@ -14,7 +14,7 @@ namespace Luga {
 			class Basis {
 			public:
 				Basis();
-				Basis(Point o, Quaternion q);
+				Basis(const Point & o, const Quaternion & q);
 				~Basis();
 
 				int ID() const;
@@ -25,12 +25,12 @@ namespace Luga {
 				Vector AxisZ() const;
 				Quaternion Orientation() const;
 
-				void AxisX(Vector & e1);
-				void Origin(Point & o);
-				void Orientation(Quaternion & q);
+				void AxisX(const Vector & e1);
+				void Origin(const Point & o);
+				void Orientation(const Quaternion & q);
 
-				void Rotate(Quaternion const & q);
-				void Translate(Vector const & o);
+				void Rotate(const Quaternion & q);
+				void Translate(const Vector & o);
 
 				void Local(Vector & a) const;
 				void Global(Vector & a) const;
@@ -40,11 +40,11 @@ namespace Luga {
 
 				void LoadFromIstream(std::istream & in);
 
-				Basis operator*(Quaternion const & q) const;
-				Basis operator+(Vector const & o) const;
+				Basis operator*(const Quaternion & q) const;
+				Basis operator+(const Vector & o) const;
 
-				void operator*=(Quaternion const& q);
-				void operator+=(Vector const& o);
+				void operator*=(const Quaternion & q);
+				void operator+=(const Vector & o);
 
 			private:
 				void ConstructAxisYAndZFromX();
@@ -57,7 +57,7 @@ namespace Luga {
 				static int instanceCount;
 			};
 
-			std::ostream & operator << (std::ostream & out, Basis const& a);
+			std::ostream & operator << (std::ostream & out, const Basis & a);
 			std::istream & operator >> (std::istream & in, Basis & a);
 		}
 	}

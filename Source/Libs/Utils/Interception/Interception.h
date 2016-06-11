@@ -3,6 +3,11 @@
 #include <iostream>
 #include <iomanip>
 
+#include "../GeometryConcepts/Point.h"
+#include "../GeometryConcepts/Plan.h"
+#include "../GeometryConcepts/Segment.h"
+#include "../GeometryConcepts/Line.h"
+
 namespace Luga {
 	namespace Meca {
 		namespace Utils {
@@ -15,11 +20,6 @@ namespace Luga {
 				InterceptionPlan
 			};
 
-		 	class Point;
-		 	class Line;
-		 	class Segment;
-		 	class Plan;
-
 			class Interception {
 			public:
 				Interception();
@@ -31,16 +31,16 @@ namespace Luga {
 				void SetSegment(const Segment & sgt);
 				void SetPlan(const Plan & pl);
 				InterceptionType Type() const;
-				Point GetPoint() const;
-				Line GetLine() const;
-				Segment GetSegment() const;
-				Plan GetPlan() const;
+				const Point GetPoint() const;
+				const Line GetLine() const;
+				const Segment GetSegment() const;
+				const Plan GetPlan() const;
 			private:
 				InterceptionType type;
-				Point* point;
-				Line * line;
-				Segment *segment;
-				Plan *plan;
+				Point point;
+				Line  line;
+				Segment segment;
+				Plan plan;
 			};
 
 		} /* namespace Utils */

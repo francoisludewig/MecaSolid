@@ -15,7 +15,7 @@ namespace Luga {
 			Point::Point():coordinateX(0),coordinateY(0),coordinateZ(0){
 			}
 
-			Point::Point(double x, double y, double z):coordinateX(x),coordinateY(y),coordinateZ(z){
+			Point::Point(const double & x, const double & y, const double & z):coordinateX(x),coordinateY(y),coordinateZ(z){
 
 			}
 
@@ -26,31 +26,31 @@ namespace Luga {
 			double Point::CoordinateY() const{return coordinateY;}
 			double Point::CoordinateZ() const{return coordinateZ;}
 
-			void Point::SetCoordinates(double x, double y, double z){
+			void Point::SetCoordinates(const double & x, const double & y, const double & z){
 				this->coordinateX = x;
 				this->coordinateY = y;
 				this->coordinateZ = z;
 			}
 
-			void Point::Translate(Vector const & a){
+			void Point::Translate(const Vector & a){
 				coordinateX += a.ComponantX();
 				coordinateY += a.ComponantY();
 				coordinateZ += a.ComponantZ();
 			}
 
-			Point Point::operator+(Vector const &b) const{
+			Point Point::operator+(const Vector &b) const{
 				return Point(b.ComponantX()+coordinateX,b.ComponantY()+coordinateY,b.ComponantZ()+coordinateZ);
 			}
 
-			Vector Point::operator-(Point const &b) const{
+			Vector Point::operator-(const Point &b) const{
 				return Vector(coordinateX-b.CoordinateX(),coordinateY-b.CoordinateY(),coordinateZ-b.CoordinateZ());
 			}
 
-			void Point::operator+=(Vector const& a){
+			void Point::operator+=(const Vector & a){
 				Translate(a);
 			}
 
-			std::ostream & operator << (std::ostream & out, Point const& a){
+			std::ostream & operator << (std::ostream & out, const Point & a){
 				out << std::scientific << std::setprecision(15);
 				out << a.CoordinateX() << " " << a.CoordinateY() << " " << a.CoordinateZ();
 				return out;

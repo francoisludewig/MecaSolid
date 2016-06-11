@@ -26,8 +26,8 @@ namespace Luga {
 				BasisChanger();
 				~BasisChanger();
 
-				void Type(BasisChangerType type);
-				BasisChangerType Type();
+				void Type(const BasisChangerType type);
+				BasisChangerType Type() const;
 				void ChangePoint(Point & point) const;
 				void ChangeVector(Vector & vector3d) const;
 				void ChangeLine(Line & line) const;

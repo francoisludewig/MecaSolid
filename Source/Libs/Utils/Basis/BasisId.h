@@ -12,13 +12,13 @@ namespace Luga {
 			public:
 				BasisId();
 				~BasisId();
-				void Id(int id);
+				void Id(const int & id);
 				int Id() const;
 			private:
 				int id;
 			};
 
-			std::ostream & operator << (std::ostream & out, BasisId const& a);
+			std::ostream & operator << (std::ostream & out, const BasisId & a);
 			std::istream & operator >> (std::istream & in, BasisId & a);
 		}
 	}

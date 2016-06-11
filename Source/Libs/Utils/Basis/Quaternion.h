@@ -12,7 +12,7 @@ namespace Luga {
 			class Quaternion {
 			public:
 				Quaternion();
-				Quaternion(double q0, double q1, double q2, double q3);
+				Quaternion(const double & q0, const double & q1, const double & q2, const double & q3);
 				Quaternion(const Vector & w);
 				~Quaternion();
 
@@ -22,23 +22,23 @@ namespace Luga {
 				double ComponantK() const;
 				double Norme();
 				void Normalize();
-				void SetComponants(double q0, double q1, double q2, double q3);
+				void SetComponants(const double & q0, const double & q1, const double & q2, const double & q3);
 
 				Quaternion Product(const Quaternion & b) const;
 				Quaternion Sum(const Quaternion & b) const;
 				Quaternion Diff(const Quaternion & b) const;
-				Quaternion operator*(Quaternion const &b);
-				Quaternion operator+(Quaternion const &b);
-				Quaternion operator-(Quaternion const &b);
+				Quaternion operator*(const Quaternion &b) const;
+				Quaternion operator+(const Quaternion &b) const;
+				Quaternion operator-(const Quaternion &b) const;
 				Quaternion operator~();
-				void operator*=(Quaternion const& a);
-				void operator+=(Quaternion const& a);
-				void operator-=(Quaternion const& a);
+				void operator*=(const Quaternion & a);
+				void operator+=(const Quaternion & a);
+				void operator-=(const Quaternion & a);
 			private:
 				double componantReal,componantI,componantJ,componantK;
 			};
 
-			std::ostream & operator << (std::ostream & out, Quaternion const& a);
+			std::ostream & operator << (std::ostream & out, const Quaternion & a);
 			std::istream & operator >> (std::istream & in, Quaternion & a);
 		}
 	}

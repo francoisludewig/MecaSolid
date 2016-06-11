@@ -9,31 +9,13 @@ namespace Luga {
 	namespace Meca {
 		namespace Utils {
 
-			Interception::Interception() {
-				type = InterceptionEmpty;
-				point = NULL;
-				line = NULL;
-				segment = NULL;
-				plan = NULL;
+			Interception::Interception():type(InterceptionEmpty),point(),line(),segment(),plan() {
 			}
 
 			Interception::~Interception() {
-				if(point != NULL)
-					delete point;
-				if(line != NULL)
-					delete line;
-				if(segment != NULL)
-					delete segment;
-				if(plan != NULL)
-					delete plan;
 			}
 
-			Interception::Interception(InterceptionType type){
-				this->type = type;
-				point = NULL;
-				line = NULL;
-				segment = NULL;
-				plan = NULL;
+			Interception::Interception(InterceptionType type):type(type),point(),line(),segment(),plan(){
 			}
 
 			void Interception::Type(const InterceptionType type){
@@ -41,38 +23,38 @@ namespace Luga {
 			}
 
 			void Interception::SetPoint(const Point & pt){
-				point = new Point(pt);
+				point = pt;
 			}
 
 			void Interception::SetLine(const Line & l){
-				line = new Line(l);
+				line = l;
 			}
 
 			void Interception::SetSegment(const Segment & sgt){
-				segment = new Segment(sgt);
+				segment = sgt;
 			}
 
 			void Interception::SetPlan(const Plan & pl){
-				plan = new Plan(pl);
+				plan = pl;
 			}
 
 			InterceptionType Interception::Type() const{
 				return type;
 			}
 
-			Point Interception::GetPoint() const{
-				return *point;
+			const Point Interception::GetPoint() const{
+				return point;
 			}
 
-			Line Interception::GetLine() const{
-				return *line;
+			const Line Interception::GetLine() const{
+				return line;
 			}
-			Segment Interception::GetSegment() const{
-				return *segment;
+			const Segment Interception::GetSegment() const{
+				return segment;
 			}
 
-			Plan Interception::GetPlan() const{
-				return *plan;
+			const Plan Interception::GetPlan() const{
+				return plan;
 			}
 
 		} /* namespace Utils */

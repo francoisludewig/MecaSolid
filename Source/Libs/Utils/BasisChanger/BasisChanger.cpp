@@ -16,12 +16,12 @@ namespace Luga {
 
 			}
 
-			void BasisChanger::Type(BasisChangerType type){
+			void BasisChanger::Type(const BasisChangerType type){
 				this->type = type;
 				UpdateSwitcher();
 			}
 
-			BasisChangerType BasisChanger::Type(){
+			BasisChangerType BasisChanger::Type() const{
 				return type;
 			}
 
