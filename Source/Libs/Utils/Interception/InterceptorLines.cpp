@@ -32,8 +32,8 @@ namespace Luga {
 				return !DoubleComparison::IsEqual(m.Determinant(),0);
 			}
 
-			bool InterceptorLines::AreVectorsParallel(const Line& a, const Line& b) {
-				return (a.Direction() ^ b.Direction()) == Vector(0, 0, 0);
+			bool InterceptorLines::AreVectorsParallel(const Vector& a, const Vector& b) {
+				return (a ^ b) == Vector(0, 0, 0);
 			}
 
 			Interception InterceptorLines::Intercept(const Line& a, const Line& b) {
@@ -42,8 +42,8 @@ namespace Luga {
 				if(AreVectorsLinearlyIndependant(originAB, a, b))
 					return interception;
 
-				if(AreVectorsParallel(a, b)) {
-					if(DoubleComparison::IsEqual(originAB*a.Direction(),0))
+				if(AreVectorsParallel(a.Direction(), b.Direction())) {
+					if(!AreVectorsParallel(a.Direction(), originAB))
 						return interception;
 					else{
 						interception.Type(InterceptionLine);

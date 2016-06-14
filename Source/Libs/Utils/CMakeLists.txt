@@ -56,6 +56,8 @@ set(Interception_Sources_files
 	Interception/InterceptorLines.cpp
 	Interception/InterceptorPlans.cpp
 	Interception/InterceptorSegments.cpp
+	Interception/InterceptorLineSegment.cpp
+	Interception/InterceptorPlanLine.cpp
 	Interception/Interception.cpp
 )
 
@@ -63,6 +65,8 @@ set(Interception_Header_files
 	Interception/InterceptorLines.h
 	Interception/InterceptorPlans.h
 	Interception/InterceptorSegments.h
+	Interception/InterceptorLineSegment.h
+	Interception/InterceptorPlanLine.h
 	Interception/Interception.h
 )
 
