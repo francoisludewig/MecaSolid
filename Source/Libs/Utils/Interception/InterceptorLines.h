@@ -17,7 +17,7 @@ namespace Luga {
 
 			private:
 				bool AreVectorsLinearlyIndependant(const Vector& originAB, const Line& a, const Line& b);
-				bool AreVectorsParallel(const Line& a, const Line& b);
+				bool AreVectorsParallel(const Vector& a, const Vector& b);
 			};
 		}
 	}

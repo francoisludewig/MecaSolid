@@ -23,8 +23,8 @@ TEST(InterceptorLines,CrossLineWithoutIntersection){
 }
 
 TEST(InterceptorLines,ParallelLineWithoutIntersection){
-	Line a(Point(0,0,0),Vector(1,1,0));
-	Line b(Point(0,0,1),Vector(1,1,0));
+	Line a(Point(0,0,0),Vector(-2,-2,0));
+	Line b(Point(1,1,1),Vector(1,1,0));
 	InterceptorLines interceptorLines;
 
 	Interception interception = interceptorLines.Intercept(a,b);
@@ -32,9 +32,10 @@ TEST(InterceptorLines,ParallelLineWithoutIntersection){
 	ASSERT_EQ (InterceptionEmpty,interception.Type());
 }
 
+
 TEST(InterceptorLines,SameLines){
 	Line a(Point(0,0,0),Vector(1,1,0));
-	Line b(Point(2,2,-17),Vector(-1,-1,0));
+	Line b(Point(2,2,0),Vector(-1,-1,0));
 	InterceptorLines interceptorLines;
 
 	Interception interception = interceptorLines.Intercept(a,b);
