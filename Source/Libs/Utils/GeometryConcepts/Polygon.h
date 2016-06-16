@@ -5,8 +5,8 @@
 #include <vector>
 
 #include "../Basis/Basis.h"
-#include "../Basis/BasisId.h"
 #include "BasisId.h"
+#include "../BasisChanger/BasisChanger.h"
 
 #include "Segment.h"
 
@@ -22,10 +22,11 @@ namespace Luga {
 
 			private:
 				std::vector<Segment> localSegment;
-				std::vector<Segment> GlobalSegment;
+				std::vector<Segment> globalSegment;
 				Basis basis;
 
 				void UpdateGlobalSegment();
+				BasisChanger basisChanger;
 			};
 
 			std::ostream & operator << (std::ostream & out, Polygon const& a);
