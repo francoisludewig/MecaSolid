@@ -8,7 +8,7 @@ set(SOURCES_FILES
 
 set(FILES
     ${SOURCES_FILES}
-)
+        Source/Libs/Repository/Include/SolidRepository.h Source/Libs/Repository/Source/SolidRepository.cpp)
 
 add_executable(mecasolid
 	${FILES}

@@ -5,7 +5,8 @@
 
 #include "Libs/Utils/Basis/Quaternion.h"
 #include "Libs/Utils/Basis/Vector.h"
-
+#include "Libs/Solid/Include/Solid/Solid.h"
+#include "Libs/Repository/Include/SolidRepository.h"
 
 using namespace Luga::Meca::Utils;
 
@@ -66,6 +67,20 @@ int main()
     	}
     	fichierOut.close();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     std::cout << "End" << std::endl << std::endl;
 
 

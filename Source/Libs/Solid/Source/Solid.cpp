@@ -35,7 +35,7 @@ namespace Luga {
 			void Solid::Momentum(Vector m) {this->momentum = m;}
 			void Solid::Inertia(Matrix i){
 				this->inertia = i;
-				this->interia_1 = inertia.MatrixInverse();
+				this->inverse_inertia = inertia.MatrixInverse();
 			}
 			void Solid::Mass(double m) {this->mass = m;}
 
@@ -44,7 +44,7 @@ namespace Luga {
 				velocity += dt*force/mass;
 				localMomentum = momentum;
 				b.Local(localMomentum);
-				angularVelocity += dt*(interia_1*localMomentum);
+				angularVelocity += dt*(inverse_inertia*localMomentum);
 			}
 
 			void Solid::UpdatePosition(double dt){

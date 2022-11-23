@@ -12,8 +12,8 @@ namespace Luga {
 		namespace Utils{
 
 			Quaternion::Quaternion() {
-				componantReal = 1.0;
-				componantI = componantJ = componantK = 0.0;
+				componantReal = 1;
+				componantI = componantJ = componantK = 0;
 			}
 
 			Quaternion::Quaternion(const double & q0, const double & q1, const double & q2, const double & q3){
@@ -32,7 +32,10 @@ namespace Luga {
 					componantI = w.ComponantX()/a*sa;
 					componantJ = w.ComponantY()/a*sa;
 					componantK = w.ComponantZ()/a*sa;
-				}
+				} else {
+                    componantReal = 1;
+                    componantI = componantJ = componantK = 0;
+                }
 			}
 
 			Quaternion::~Quaternion(){

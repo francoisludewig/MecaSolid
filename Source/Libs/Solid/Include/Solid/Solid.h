@@ -1,10 +1,10 @@
 
-#pragma
+#pragma once
 
 #include <iostream>
 #include <iomanip>
-#include "../../../Utils/Basis/Basis.h"
-#include "../../../Utils/Basis/Matrix.h"
+#include "Basis.h"
+#include "Matrix.h"
 
 using namespace Luga::Meca::Utils;
 
@@ -45,7 +45,7 @@ namespace Luga {
 			Basis b;
 			Vector velocity,angularVelocity,force,momentum;
 			Vector localMomentum;
-			Matrix inertia,interia_1;
+			Matrix inertia, inverse_inertia;
 			double mass;
 		};
 
