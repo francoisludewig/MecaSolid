@@ -1,0 +1,8 @@
+//
+// Created by fld on 24/11/22.
+//
+
+#ifndef MECASOLID_JSONCONVERTER_H
+#define MECASOLID_JSONCONVERTER_H
+
+#endif //MECASOLID_JSONCONVERTER_H
