@@ -16,8 +16,8 @@ namespace Luga {
                 SolidRepository() {}
                 ~SolidRepository() {}
 
-                std::string SaveSolid(const Solid::Solid& solid);
-                Solid::Solid LoadSolid(const std::string & jsonStr);
+                std::string SaveSolid(const Solid::Solid& solid, const std::string  filepath);
+                Solid::Solid LoadSolid(const std::string  filepath);
             private:
                 Json::Value PointToJson(const Point & point);
                 Json::Value VectorToJson(const Vector & vector);

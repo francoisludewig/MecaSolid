@@ -620,6 +620,13 @@ build Source/Libs/Repository/CMakeFiles/mecasolidRepository.libs.dir/__/__/__/Te
   OBJECT_DIR = Source/Libs/Repository/CMakeFiles/mecasolidRepository.libs.dir
   OBJECT_FILE_DIR = Source/Libs/Repository/CMakeFiles/mecasolidRepository.libs.dir/__/__/__/Tests/Repository
 
+build Source/Libs/Repository/CMakeFiles/mecasolidRepository.libs.dir/Source/JsonConverter.cpp.o: CXX_COMPILER__mecasolidRepository.2elibs_Debug /home/fld/Dev/MecaSolid/Source/Libs/Repository/Source/JsonConverter.cpp || cmake_object_order_depends_target_mecasolidRepository.libs
+  DEP_FILE = Source/Libs/Repository/CMakeFiles/mecasolidRepository.libs.dir/Source/JsonConverter.cpp.o.d
+  FLAGS = -g
+  INCLUDES = -I/home/fld/Dev/MecaSolid/Source/Libs/Repository/Include -I/home/fld/Dev/MecaSolid/Source/Libs/Solid/Include -I/home/fld/Dev/MecaSolid/Source/Libs/Utils/Basis -I/home/fld/Dev/MecaSolid/Source/Libs/Utils/BasisChanger -I/home/fld/Dev/MecaSolid/Source/Libs/Utils/GeometryConcepts -I/home/fld/Dev/MecaSolid/Source/Libs/Utils/Exceptions -I/home/fld/Dev/MecaSolid/Source/Libs/Utils/Interception
+  OBJECT_DIR = Source/Libs/Repository/CMakeFiles/mecasolidRepository.libs.dir
+  OBJECT_FILE_DIR = Source/Libs/Repository/CMakeFiles/mecasolidRepository.libs.dir/Source
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target mecasolidRepository.libs
@@ -628,7 +635,7 @@ build Source/Libs/Repository/CMakeFiles/mecasolidRepository.libs.dir/__/__/__/Te
 #############################################
 # Link the static library Source/Libs/Repository/libmecasolidRepository.libs.a
 
-build Source/Libs/Repository/libmecasolidRepository.libs.a: CXX_STATIC_LIBRARY_LINKER__mecasolidRepository.2elibs_Debug Source/Libs/Repository/CMakeFiles/mecasolidRepository.libs.dir/Source/SolidRepository.cpp.o Source/Libs/Repository/CMakeFiles/mecasolidRepository.libs.dir/__/__/__/Tests/Repository/TestSolidReposiroty.cpp.o || Source/Libs/Solid/libmecasolidSolid.libs.a Source/Libs/Utils/libmecasolidUtils.libs.a
+build Source/Libs/Repository/libmecasolidRepository.libs.a: CXX_STATIC_LIBRARY_LINKER__mecasolidRepository.2elibs_Debug Source/Libs/Repository/CMakeFiles/mecasolidRepository.libs.dir/Source/SolidRepository.cpp.o Source/Libs/Repository/CMakeFiles/mecasolidRepository.libs.dir/__/__/__/Tests/Repository/TestSolidReposiroty.cpp.o Source/Libs/Repository/CMakeFiles/mecasolidRepository.libs.dir/Source/JsonConverter.cpp.o || Source/Libs/Solid/libmecasolidSolid.libs.a Source/Libs/Utils/libmecasolidUtils.libs.a
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = Source/Libs/Repository/CMakeFiles/mecasolidRepository.libs.dir
   POST_BUILD = :

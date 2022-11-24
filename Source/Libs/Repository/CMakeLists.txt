@@ -12,7 +12,7 @@ set(HEADER_FILES
 set(FILES
         ${SOURCES_FILES}
         ${HEADER_FILES}
-        ../../../Tests/Repository/TestSolidReposiroty.cpp)
+        ../../../Tests/Repository/TestSolidReposiroty.cpp Include/JsonConverter.h Source/JsonConverter.cpp)
 
 
 add_library(
