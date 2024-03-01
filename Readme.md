@@ -7,3 +7,11 @@ Installation sous Ubuntu 22.4
 
     sudo apt-get install libgtest-dev
     sudo apt-get instalsudo apt install qt6-base-dev
+
+
+
+Windows
+-------
+    Install MinGW-w64 via https://winlibs.com/
+    
+    

@@ -6,12 +6,13 @@
 #include "Libs/Utils/Basis/Quaternion.h"
 #include "Libs/Utils/Basis/Vector.h"
 #include "Libs/Solid/Include/Solid/Solid.h"
-#include "Libs/Repository/Include/SolidRepository.h"
+//#include "Libs/Repository/Include/SolidRepository.h"
 
 using namespace Luga::Meca::Utils;
 
 int main()
 {
+    /*
 	int x;
 
 	Vector a;
@@ -86,6 +87,6 @@ int main()
 
     std::cout << "Size of double " << sizeof(double)*CHAR_BIT << std::endl;
     std::cout << "Size of long double " << sizeof(long double)*CHAR_BIT << std::endl;
-
+*/
     return 0;
 }

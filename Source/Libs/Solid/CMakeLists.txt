@@ -23,7 +23,7 @@ add_library(
 target_link_libraries(
         mecasolidSolid.libs
         mecasolidUtils.libs
-        jsoncpp
+        #jsoncpp
 )
 
 target_include_directories(

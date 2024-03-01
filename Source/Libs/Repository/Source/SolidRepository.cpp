@@ -2,8 +2,10 @@
 // Created by fld on 23/11/22.
 //
 
+
 #include "../Include/SolidRepository.h"
 #include "../Include/JsonConverter.h"
+#include <json/json.h>
 #include <string>
 #include <fstream>
 

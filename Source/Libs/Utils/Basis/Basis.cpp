@@ -10,7 +10,6 @@ namespace Luga {
 	namespace Meca {
 		namespace Utils{
 
-
 			int Basis::instanceCount = 0;
 
 			Basis::Basis():origin(),axisX(1,0,0),axisY(0,1,0),axisZ(0,0,1),orientation(){

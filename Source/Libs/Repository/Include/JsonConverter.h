@@ -1,8 +1,9 @@
 #pragma once
 
-#include <jsoncpp/json/json.h>
+
 #include "Vector.h"
 #include "Solid/Solid.h"
+#include "json/value.h"
 
 using namespace Luga::Meca::Utils;
 using namespace Luga::Meca::Solid;

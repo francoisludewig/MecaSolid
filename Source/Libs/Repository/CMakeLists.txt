@@ -1,5 +1,19 @@
 cmake_minimum_required(VERSION 3.1.2)
 
+
+include(FetchContent)
+FetchContent_Declare(
+        jsoncpp
+        GIT_REPOSITORY https://github.com/open-source-parsers/jsoncpp
+        GIT_TAG        1.9.5
+)
+
+FetchContent_GetProperties(jsoncpp)
+if (NOT jsoncpp_POPULATED)
+    FetchContent_Populate(jsoncpp)
+    add_subdirectory(${jsoncpp_SOURCE_DIR} ${jsoncpp_BINARY_DIR})
+endif ()
+
 set(SOURCES_FILES
         Source/SolidRepository.cpp
         )
@@ -12,7 +26,7 @@ set(HEADER_FILES
 set(FILES
         ${SOURCES_FILES}
         ${HEADER_FILES}
-        ../../../Tests/Repository/TestSolidReposiroty.cpp Include/JsonConverter.h Source/JsonConverter.cpp)
+        Include/JsonConverter.h Source/JsonConverter.cpp)
 
 
 add_library(
@@ -20,16 +34,20 @@ add_library(
         ${FILES}
 )
 
+
+
 target_link_libraries(
         mecasolidRepository.libs
         mecasolidSolid.libs
         mecasolidUtils.libs
-        jsoncpp
+        jsoncpp_lib
 )
 
 target_include_directories(
         mecasolidRepository.libs PUBLIC
         Include/
 )
+
+
 
 
