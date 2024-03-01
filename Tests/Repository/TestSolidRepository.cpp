@@ -6,7 +6,6 @@
 #include <cmath>
 #include <filesystem>
 #include <fstream>
-#include <regex>
 #include "Solid/Solid.h"
 #include "SolidRepository.h"
 
@@ -16,7 +15,7 @@ void RemoveFile(const std::string &fileName) {
     if (status == 0)
         std::cout << "\nFile Deleted Successfully!";
     else
-        std::cout << "\nError Occurred!";
+        std::cout << "\nError Occurred while deleting file : " + fileName;
 }
 
 std::string GetResourceDirectory() {
@@ -38,10 +37,12 @@ TEST(SolidRepository, SolidToJson) {
 
     ASSERT_TRUE(std::filesystem::exists(fileName));
     std::string str;
-    std::ifstream fread(fileName);
-    fread >> str;
+    {
+        std::ifstream fread(fileName);
+        fread >> str;
+    }
     str+="\n";
-
+    
     /* Build string to test without id depending on test execution order */
     auto begin = str.substr(0, str.find("\"id\":"));
     auto end = str.substr(str.find("\"id\":"));
