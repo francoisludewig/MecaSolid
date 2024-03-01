@@ -6,6 +6,7 @@
 #include <cmath>
 #include <filesystem>
 #include <fstream>
+#include <regex>
 #include "Solid/Solid.h"
 #include "SolidRepository.h"
 
@@ -40,8 +41,16 @@ TEST(SolidRepository, SolidToJson) {
     std::ifstream fread(fileName);
     fread >> str;
     str+="\n";
-    ASSERT_EQ(str,
-              "{\"angularVelocity\":{\"x\":0.0,\"y\":0.0,\"z\":0.0},\"basis\":{\"id\":0,\"orientation\":{\"i\":0.0,\"j\":0.0,\"k\":0.0,\"r\":1.0},\"origin\":{\"x\":3.1415926535897931,\"y\":0.0,\"z\":0.0}},\"force\":{\"x\":0.0,\"y\":0.0,\"z\":0.0},\"inertia\":{\"0-0\":1.0,\"0-1\":0.0,\"0-2\":0.0,\"1-0\":0.0,\"1-1\":1.0,\"1-2\":0.0,\"2-0\":0.0,\"2-1\":0.0,\"2-2\":1.0},\"momentum\":{\"x\":0.0,\"y\":0.0,\"z\":0.0},\"velocity\":{\"x\":3.1415926535897931,\"y\":0.0,\"z\":0.0}}\n");
+
+    /* Build string to test without id depending on test execution order */
+    auto begin = str.substr(0, str.find("\"id\":"));
+    auto end = str.substr(str.find("\"id\":"));
+    auto end_without_id = end.substr(end.find(","));
+
+    ASSERT_EQ(begin,
+              "{\"angularVelocity\":{\"x\":0.0,\"y\":0.0,\"z\":0.0},\"basis\":{");
+    ASSERT_EQ(end_without_id,
+              ",\"orientation\":{\"i\":0.0,\"j\":0.0,\"k\":0.0,\"r\":1.0},\"origin\":{\"x\":3.1415926535897931,\"y\":0.0,\"z\":0.0}},\"force\":{\"x\":0.0,\"y\":0.0,\"z\":0.0},\"inertia\":{\"0-0\":1.0,\"0-1\":0.0,\"0-2\":0.0,\"1-0\":0.0,\"1-1\":1.0,\"1-2\":0.0,\"2-0\":0.0,\"2-1\":0.0,\"2-2\":1.0},\"momentum\":{\"x\":0.0,\"y\":0.0,\"z\":0.0},\"velocity\":{\"x\":3.1415926535897931,\"y\":0.0,\"z\":0.0}}\n");
     RemoveFile(fileName.c_str());
 }
 
